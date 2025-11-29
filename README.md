@@ -4,7 +4,7 @@ A comprehensive showcase of 11 modern frontend design aesthetics with master pro
 
 ## Live Demo
 
-**[View Demo](https://vibery-studio.github.io/frontend-design-pro-demo/demos-v02/index.html)**
+**[View Demo](https://claudekit.github.io/frontend-design-pro-demo/)**
 
 ## 11 Aesthetic Directions
 
