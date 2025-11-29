@@ -27,11 +27,14 @@ A comprehensive showcase of 11 modern frontend design aesthetics with master pro
 Install as a Claude Code plugin to get the `frontend-design-pro` skill:
 
 ```bash
-# From GitHub
-claude /plugin install vibery-studio/frontend-design-pro-demo
+# Add marketplace from GitHub
+/plugin marketplace add claudekit/frontend-design-pro-demo
+
+# Install the plugin
+/plugin install frontend-design-pro
 
 # Or from local directory
-claude /plugin install /path/to/frontend-design-pro-demo
+/plugin install /path/to/frontend-design-pro-demo
 ```
 
 Once installed, Claude will automatically use the skill when building frontend interfaces.
