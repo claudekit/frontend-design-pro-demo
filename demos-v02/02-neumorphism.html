@@ -619,12 +619,89 @@
     .form-card { animation: fadeInUp 0.7s ease-out 0.3s both; }
     .player-card { animation: fadeInUp 0.7s ease-out 0.4s both; }
 
+    /* Scroll Reveal Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-scale.revealed {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Enhanced interaction animations */
+    .stat-card {
+      cursor: default;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .feature-card {
+      cursor: pointer;
+    }
+
+    .feature-card:active {
+      transform: translateY(-2px) scale(0.98);
+      box-shadow: var(--neu-distance-sm) var(--neu-distance-sm) var(--neu-blur-sm) var(--shadow-dark),
+                  calc(var(--neu-distance-sm) * -1) calc(var(--neu-distance-sm) * -1) var(--neu-blur-sm) var(--shadow-light);
+    }
+
+    /* Button ripple effect */
+    .btn {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.4s ease, height 0.4s ease;
+    }
+
+    .btn:active::after {
+      width: 200px;
+      height: 200px;
+    }
+
+    /* Stagger delay classes */
+    .stagger-1 { transition-delay: 0.1s; }
+    .stagger-2 { transition-delay: 0.2s; }
+    .stagger-3 { transition-delay: 0.3s; }
+    .stagger-4 { transition-delay: 0.4s; }
+
     /* Reduced Motion */
     @media (prefers-reduced-motion: reduce) {
-      *, .hero-card, .hero-icon, .stat-card, .feature-card, .form-card, .player-card, .progress-fill {
+      *, .hero-card, .hero-icon, .stat-card, .feature-card, .form-card, .player-card, .progress-fill, .reveal, .reveal-scale {
         animation-duration: 0.01ms !important;
         transition-duration: 0.01ms !important;
         animation-delay: 0ms !important;
+      }
+      .reveal, .reveal-scale {
+        opacity: 1;
+        transform: none;
       }
     }
   </style>
@@ -768,5 +845,63 @@
       <p>&copy; 2024 Softify. Crafted with soft shadows.</p>
     </div>
   </footer>
+
+  <script>
+    // Scroll Reveal with Intersection Observer
+    const revealElements = document.querySelectorAll('.reveal, .reveal-scale');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // Staggered reveal for cards
+    const featureCards = document.querySelectorAll('.feature-card');
+    const cardObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }, index * 100);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    featureCards.forEach(card => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(40px)';
+      card.style.transition = 'opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+      cardObserver.observe(card);
+    });
+
+    // Stat cards reveal
+    const statCards = document.querySelectorAll('.stat-card');
+    const statObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }, index * 80);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    statCards.forEach(card => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(30px)';
+      card.style.transition = 'opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+      statObserver.observe(card);
+    });
+  </script>
 </body>
 </html>

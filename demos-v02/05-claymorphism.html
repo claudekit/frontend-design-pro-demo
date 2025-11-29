@@ -601,12 +601,67 @@
       transform: translateY(-3px);
     }
 
+    /* Scroll Reveal Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(0.85);
+      transition: opacity 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .reveal-scale.revealed {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Enhanced clay interactions */
+    .clay:active {
+      box-shadow: var(--clay-shadow-pressed);
+      transform: translateY(-2px) scale(0.98);
+    }
+
+    .feature-card {
+      cursor: pointer;
+    }
+
+    .price-card {
+      cursor: pointer;
+    }
+
+    .price-features li {
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .price-card:hover .price-features li {
+      transform: translateX(4px);
+    }
+
+    /* Stagger delay classes */
+    .stagger-1 { transition-delay: 0.1s; }
+    .stagger-2 { transition-delay: 0.2s; }
+    .stagger-3 { transition-delay: 0.3s; }
+    .stagger-4 { transition-delay: 0.4s; }
+
     /* Reduced Motion */
     @media (prefers-reduced-motion: reduce) {
-      *, .hero-content, .hero-card-main, .hero-card-float, .feature-card, .price-card {
+      *, .hero-content, .hero-card-main, .hero-card-float, .feature-card, .price-card, .reveal, .reveal-scale {
         animation-duration: 0.01ms !important;
         transition-duration: 0.01ms !important;
         animation-delay: 0ms !important;
+      }
+      .reveal, .reveal-scale {
+        opacity: 1;
+        transform: none;
       }
     }
   </style>
@@ -747,11 +802,69 @@
 
   <footer>
     <div class="container">
-      <div class="footer-card clay">
+      <div class="footer-card clay reveal">
         <div class="footer-logo">🎨 Clayful</div>
         <p>&copy; 2024 Clayful. Made with squishy love.</p>
       </div>
     </div>
   </footer>
+
+  <script>
+    // Scroll Reveal with Intersection Observer
+    const revealElements = document.querySelectorAll('.reveal, .reveal-scale');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // Feature cards staggered reveal
+    const featureCards = document.querySelectorAll('.feature-card');
+    const cardObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }, index * 100);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    featureCards.forEach(card => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(40px)';
+      card.style.transition = 'opacity 0.6s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      cardObserver.observe(card);
+    });
+
+    // Price cards bouncy reveal
+    const priceCards = document.querySelectorAll('.price-card');
+    const priceObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'scale(1)';
+          }, index * 150);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    priceCards.forEach(card => {
+      card.style.opacity = '0';
+      card.style.transform = 'scale(0.9)';
+      card.style.transition = 'opacity 0.5s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      priceObserver.observe(card);
+    });
+  </script>
 </body>
 </html>

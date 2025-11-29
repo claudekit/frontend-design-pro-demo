@@ -22,10 +22,45 @@ A comprehensive showcase of 11 modern frontend design aesthetics with master pro
 | 10 | **Dark OLED Luxury** | Absolute black + Gold accents, spotlight cursor, gold foil gradients |
 | 11 | **Organic / Biomorphic** | "Living Earth" palette, morphing blobs, wavy dividers |
 
+## Installation (Claude Code Plugin)
+
+Install as a Claude Code plugin to get the `frontend-design-pro` skill:
+
+```bash
+# From GitHub
+claude /plugin install vibery-studio/frontend-design-pro-demo
+
+# Or from local directory
+claude /plugin install /path/to/frontend-design-pro-demo
+```
+
+Once installed, Claude will automatically use the skill when building frontend interfaces.
+
+### Plugin Structure
+
+```
+frontend-design-pro-demo/
+├── .claude-plugin/
+│   └── plugin.json     # Plugin metadata
+└── skills/
+    └── frontend-design-pro/
+        └── SKILL.md    # Skill definition
+```
+
+## Usage
+
+Example prompt:
+```markdown
+use frontend-design-pro to create a frontend interface for <project-name> with <aesthetic-direction> style.
+```
+That's it!
+
 ## Project Structure
 
 ```
 frontend-design-pro-demo/
+├── .claude-plugin/     # Claude Code plugin config
+├── skills/             # Plugin skills
 ├── demos-v01/          # Version 1 demos
 ├── demos-v02/          # Version 2 demos (latest)
 │   ├── index.html      # Main showcase page
@@ -59,3 +94,18 @@ Each demo includes a "Master Prompt" section that describes the key characterist
 ## License
 
 MIT
+
+## Credit
+
+**Powered by [ClaudeKit](https://claudekit.cc)**
+
+**I've been spending 7+ months to dig into every aspect of Claude Code so you don't have to.**
+
+[![ClaudeKit Agent Skills](https://github.com/mrgoonie/claudekit-skills/blob/main/claudekit.png?raw=true)](https://claudekit.cc)
+
+I've basically been sharing everything I learned about Claude Code on this Substack: [https://faafospecialist.substack.com/](https://faafospecialist.substack.com/)
+
+So if you find this collection useful, please consider supporting my product at [ClaudeKit.cc](https://claudekit.cc).
+
+Thanks so much! 🥰
+*[Duy /zuey/](https://x.com/goon_nguyen)*

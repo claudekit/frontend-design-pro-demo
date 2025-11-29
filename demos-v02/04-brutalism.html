@@ -588,15 +588,79 @@
       transform: rotate(-10deg) scale(1.2);
     }
 
+    /* Scroll Reveal Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-80px);
+      transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-left.revealed {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Enhanced brutal interactions */
+    .project-card {
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .project-card:hover {
+      transform: translate(-6px, -6px);
+      box-shadow: 10px 10px 0 var(--color-accent);
+    }
+
+    .project-card:active {
+      transform: translate(-2px, -2px);
+      box-shadow: 4px 4px 0 var(--color-accent);
+    }
+
+    .stat-item {
+      transition: transform 0.15s ease;
+    }
+
+    .stat-item:hover {
+      transform: translate(-4px, -4px);
+    }
+
+    .cta-visual span {
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .cta:hover .cta-visual span {
+      transform: rotate(-20deg) scale(1.1);
+    }
+
+    /* Stagger delay classes */
+    .stagger-1 { transition-delay: 0.1s; }
+    .stagger-2 { transition-delay: 0.2s; }
+    .stagger-3 { transition-delay: 0.3s; }
+    .stagger-4 { transition-delay: 0.4s; }
+
     /* Reduced Motion */
     @media (prefers-reduced-motion: reduce) {
       .marquee-track, .glitch-box {
         animation: none;
       }
-      *, .hero-content, .hero-visual, .hero-tag, .project-card, .stat-item {
+      *, .hero-content, .hero-visual, .hero-tag, .project-card, .stat-item, .reveal, .reveal-left {
         animation-duration: 0.01ms !important;
         transition-duration: 0.01ms !important;
         animation-delay: 0ms !important;
+      }
+      .reveal, .reveal-left {
+        opacity: 1;
+        transform: none;
       }
     }
   </style>
@@ -759,5 +823,63 @@
     </div>
     <p class="copyright">&copy; 2024 — No Rights Reserved</p>
   </footer>
+
+  <script>
+    // Scroll Reveal with Intersection Observer
+    const revealElements = document.querySelectorAll('.reveal, .reveal-left');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // Project cards staggered reveal
+    const projectCards = document.querySelectorAll('.project-card');
+    const cardObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }, index * 100);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    projectCards.forEach(card => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(50px)';
+      card.style.transition = 'opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+      cardObserver.observe(card);
+    });
+
+    // Stat items staggered reveal
+    const statItems = document.querySelectorAll('.stat-item');
+    const statObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }, index * 80);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    statItems.forEach(item => {
+      item.style.opacity = '0';
+      item.style.transform = 'translateY(30px)';
+      item.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+      statObserver.observe(item);
+    });
+  </script>
 </body>
 </html>

@@ -647,14 +647,71 @@
       transition: width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
+    /* Scroll Reveal Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-3d {
+      opacity: 0;
+      transform: translateY(40px) rotateX(10deg);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-3d.revealed {
+      opacity: 1;
+      transform: translateY(0) rotateX(0deg);
+    }
+
+    /* Enhanced 3D interactions */
+    .product-card {
+      cursor: pointer;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .product-card:active {
+      transform: translateY(-6px) scale(0.98);
+    }
+
+    .material-card {
+      cursor: pointer;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .material-card:active {
+      transform: scale(0.98);
+    }
+
+    /* Stagger delay classes */
+    .stagger-1 { transition-delay: 0.1s; }
+    .stagger-2 { transition-delay: 0.2s; }
+    .stagger-3 { transition-delay: 0.3s; }
+    .stagger-4 { transition-delay: 0.4s; }
+
     /* Reduced Motion */
     @media (prefers-reduced-motion: reduce) {
-      *, .hero-content, .hero-visual, .card-3d, .product-card, .material-card, .cta-card, .btn-gold {
+      *, .hero-content, .hero-visual, .card-3d, .product-card, .material-card, .cta-card, .btn-gold, .reveal, .reveal-3d {
         animation-duration: 0.01ms !important;
         transition-duration: 0.01ms !important;
         animation-delay: 0ms !important;
       }
       .metallic-gold { animation: none; }
+      .reveal, .reveal-3d {
+        opacity: 1;
+        transform: none;
+      }
     }
   </style>
 </head>
@@ -775,9 +832,67 @@
 
   <footer>
     <div class="container">
-      <div class="footer-logo metallic-gold">LUXE</div>
-      <p>&copy; 2024 LUXE. Crafted with hyperrealistic precision.</p>
+      <div class="footer-logo metallic-gold reveal">LUXE</div>
+      <p class="reveal stagger-1">&copy; 2024 LUXE. Crafted with hyperrealistic precision.</p>
     </div>
   </footer>
+
+  <script>
+    // Scroll Reveal with Intersection Observer
+    const revealElements = document.querySelectorAll('.reveal, .reveal-3d');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // Product cards with 3D reveal
+    const productCards = document.querySelectorAll('.product-card');
+    const cardObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0) rotateX(0deg)';
+          }, index * 120);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    productCards.forEach(card => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(50px) rotateX(10deg)';
+      card.style.transition = 'opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1)';
+      cardObserver.observe(card);
+    });
+
+    // Material cards reveal
+    const materialCards = document.querySelectorAll('.material-card');
+    const materialObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'scale(1)';
+          }, index * 100);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    materialCards.forEach(card => {
+      card.style.opacity = '0';
+      card.style.transform = 'scale(0.9)';
+      card.style.transition = 'opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+      materialObserver.observe(card);
+    });
+  </script>
 </body>
 </html>

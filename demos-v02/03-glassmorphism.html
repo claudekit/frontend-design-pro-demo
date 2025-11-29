@@ -679,14 +679,71 @@
 
     .nav-glass { animation: fadeInUp 0.6s ease-out 0.1s both; }
 
+    /* Scroll Reveal Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-scale.revealed {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Enhanced glassmorphism interactions */
+    .glass:hover {
+      border-color: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 16px 48px var(--glass-shadow);
+    }
+
+    .feature-card:active {
+      transform: translateY(-4px) scale(0.98);
+    }
+
+    .price-card:active {
+      transform: translateY(-4px) scale(0.98);
+    }
+
+    /* Glow pulse on hover */
+    .btn-primary:hover {
+      box-shadow: 0 15px 40px rgba(244, 114, 182, 0.4), 0 0 40px rgba(244, 114, 182, 0.2);
+    }
+
+    /* Preview card hover glow */
+    .preview-card:hover {
+      box-shadow: 0 8px 32px var(--glass-shadow), 0 0 60px rgba(244, 114, 182, 0.15);
+    }
+
+    /* Stagger delay classes */
+    .stagger-1 { transition-delay: 0.1s; }
+    .stagger-2 { transition-delay: 0.2s; }
+    .stagger-3 { transition-delay: 0.3s; }
+    .stagger-4 { transition-delay: 0.4s; }
+
     /* Reduced Motion */
     @media (prefers-reduced-motion: reduce) {
-      *, .orb, .hero-content, .preview-card, .preview-stat, .feature-card, .price-card, .nav-glass {
+      *, .orb, .hero-content, .preview-card, .preview-stat, .feature-card, .price-card, .nav-glass, .reveal, .reveal-scale {
         animation-duration: 0.01ms !important;
         transition-duration: 0.01ms !important;
         animation-delay: 0ms !important;
       }
       .hero-content h1 span { animation: none; }
+      .reveal, .reveal-scale {
+        opacity: 1;
+        transform: none;
+      }
     }
   </style>
 </head>
@@ -858,10 +915,68 @@
 
   <footer>
     <div class="container">
-      <div class="footer-glass glass">
+      <div class="footer-glass glass reveal">
         <p>&copy; 2024 Aura. Crafted with frosted glass and gradients.</p>
       </div>
     </div>
   </footer>
+
+  <script>
+    // Scroll Reveal with Intersection Observer
+    const revealElements = document.querySelectorAll('.reveal, .reveal-scale');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // Feature cards staggered reveal
+    const featureCards = document.querySelectorAll('.feature-card');
+    const cardObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }, index * 100);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    featureCards.forEach(card => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(40px)';
+      card.style.transition = 'opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+      cardObserver.observe(card);
+    });
+
+    // Price cards staggered reveal
+    const priceCards = document.querySelectorAll('.price-card');
+    const priceObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }, index * 120);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    priceCards.forEach(card => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(40px)';
+      card.style.transition = 'opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1)';
+      priceObserver.observe(card);
+    });
+  </script>
 </body>
 </html>

@@ -607,15 +607,73 @@
       transform: scale(1.05);
     }
 
+    /* Scroll Reveal Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-blob {
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .reveal-blob.revealed {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Enhanced organic interactions */
+    .feature-card {
+      cursor: pointer;
+    }
+
+    .feature-card:active {
+      transform: translateY(-4px) scale(0.98);
+    }
+
+    .gallery-item {
+      cursor: pointer;
+    }
+
+    .gallery-item:active {
+      transform: scale(0.98);
+    }
+
+    .cta-card {
+      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .cta-card:hover {
+      transform: scale(1.02);
+    }
+
+    /* Stagger delay classes */
+    .stagger-1 { transition-delay: 0.1s; }
+    .stagger-2 { transition-delay: 0.2s; }
+    .stagger-3 { transition-delay: 0.3s; }
+    .stagger-4 { transition-delay: 0.4s; }
+
     /* Reduced Motion */
     @media (prefers-reduced-motion: reduce) {
       .blob, .floating-tag, .cta-card::before, .hero-image, .gallery-item, .section-tag {
         animation: none;
       }
-      *, .hero-content, .hero-blob-card, .feature-card, .gallery-item, .cta-card {
+      *, .hero-content, .hero-blob-card, .feature-card, .gallery-item, .cta-card, .reveal, .reveal-blob {
         animation-duration: 0.01ms !important;
         transition-duration: 0.01ms !important;
         animation-delay: 0ms !important;
+      }
+      .reveal, .reveal-blob {
+        opacity: 1;
+        transform: none;
       }
     }
   </style>
@@ -743,9 +801,85 @@
 
   <footer>
     <div class="container">
-      <div class="footer-logo">Bloom</div>
-      <p>&copy; 2024 Bloom. Grown with nature's touch.</p>
+      <div class="footer-logo reveal">Bloom</div>
+      <p class="reveal stagger-1">&copy; 2024 Bloom. Grown with nature's touch.</p>
     </div>
   </footer>
+
+  <script>
+    // Scroll Reveal with Intersection Observer
+    const revealElements = document.querySelectorAll('.reveal, .reveal-blob');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // Feature cards organic reveal
+    const featureCards = document.querySelectorAll('.feature-card');
+    const cardObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }, index * 100);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    featureCards.forEach(card => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(40px)';
+      card.style.transition = 'opacity 0.6s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      cardObserver.observe(card);
+    });
+
+    // Gallery items organic reveal
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const galleryObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'scale(1)';
+          }, index * 120);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    galleryItems.forEach(item => {
+      item.style.opacity = '0';
+      item.style.transform = 'scale(0.9)';
+      item.style.transition = 'opacity 0.6s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      galleryObserver.observe(item);
+    });
+
+    // CTA card reveal
+    const ctaCard = document.querySelector('.cta-card');
+    if (ctaCard) {
+      const ctaObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'scale(1)';
+          }
+        });
+      }, { threshold: 0.2 });
+
+      ctaCard.style.opacity = '0';
+      ctaCard.style.transform = 'scale(0.95)';
+      ctaCard.style.transition = 'opacity 0.8s ease, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      ctaObserver.observe(ctaCard);
+    }
+  </script>
 </body>
 </html>

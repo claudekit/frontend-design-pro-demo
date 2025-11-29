@@ -434,8 +434,26 @@
       to { width: 40px; }
     }
 
-    .hero-content { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both; }
-    .hero-meta { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both; }
+    .hero-content {
+      opacity: 0;
+      animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+    }
+    .hero-meta {
+      opacity: 0;
+      animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+    }
+    .hero-content h1 {
+      opacity: 0;
+      animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+    }
+    .hero-content .hero-description {
+      opacity: 0;
+      animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+    }
+    .overline {
+      opacity: 0;
+      animation: fadeIn 0.5s ease 0.1s forwards;
+    }
     .overline::before {
       content: '';
       display: inline-block;
@@ -444,33 +462,24 @@
       background: var(--color-accent);
       margin-right: 1rem;
       vertical-align: middle;
-      animation: lineExpand 0.6s ease-out 0.6s both;
+      animation: lineExpand 0.6s ease-out 0.4s both;
     }
-
-    .project-card { animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both; }
-    .project-card:nth-child(1) { animation-delay: 0.1s; }
-    .project-card:nth-child(2) { animation-delay: 0.2s; }
-    .project-card:nth-child(3) { animation-delay: 0.3s; }
-    .project-card:nth-child(4) { animation-delay: 0.4s; }
-
-    .service-item { animation: fadeInUp 0.5s ease-out both; }
-    .service-item:nth-child(1) { animation-delay: 0.1s; }
-    .service-item:nth-child(2) { animation-delay: 0.15s; }
-    .service-item:nth-child(3) { animation-delay: 0.2s; }
-    .service-item:nth-child(4) { animation-delay: 0.25s; }
-
-    .stat { animation: fadeIn 0.5s ease-out both; }
-    .stat:nth-child(1) { animation-delay: 0.5s; }
-    .stat:nth-child(2) { animation-delay: 0.6s; }
-    .stat:nth-child(3) { animation-delay: 0.7s; }
-    .stat:nth-child(4) { animation-delay: 0.8s; }
+    .stat {
+      opacity: 0;
+      animation: fadeInUp 0.5s ease-out forwards;
+    }
+    .stat:nth-child(1) { animation-delay: 0.6s; }
+    .stat:nth-child(2) { animation-delay: 0.7s; }
+    .stat:nth-child(3) { animation-delay: 0.8s; }
+    .stat:nth-child(4) { animation-delay: 0.9s; }
 
     .stat-value {
       display: inline-block;
-      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.3s ease;
     }
     .stat:hover .stat-value {
       transform: scale(1.1);
+      color: var(--color-accent);
     }
 
     .nav-links a { transition: color 0.2s ease, transform 0.2s ease; }
@@ -479,12 +488,219 @@
     .footer-left h3 { transition: letter-spacing 0.3s ease; }
     .footer-left:hover h3 { letter-spacing: 0.02em; }
 
+    /* Scroll Reveal Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-60px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-left.revealed {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(60px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-right.revealed {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-scale.revealed {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Parallax effect for sections */
+    .parallax-bg {
+      transition: transform 0.1s linear;
+    }
+
+    /* Enhanced interaction animations - Project Cards */
+    .project-card {
+      position: relative;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid transparent;
+      transition: border-color 0.4s ease;
+      pointer-events: none;
+    }
+
+    .project-card:hover::before {
+      border-color: var(--color-accent);
+    }
+
+    .project-card .project-image {
+      transition: box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .project-card:hover .project-image {
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    .project-card .project-title {
+      transition: color 0.3s ease;
+    }
+
+    .project-card:hover .project-title {
+      color: var(--color-accent);
+    }
+
+    .project-card .project-number {
+      transition: color 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .project-card:hover .project-number {
+      color: var(--color-accent);
+      transform: scale(1.1);
+    }
+
+    /* Service items */
+    .service-item {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .service-item::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 1px;
+      width: 0;
+      background: var(--color-accent);
+      transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .service-item:hover::after {
+      width: 100%;
+    }
+
+    .service-title {
+      transition: color 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .service-item:hover .service-title {
+      color: var(--color-accent);
+      transform: translateX(8px);
+    }
+
+    .service-number {
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.3s ease;
+    }
+
+    .service-item:hover .service-number {
+      transform: scale(1.3);
+    }
+
+    .service-description {
+      transition: color 0.3s ease;
+    }
+
+    .service-item:hover .service-description {
+      color: var(--color-text);
+    }
+
+    /* Quote section animation */
+    blockquote {
+      transition: opacity 0.5s ease;
+    }
+
+    .quote-section:hover blockquote {
+      opacity: 0.8;
+    }
+
+    .quote-author span {
+      transition: transform 0.3s ease;
+      display: inline-block;
+    }
+
+    .quote-section:hover .quote-author span {
+      transform: translateX(-4px);
+    }
+
+    /* Footer animation */
+    .footer-left h3 {
+      position: relative;
+      display: inline-block;
+    }
+
+    .footer-left h3::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--color-accent);
+      transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .footer-left:hover h3::after {
+      width: 100%;
+    }
+
+    .footer-links a {
+      position: relative;
+    }
+
+    .footer-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--color-accent);
+      transition: width 0.3s ease;
+    }
+
+    .footer-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Stagger delay classes */
+    .stagger-1 { transition-delay: 0.1s; }
+    .stagger-2 { transition-delay: 0.2s; }
+    .stagger-3 { transition-delay: 0.3s; }
+    .stagger-4 { transition-delay: 0.4s; }
+
     /* Reduced Motion */
     @media (prefers-reduced-motion: reduce) {
-      *, .hero-content, .hero-meta, .project-card, .service-item, .stat {
+      *, .hero-content, .hero-meta, .project-card, .service-item, .stat, .reveal, .reveal-left, .reveal-right, .reveal-scale {
         animation-duration: 0.01ms !important;
         transition-duration: 0.01ms !important;
         animation-delay: 0ms !important;
+      }
+      .reveal, .reveal-left, .reveal-right, .reveal-scale {
+        opacity: 1;
+        transform: none;
       }
     }
   </style>
@@ -639,11 +855,11 @@
   <footer>
     <div class="container">
       <div class="footer-grid">
-        <div class="footer-left">
+        <div class="footer-left reveal">
           <h3>Let's work together</h3>
           <p>hello@studio.design</p>
         </div>
-        <div class="footer-right">
+        <div class="footer-right reveal stagger-1">
           <div class="footer-links">
             <a href="#">Twitter</a>
             <a href="#">Instagram</a>
@@ -654,5 +870,151 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    // Scroll Reveal with Intersection Observer
+    const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // Section reveal animations (scroll-triggered)
+    const animateSections = () => {
+      // Project cards - staggered reveal
+      const projectCards = document.querySelectorAll('.project-card');
+      const projectObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const cards = document.querySelectorAll('.project-card');
+            cards.forEach((card, i) => {
+              setTimeout(() => {
+                card.classList.add('animate-in');
+              }, i * 100);
+            });
+            projectObserver.disconnect();
+          }
+        });
+      }, { threshold: 0.15 });
+
+      if (projectCards.length) {
+        projectObserver.observe(projectCards[0]);
+      }
+
+      // Service items - staggered reveal
+      const serviceItems = document.querySelectorAll('.service-item');
+      const serviceObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const items = document.querySelectorAll('.service-item');
+            items.forEach((item, i) => {
+              setTimeout(() => {
+                item.classList.add('animate-in');
+              }, i * 80);
+            });
+            serviceObserver.disconnect();
+          }
+        });
+      }, { threshold: 0.2 });
+
+      if (serviceItems.length) {
+        serviceObserver.observe(serviceItems[0]);
+      }
+
+      // Quote reveal
+      const quoteSection = document.querySelector('.quote-section');
+      if (quoteSection) {
+        const quoteObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              quoteSection.classList.add('animate-in');
+              quoteObserver.disconnect();
+            }
+          });
+        }, { threshold: 0.3 });
+        quoteObserver.observe(quoteSection);
+      }
+    };
+
+    // Add animation styles dynamically
+    const style = document.createElement('style');
+    style.textContent = `
+      .project-card {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .project-card.animate-in {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .service-item {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .service-item.animate-in {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .quote-section blockquote,
+      .quote-section .quote-author {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .quote-section.animate-in blockquote {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .quote-section.animate-in .quote-author {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.2s;
+      }
+    `;
+    document.head.appendChild(style);
+
+    // Initialize animations
+    animateSections();
+
+    // Stats counter animation
+    const stats = document.querySelectorAll('.stat-value');
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const target = entry.target;
+          const text = target.textContent;
+          const num = parseInt(text);
+          if (!isNaN(num) && num > 0) {
+            target.textContent = '0';
+            let current = 0;
+            const increment = num / 30;
+            const timer = setInterval(() => {
+              current += increment;
+              if (current >= num) {
+                target.textContent = text;
+                clearInterval(timer);
+              } else {
+                target.textContent = Math.floor(current);
+              }
+            }, 30);
+          }
+          statsObserver.unobserve(target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    stats.forEach(stat => statsObserver.observe(stat));
+  </script>
 </body>
 </html>

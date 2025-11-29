@@ -597,16 +597,79 @@
       transform: scale(1.1);
     }
 
+    /* Scroll Reveal Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-60px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-left.revealed {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(60px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-right.revealed {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Enhanced block interactions */
+    .block {
+      cursor: pointer;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .block:active {
+      transform: scale(0.98);
+    }
+
+    .stat {
+      cursor: default;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .stat:hover {
+      transform: scale(1.05);
+    }
+
+    /* Stagger delay classes */
+    .stagger-1 { transition-delay: 0.1s; }
+    .stagger-2 { transition-delay: 0.2s; }
+    .stagger-3 { transition-delay: 0.3s; }
+    .stagger-4 { transition-delay: 0.4s; }
+
     /* Reduced Motion */
     @media (prefers-reduced-motion: reduce) {
       html { scroll-snap-type: none; }
       .marquee-track, .hero-badge {
         animation: none;
       }
-      *, .hero-left, .hero-right, .hero-image, .block, .feature-content, .feature-visual, .stat, .cta-title {
+      *, .hero-left, .hero-right, .hero-image, .block, .feature-content, .feature-visual, .stat, .cta-title, .reveal, .reveal-left, .reveal-right {
         animation-duration: 0.01ms !important;
         transition-duration: 0.01ms !important;
         animation-delay: 0ms !important;
+      }
+      .reveal, .reveal-left, .reveal-right {
+        opacity: 1;
+        transform: none;
       }
     }
   </style>
@@ -715,8 +778,66 @@
   </main>
 
   <footer>
-    <div class="footer-logo">MAXIMAL</div>
-    <p>&copy; 2024 Maximal. Bold by design.</p>
+    <div class="footer-logo reveal">MAXIMAL</div>
+    <p class="reveal stagger-1">&copy; 2024 Maximal. Bold by design.</p>
   </footer>
+
+  <script>
+    // Scroll Reveal with Intersection Observer
+    const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // Block cards staggered reveal
+    const blocks = document.querySelectorAll('.block');
+    const blockObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }, index * 100);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    blocks.forEach(block => {
+      block.style.opacity = '0';
+      block.style.transform = 'translateY(40px)';
+      block.style.transition = 'opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+      blockObserver.observe(block);
+    });
+
+    // Stats reveal
+    const stats = document.querySelectorAll('.stat');
+    const statObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'scale(1)';
+          }, index * 80);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    stats.forEach(stat => {
+      stat.style.opacity = '0';
+      stat.style.transform = 'scale(0.9)';
+      stat.style.transition = 'opacity 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      statObserver.observe(stat);
+    });
+  </script>
 </body>
 </html>

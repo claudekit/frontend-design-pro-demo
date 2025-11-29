@@ -602,12 +602,70 @@
       transform: translateY(-2px);
     }
 
+    /* Scroll Reveal Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-fade {
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    .reveal-fade.revealed {
+      opacity: 1;
+    }
+
+    /* Enhanced luxury interactions */
+    .feature-card {
+      cursor: pointer;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), background 0.5s ease;
+    }
+
+    .feature-card:active {
+      transform: translateY(-4px) scale(0.98);
+    }
+
+    .stat-item {
+      cursor: default;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .stat-item:hover {
+      transform: translateY(-6px);
+    }
+
+    .cta-card {
+      transition: transform 0.5s ease;
+    }
+
+    .cta-card:hover {
+      transform: scale(1.02);
+    }
+
+    /* Stagger delay classes */
+    .stagger-1 { transition-delay: 0.1s; }
+    .stagger-2 { transition-delay: 0.2s; }
+    .stagger-3 { transition-delay: 0.3s; }
+    .stagger-4 { transition-delay: 0.4s; }
+
     /* Reduced Motion */
     @media (prefers-reduced-motion: reduce) {
-      *, .hero-content, .hero-visual, .feature-card, .stat-item, .cta-card, .btn-primary {
+      *, .hero-content, .hero-visual, .feature-card, .stat-item, .cta-card, .btn-primary, .reveal, .reveal-fade {
         animation-duration: 0.01ms !important;
         transition-duration: 0.01ms !important;
         animation-delay: 0ms !important;
+      }
+      .reveal, .reveal-fade {
+        opacity: 1;
+        transform: none;
       }
     }
   </style>
@@ -745,5 +803,81 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    // Scroll Reveal with Intersection Observer
+    const revealElements = document.querySelectorAll('.reveal, .reveal-fade');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // Feature cards staggered reveal
+    const featureCards = document.querySelectorAll('.feature-card');
+    const cardObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }, index * 100);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    featureCards.forEach(card => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(40px)';
+      card.style.transition = 'opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+      cardObserver.observe(card);
+    });
+
+    // Stat items reveal
+    const statItems = document.querySelectorAll('.stat-item');
+    const statObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }, index * 80);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    statItems.forEach(item => {
+      item.style.opacity = '0';
+      item.style.transform = 'translateY(30px)';
+      item.style.transition = 'opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+      statObserver.observe(item);
+    });
+
+    // CTA card reveal
+    const ctaCard = document.querySelector('.cta-card');
+    if (ctaCard) {
+      const ctaObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'scale(1)';
+          }
+        });
+      }, { threshold: 0.2 });
+
+      ctaCard.style.opacity = '0';
+      ctaCard.style.transform = 'scale(0.95)';
+      ctaCard.style.transition = 'opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+      ctaObserver.observe(ctaCard);
+    }
+  </script>
 </body>
 </html>

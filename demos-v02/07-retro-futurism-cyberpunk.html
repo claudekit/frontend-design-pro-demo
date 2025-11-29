@@ -735,16 +735,75 @@
       text-shadow: 0 0 20px var(--color-cyan), 0 0 40px var(--color-cyan), 0 0 60px var(--color-cyan);
     }
 
+    /* Scroll Reveal Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-glitch {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-glitch.revealed {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Enhanced cyber interactions */
+    .feature-card {
+      cursor: pointer;
+    }
+
+    .feature-card:active {
+      transform: scale(0.98);
+    }
+
+    .cyber-frame {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .cyber-frame:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 40px rgba(0, 255, 255, 0.3);
+    }
+
+    .terminal {
+      transition: box-shadow 0.3s ease;
+    }
+
+    .terminal:hover {
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+    }
+
+    /* Stagger delay classes */
+    .stagger-1 { transition-delay: 0.1s; }
+    .stagger-2 { transition-delay: 0.2s; }
+    .stagger-3 { transition-delay: 0.3s; }
+    .stagger-4 { transition-delay: 0.4s; }
+
     /* Reduced Motion */
     @media (prefers-reduced-motion: reduce) {
       body::before { display: none; }
       .hero-tag, .glitch::before, .glitch::after, .terminal-cursor, .cyber-frame::after {
         animation: none;
       }
-      *, .hero-content, .hero-visual, .cyber-frame, .cyber-stat, .feature-card, .terminal, .terminal-line {
+      *, .hero-content, .hero-visual, .cyber-frame, .cyber-stat, .feature-card, .terminal, .terminal-line, .reveal, .reveal-glitch {
         animation-duration: 0.01ms !important;
         transition-duration: 0.01ms !important;
         animation-delay: 0ms !important;
+      }
+      .reveal, .reveal-glitch {
+        opacity: 1;
+        transform: none;
       }
     }
   </style>
@@ -870,9 +929,65 @@
 
   <footer>
     <div class="container">
-      <div class="footer-logo">NEON//SYS</div>
-      <p>&copy; 2077 NeonSys Corp. All rights reserved in the digital realm.</p>
+      <div class="footer-logo reveal">NEON//SYS</div>
+      <p class="reveal stagger-1">&copy; 2077 NeonSys Corp. All rights reserved in the digital realm.</p>
     </div>
   </footer>
+
+  <script>
+    // Scroll Reveal with Intersection Observer
+    const revealElements = document.querySelectorAll('.reveal, .reveal-glitch');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // Feature cards staggered reveal
+    const featureCards = document.querySelectorAll('.feature-card');
+    const cardObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateX(0)';
+          }, index * 80);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    featureCards.forEach(card => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateX(-30px)';
+      card.style.transition = 'opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+      cardObserver.observe(card);
+    });
+
+    // Terminal reveal
+    const terminal = document.querySelector('.terminal');
+    if (terminal) {
+      const terminalObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, { threshold: 0.2 });
+
+      terminal.style.opacity = '0';
+      terminal.style.transform = 'translateY(40px)';
+      terminal.style.transition = 'opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1)';
+      terminalObserver.observe(terminal);
+    }
+  </script>
 </body>
 </html>
