@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brutalism | Aesthetic Direction 04</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #0a0a0a;
+      --color-text: #ffffff;
+      --color-accent: #ffff00;
+      --color-accent-alt: #ff3366;
+      --color-accent-blue: #00ffff;
+      --font-display: 'Anton', sans-serif;
+      --font-mono: 'Space Mono', monospace;
+      --border-thick: 4px;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-mono);
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.4;
+      -webkit-font-smoothing: antialiased;
+      cursor: crosshair;
+    }
+
+    ::selection {
+      background: var(--color-accent);
+      color: var(--color-bg);
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* Navigation */
+    nav {
+      border-bottom: var(--border-thick) solid var(--color-text);
+      padding: 1rem 0;
+    }
+
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      text-decoration: none;
+      color: var(--color-text);
+      letter-spacing: 0.05em;
+      transition: color 0.1s;
+    }
+
+    .logo:hover {
+      color: var(--color-accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0;
+      list-style: none;
+    }
+
+    .nav-links a {
+      display: block;
+      padding: 0.75rem 1.5rem;
+      font-size: 0.875rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--color-text);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border: var(--border-thick) solid transparent;
+      transition: all 0.1s;
+    }
+
+    .nav-links a:hover {
+      background: var(--color-accent);
+      color: var(--color-bg);
+      border-color: var(--color-text);
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: var(--border-thick) solid var(--color-text);
+    }
+
+    .hero-content {
+      padding: 4rem 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-right: var(--border-thick) solid var(--color-text);
+    }
+
+    .hero-tag {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      background: var(--color-accent-alt);
+      color: var(--color-text);
+      margin-bottom: 2rem;
+      transform: rotate(-2deg);
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 10vw, 10rem);
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+
+    h1 span {
+      display: block;
+      color: var(--color-accent);
+    }
+
+    .hero-description {
+      font-size: 1rem;
+      line-height: 1.8;
+      max-width: 400px;
+      margin-bottom: 3rem;
+    }
+
+    .hero-visual {
+      background: var(--color-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-image {
+      width: 80%;
+      height: 80%;
+      position: relative;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border: var(--border-thick) solid var(--color-bg);
+      mix-blend-mode: multiply;
+      filter: grayscale(100%) contrast(1.2);
+    }
+
+    .glitch-box {
+      position: absolute;
+      top: 10%;
+      right: -20px;
+      padding: 1rem 1.5rem;
+      background: var(--color-bg);
+      border: var(--border-thick) solid var(--color-text);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transform: rotate(5deg);
+    }
+
+    /* Marquee */
+    .marquee {
+      overflow: hidden;
+      background: var(--color-accent);
+      padding: 1rem 0;
+      border-bottom: var(--border-thick) solid var(--color-text);
+    }
+
+    .marquee-track {
+      display: flex;
+      animation: marquee 20s linear infinite;
+    }
+
+    .marquee-content {
+      display: flex;
+      gap: 4rem;
+      padding: 0 2rem;
+      white-space: nowrap;
+    }
+
+    .marquee-content span {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      color: var(--color-bg);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Projects Grid */
+    .projects {
+      padding: 0;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem 3rem;
+      border-bottom: var(--border-thick) solid var(--color-text);
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      text-transform: uppercase;
+    }
+
+    .section-count {
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .project-card {
+      border-right: var(--border-thick) solid var(--color-text);
+      border-bottom: var(--border-thick) solid var(--color-text);
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .project-card:nth-child(2n) {
+      border-right: none;
+    }
+
+    .project-image {
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .project-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%);
+      transition: all 0.3s;
+    }
+
+    .project-card:hover .project-image img {
+      filter: grayscale(0%);
+      transform: scale(1.1);
+    }
+
+    .project-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .project-card:hover .project-overlay {
+      opacity: 1;
+    }
+
+    .project-overlay span {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      text-transform: uppercase;
+      color: var(--color-accent);
+    }
+
+    .project-info {
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .project-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+    }
+
+    .project-category {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-accent);
+    }
+
+    .project-number {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      color: var(--color-accent);
+    }
+
+    /* Stats Section */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-bottom: var(--border-thick) solid var(--color-text);
+    }
+
+    .stat-item {
+      padding: 3rem 2rem;
+      border-right: var(--border-thick) solid var(--color-text);
+      text-align: center;
+    }
+
+    .stat-item:last-child {
+      border-right: none;
+    }
+
+    .stat-item:nth-child(odd) {
+      background: var(--color-accent);
+      color: var(--color-bg);
+    }
+
+    .stat-value {
+      font-family: var(--font-display);
+      font-size: 4rem;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+
+    /* CTA Section */
+    .cta {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      border-bottom: var(--border-thick) solid var(--color-text);
+    }
+
+    .cta-content {
+      padding: 5rem 3rem;
+      border-right: var(--border-thick) solid var(--color-text);
+    }
+
+    .cta-title {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 8vw, 6rem);
+      text-transform: uppercase;
+      line-height: 1;
+      margin-bottom: 2rem;
+    }
+
+    .cta-title span {
+      color: var(--color-accent-alt);
+    }
+
+    .cta-description {
+      font-size: 1rem;
+      max-width: 500px;
+      margin-bottom: 2rem;
+      line-height: 1.8;
+    }
+
+    .btn-brutal {
+      display: inline-block;
+      padding: 1.25rem 3rem;
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      text-decoration: none;
+      color: var(--color-bg);
+      background: var(--color-accent);
+      border: var(--border-thick) solid var(--color-text);
+      cursor: pointer;
+      position: relative;
+      transition: all 0.1s;
+    }
+
+    .btn-brutal:hover {
+      transform: translate(-4px, -4px);
+      box-shadow: 8px 8px 0 var(--color-text);
+    }
+
+    .btn-brutal:active {
+      transform: translate(0, 0);
+      box-shadow: none;
+    }
+
+    .cta-visual {
+      background: var(--color-accent-alt);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cta-visual span {
+      font-family: var(--font-display);
+      font-size: 8rem;
+      color: var(--color-bg);
+      transform: rotate(-10deg);
+    }
+
+    /* Footer */
+    footer {
+      padding: 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--color-text);
+      text-decoration: none;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .footer-links a {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-text);
+      text-decoration: none;
+      transition: color 0.1s;
+    }
+
+    .footer-links a:hover {
+      color: var(--color-accent);
+    }
+
+    .copyright {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-content { border-right: none; border-bottom: var(--border-thick) solid var(--color-text); }
+      .hero-visual { min-height: 50vh; }
+      .cta { grid-template-columns: 1fr; }
+      .cta-content { border-right: none; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .project-card { border-right: none; }
+      .stats { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; }
+      footer { flex-direction: column; gap: 2rem; text-align: center; }
+    }
+
+    /* Focus States */
+    a:focus-visible, button:focus-visible {
+      outline: 4px solid var(--color-accent);
+      outline-offset: 4px;
+    }
+
+    /* Micro Animations */
+    @keyframes slideInHard {
+      from { opacity: 0; transform: translateX(-100px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes popInBrutal {
+      0% { opacity: 0; transform: scale(0) rotate(-10deg); }
+      70% { transform: scale(1.1) rotate(2deg); }
+      100% { opacity: 1; transform: scale(1) rotate(0deg); }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+
+    @keyframes typeIn {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    .hero-content { animation: slideInHard 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both; }
+    .hero-visual { animation: slideInHard 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both; }
+    .hero-visual { animation-direction: reverse; transform-origin: right; }
+
+    .hero-tag {
+      animation: popInBrutal 0.4s ease-out 0.6s both;
+    }
+
+    .glitch-box {
+      animation: shake 0.5s ease-in-out infinite;
+      animation-delay: 2s;
+    }
+
+    h1 span {
+      display: inline-block;
+      overflow: hidden;
+    }
+
+    .project-card { animation: slideInHard 0.4s ease-out both; }
+    .project-card:nth-child(1) { animation-delay: 0.1s; }
+    .project-card:nth-child(2) { animation-delay: 0.2s; }
+    .project-card:nth-child(3) { animation-delay: 0.3s; }
+    .project-card:nth-child(4) { animation-delay: 0.4s; }
+
+    .stat-item { animation: popInBrutal 0.4s ease-out both; }
+    .stat-item:nth-child(1) { animation-delay: 0.1s; }
+    .stat-item:nth-child(2) { animation-delay: 0.2s; }
+    .stat-item:nth-child(3) { animation-delay: 0.3s; }
+    .stat-item:nth-child(4) { animation-delay: 0.4s; }
+
+    .stat-value {
+      display: inline-block;
+      transition: transform 0.1s ease;
+    }
+    .stat-item:hover .stat-value {
+      animation: shake 0.3s ease-in-out;
+    }
+
+    .btn-brutal {
+      transition: all 0.1s ease;
+    }
+    .btn-brutal:hover {
+      animation: shake 0.2s ease-in-out;
+    }
+
+    .project-overlay span {
+      transition: transform 0.2s ease, letter-spacing 0.2s ease;
+    }
+    .project-card:hover .project-overlay span {
+      letter-spacing: 0.1em;
+    }
+
+    .project-number {
+      transition: transform 0.2s ease;
+    }
+    .project-card:hover .project-number {
+      transform: rotate(-10deg) scale(1.2);
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      .marquee-track, .glitch-box {
+        animation: none;
+      }
+      *, .hero-content, .hero-visual, .hero-tag, .project-card, .stat-item {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        animation-delay: 0ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container">
+      <a href="#" class="logo">BRUTAL</a>
+      <ul class="nav-links">
+        <li><a href="#">Work</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <span class="hero-tag">Est. 2024</span>
+        <h1>Design <span>Without</span> Rules</h1>
+        <p class="hero-description">We reject the polished. We embrace the raw. Brutalist design for brands that refuse to conform to boring conventions.</p>
+        <a href="#" class="btn-brutal">See Our Work</a>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-image">
+          <img src="https://images.unsplash.com/photo-1545873182-36625ac88aa9?w=800&q=80" alt="Abstract brutalist architecture">
+          <div class="glitch-box">ERROR 404: BEAUTY NOT FOUND</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="marquee">
+      <div class="marquee-track">
+        <div class="marquee-content">
+          <span>Raw Design</span>
+          <span>*</span>
+          <span>Unpolished</span>
+          <span>*</span>
+          <span>High Contrast</span>
+          <span>*</span>
+          <span>Bold Typography</span>
+          <span>*</span>
+          <span>Asymmetric</span>
+          <span>*</span>
+        </div>
+        <div class="marquee-content">
+          <span>Raw Design</span>
+          <span>*</span>
+          <span>Unpolished</span>
+          <span>*</span>
+          <span>High Contrast</span>
+          <span>*</span>
+          <span>Bold Typography</span>
+          <span>*</span>
+          <span>Asymmetric</span>
+          <span>*</span>
+        </div>
+      </div>
+    </div>
+
+    <section class="projects">
+      <div class="section-header">
+        <h2 class="section-title">Selected Work</h2>
+        <span class="section-count">[04] Projects</span>
+      </div>
+      <div class="projects-grid">
+        <a href="#" class="project-card">
+          <div class="project-image">
+            <img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?w=800&q=80" alt="Concrete architecture">
+            <div class="project-overlay"><span>View</span></div>
+          </div>
+          <div class="project-info">
+            <div>
+              <h3 class="project-title">Concrete Dreams</h3>
+              <p class="project-category">Brand Identity</p>
+            </div>
+            <span class="project-number">01</span>
+          </div>
+        </a>
+        <a href="#" class="project-card">
+          <div class="project-image">
+            <img src="https://images.unsplash.com/photo-1511447333015-45b65e60f6d5?w=800&q=80" alt="Typography poster">
+            <div class="project-overlay"><span>View</span></div>
+          </div>
+          <div class="project-info">
+            <div>
+              <h3 class="project-title">Type Chaos</h3>
+              <p class="project-category">Print Design</p>
+            </div>
+            <span class="project-number">02</span>
+          </div>
+        </a>
+        <a href="#" class="project-card">
+          <div class="project-image">
+            <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800&q=80" alt="Product photography">
+            <div class="project-overlay"><span>View</span></div>
+          </div>
+          <div class="project-info">
+            <div>
+              <h3 class="project-title">Anti-Brand</h3>
+              <p class="project-category">Packaging</p>
+            </div>
+            <span class="project-number">03</span>
+          </div>
+        </a>
+        <a href="#" class="project-card">
+          <div class="project-image">
+            <img src="https://images.unsplash.com/photo-1493612276216-ee3925520721?w=800&q=80" alt="Digital interface">
+            <div class="project-overlay"><span>View</span></div>
+          </div>
+          <div class="project-info">
+            <div>
+              <h3 class="project-title">System Error</h3>
+              <p class="project-category">Web Design</p>
+            </div>
+            <span class="project-number">04</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div class="stat-item">
+        <div class="stat-value">127</div>
+        <div class="stat-label">Projects Done</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">89</div>
+        <div class="stat-label">Happy Clients</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">14</div>
+        <div class="stat-label">Design Awards</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">∞</div>
+        <div class="stat-label">No Limits</div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="cta-content">
+        <h2 class="cta-title">Let's Make Something <span>Ugly Beautiful</span></h2>
+        <p class="cta-description">Ready to break the rules? We're looking for brands brave enough to stand out from the sea of sameness.</p>
+        <a href="#" class="btn-brutal">Start a Project</a>
+      </div>
+      <div class="cta-visual">
+        <span>!</span>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <a href="#" class="footer-logo">BRUTAL</a>
+    <div class="footer-links">
+      <a href="#">Twitter</a>
+      <a href="#">Instagram</a>
+      <a href="#">Dribbble</a>
+    </div>
+    <p class="copyright">&copy; 2024 — No Rights Reserved</p>
+  </footer>
+</body>
+</html>

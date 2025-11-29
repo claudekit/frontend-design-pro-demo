@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Retro-Futurism / Cyberpunk | Aesthetic Direction 07</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #0a0a0f;
+      --color-text: #ffffff;
+      --color-text-muted: rgba(255, 255, 255, 0.5);
+      --color-cyan: #00ffff;
+      --color-magenta: #ff00ff;
+      --color-yellow: #ffff00;
+      --color-hot-pink: #ff1493;
+      --font-display: 'Orbitron', sans-serif;
+      --font-mono: 'Share Tech Mono', monospace;
+      --glow-cyan: 0 0 10px var(--color-cyan), 0 0 20px var(--color-cyan), 0 0 40px var(--color-cyan);
+      --glow-magenta: 0 0 10px var(--color-magenta), 0 0 20px var(--color-magenta), 0 0 40px var(--color-magenta);
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-mono);
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* CRT Scanlines Effect */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 2px
+      );
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    /* Grid Background */
+    .grid-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background:
+        linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      z-index: -1;
+      perspective: 500px;
+    }
+
+    .grid-bg::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background: linear-gradient(to bottom,
+        transparent 0%,
+        rgba(255, 0, 255, 0.1) 50%,
+        rgba(0, 255, 255, 0.1) 100%
+      );
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Neon Text Utility */
+    .neon-cyan {
+      color: var(--color-cyan);
+      text-shadow: var(--glow-cyan);
+    }
+
+    .neon-magenta {
+      color: var(--color-magenta);
+      text-shadow: var(--glow-magenta);
+    }
+
+    /* Navigation */
+    nav {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+    }
+
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 900;
+      text-decoration: none;
+      color: var(--color-cyan);
+      text-shadow: var(--glow-cyan);
+      letter-spacing: 0.1em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      text-decoration: none;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .nav-links a::before {
+      content: '>';
+      margin-right: 0.5rem;
+      color: var(--color-magenta);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-cyan);
+      text-shadow: var(--glow-cyan);
+    }
+
+    .nav-links a:hover::before {
+      opacity: 1;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 80px 0;
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-content {
+      position: relative;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      border: 1px solid var(--color-magenta);
+      color: var(--color-magenta);
+      margin-bottom: 2rem;
+      animation: flicker 3s infinite;
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      92% { opacity: 1; }
+      93% { opacity: 0.3; }
+      94% { opacity: 1; }
+      95% { opacity: 0.5; }
+      96% { opacity: 1; }
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 7vw, 5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+
+    h1 .line-1 {
+      display: block;
+      color: var(--color-text);
+    }
+
+    h1 .line-2 {
+      display: block;
+      color: var(--color-cyan);
+      text-shadow: var(--glow-cyan);
+    }
+
+    h1 .line-3 {
+      display: block;
+      color: var(--color-magenta);
+      text-shadow: var(--glow-magenta);
+    }
+
+    .hero-description {
+      font-size: 1rem;
+      color: var(--color-text-muted);
+      max-width: 450px;
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn-cyber {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 2rem;
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.3s ease;
+      clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    }
+
+    .btn-cyber-primary {
+      color: var(--color-bg);
+      background: var(--color-cyan);
+      box-shadow: var(--glow-cyan);
+    }
+
+    .btn-cyber-primary:hover {
+      background: var(--color-magenta);
+      box-shadow: var(--glow-magenta);
+    }
+
+    .btn-cyber-secondary {
+      color: var(--color-cyan);
+      background: transparent;
+      border: 2px solid var(--color-cyan);
+    }
+
+    .btn-cyber-secondary:hover {
+      color: var(--color-bg);
+      background: var(--color-cyan);
+    }
+
+    /* Hero Visual */
+    .hero-visual {
+      position: relative;
+    }
+
+    .cyber-frame {
+      position: relative;
+      padding: 2rem;
+      background: rgba(0, 255, 255, 0.05);
+      border: 2px solid var(--color-cyan);
+      clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+    }
+
+    .cyber-frame::before,
+    .cyber-frame::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--color-magenta);
+    }
+
+    .cyber-frame::before {
+      top: -2px;
+      left: -2px;
+      border-right: none;
+      border-bottom: none;
+    }
+
+    .cyber-frame::after {
+      bottom: -2px;
+      right: -2px;
+      border-left: none;
+      border-top: none;
+    }
+
+    .cyber-image {
+      width: 100%;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .cyber-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(1.5) contrast(1.1);
+    }
+
+    .cyber-image::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg,
+        rgba(0, 255, 255, 0.2) 0%,
+        transparent 50%,
+        rgba(255, 0, 255, 0.2) 100%
+      );
+      mix-blend-mode: overlay;
+    }
+
+    .cyber-stats {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(0, 255, 255, 0.3);
+    }
+
+    .cyber-stat {
+      text-align: center;
+    }
+
+    .cyber-stat-value {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-cyan);
+      text-shadow: var(--glow-cyan);
+    }
+
+    .cyber-stat-label {
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* Features Section */
+    .features {
+      padding: 100px 0;
+      border-top: 1px solid rgba(0, 255, 255, 0.1);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .section-title span {
+      color: var(--color-cyan);
+      text-shadow: var(--glow-cyan);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .feature-card {
+      padding: 2rem;
+      background: rgba(0, 255, 255, 0.02);
+      border: 1px solid rgba(0, 255, 255, 0.2);
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--color-cyan), var(--color-magenta));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    .feature-card:hover {
+      background: rgba(0, 255, 255, 0.05);
+      border-color: var(--color-cyan);
+      box-shadow: inset 0 0 30px rgba(0, 255, 255, 0.1);
+    }
+
+    .feature-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .feature-number {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--color-magenta);
+      text-shadow: var(--glow-magenta);
+      margin-bottom: 1rem;
+    }
+
+    .feature-title {
+      font-family: var(--font-display);
+      font-size: 1.125rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+    }
+
+    .feature-description {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+      line-height: 1.7;
+    }
+
+    /* Terminal Section */
+    .terminal-section {
+      padding: 80px 0;
+    }
+
+    .terminal {
+      background: rgba(0, 0, 0, 0.8);
+      border: 2px solid var(--color-cyan);
+      border-radius: 0;
+    }
+
+    .terminal-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 1.5rem;
+      background: rgba(0, 255, 255, 0.1);
+      border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+    }
+
+    .terminal-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .terminal-dot.red { background: #ff5f56; }
+    .terminal-dot.yellow { background: #ffbd2e; }
+    .terminal-dot.green { background: #27c93f; }
+
+    .terminal-title {
+      margin-left: 1rem;
+      font-size: 0.875rem;
+      color: var(--color-cyan);
+    }
+
+    .terminal-body {
+      padding: 2rem;
+      font-size: 0.9375rem;
+      line-height: 2;
+    }
+
+    .terminal-line {
+      display: block;
+    }
+
+    .terminal-prompt {
+      color: var(--color-magenta);
+    }
+
+    .terminal-command {
+      color: var(--color-cyan);
+    }
+
+    .terminal-output {
+      color: var(--color-text-muted);
+    }
+
+    .terminal-cursor {
+      display: inline-block;
+      width: 10px;
+      height: 1.2em;
+      background: var(--color-cyan);
+      animation: blink 1s step-end infinite;
+      vertical-align: bottom;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    /* Footer */
+    footer {
+      padding: 60px 0 40px;
+      border-top: 1px solid rgba(0, 255, 255, 0.2);
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--color-cyan);
+      text-shadow: var(--glow-cyan);
+      margin-bottom: 1rem;
+    }
+
+    footer p {
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* Glitch Effect */
+    .glitch {
+      position: relative;
+    }
+
+    .glitch::before,
+    .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .glitch::before {
+      left: 2px;
+      text-shadow: -2px 0 var(--color-magenta);
+      clip: rect(24px, 550px, 90px, 0);
+      animation: glitch-anim-1 2s infinite linear alternate-reverse;
+    }
+
+    .glitch::after {
+      left: -2px;
+      text-shadow: -2px 0 var(--color-cyan);
+      clip: rect(85px, 550px, 140px, 0);
+      animation: glitch-anim-2 2s infinite linear alternate-reverse;
+    }
+
+    @keyframes glitch-anim-1 {
+      0% { clip: rect(36px, 9999px, 97px, 0); }
+      25% { clip: rect(7px, 9999px, 75px, 0); }
+      50% { clip: rect(50px, 9999px, 68px, 0); }
+      75% { clip: rect(62px, 9999px, 15px, 0); }
+      100% { clip: rect(24px, 9999px, 14px, 0); }
+    }
+
+    @keyframes glitch-anim-2 {
+      0% { clip: rect(65px, 9999px, 89px, 0); }
+      25% { clip: rect(4px, 9999px, 44px, 0); }
+      50% { clip: rect(99px, 9999px, 12px, 0); }
+      75% { clip: rect(23px, 9999px, 77px, 0); }
+      100% { clip: rect(56px, 9999px, 34px, 0); }
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-visual { margin-top: 3rem; }
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .features-grid { grid-template-columns: 1fr; }
+      .hero-buttons { flex-direction: column; }
+    }
+
+    /* Focus States */
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--color-cyan);
+      outline-offset: 4px;
+    }
+
+    /* Micro Animations */
+    @keyframes fadeInGlitch {
+      0% { opacity: 0; transform: translateX(-20px); clip-path: inset(0 100% 0 0); }
+      50% { clip-path: inset(0 50% 0 0); }
+      100% { opacity: 1; transform: translateX(0); clip-path: inset(0 0 0 0); }
+    }
+
+    @keyframes slideInNeon {
+      from { opacity: 0; transform: translateY(30px); filter: blur(10px); }
+      to { opacity: 1; transform: translateY(0); filter: blur(0); }
+    }
+
+    @keyframes typewriter {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes scanline {
+      0% { top: 0; }
+      100% { top: 100%; }
+    }
+
+    .hero-content { animation: fadeInGlitch 0.8s ease-out 0.2s both; }
+    .hero-visual { animation: slideInNeon 0.8s ease-out 0.4s both; }
+
+    .hero-tag {
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .cyber-frame {
+      animation: slideInNeon 0.6s ease-out 0.5s both;
+      position: relative;
+    }
+    .cyber-frame::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--color-cyan), transparent);
+      animation: scanline 3s linear infinite;
+      opacity: 0.5;
+    }
+
+    .cyber-stat { animation: slideInNeon 0.4s ease-out both; }
+    .cyber-stat:nth-child(1) { animation-delay: 0.7s; }
+    .cyber-stat:nth-child(2) { animation-delay: 0.8s; }
+    .cyber-stat:nth-child(3) { animation-delay: 0.9s; }
+
+    .feature-card { animation: fadeInGlitch 0.5s ease-out both; }
+    .feature-card:nth-child(1) { animation-delay: 0.1s; }
+    .feature-card:nth-child(2) { animation-delay: 0.15s; }
+    .feature-card:nth-child(3) { animation-delay: 0.2s; }
+    .feature-card:nth-child(4) { animation-delay: 0.25s; }
+    .feature-card:nth-child(5) { animation-delay: 0.3s; }
+    .feature-card:nth-child(6) { animation-delay: 0.35s; }
+
+    .feature-number {
+      transition: text-shadow 0.3s ease, transform 0.3s ease;
+    }
+    .feature-card:hover .feature-number {
+      text-shadow: 0 0 20px var(--color-magenta), 0 0 40px var(--color-magenta), 0 0 60px var(--color-magenta);
+      transform: scale(1.1);
+    }
+
+    .terminal {
+      animation: slideInNeon 0.7s ease-out 0.3s both;
+    }
+
+    .terminal-line {
+      opacity: 0;
+      animation: slideInNeon 0.3s ease-out both;
+    }
+    .terminal-line:nth-child(1) { animation-delay: 1s; }
+    .terminal-line:nth-child(2) { animation-delay: 1.3s; }
+    .terminal-line:nth-child(3) { animation-delay: 1.6s; }
+    .terminal-line:nth-child(4) { animation-delay: 1.9s; }
+    .terminal-line:nth-child(5) { animation-delay: 2.2s; }
+    .terminal-line:nth-child(6) { animation-delay: 2.5s; }
+
+    .btn-cyber {
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-cyber::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.4s ease;
+    }
+    .btn-cyber:hover::after {
+      left: 100%;
+    }
+
+    .nav-links a {
+      transition: all 0.2s ease;
+    }
+    .nav-links a:hover {
+      text-shadow: var(--glow-cyan);
+      transform: translateX(5px);
+    }
+
+    .logo {
+      transition: text-shadow 0.3s ease;
+    }
+    .logo:hover {
+      text-shadow: 0 0 20px var(--color-cyan), 0 0 40px var(--color-cyan), 0 0 60px var(--color-cyan);
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      body::before { display: none; }
+      .hero-tag, .glitch::before, .glitch::after, .terminal-cursor, .cyber-frame::after {
+        animation: none;
+      }
+      *, .hero-content, .hero-visual, .cyber-frame, .cyber-stat, .feature-card, .terminal, .terminal-line {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        animation-delay: 0ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="grid-bg"></div>
+
+  <nav>
+    <div class="container">
+      <a href="#" class="logo">NEON//SYS</a>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Interface</a></li>
+        <li><a href="#">Network</a></li>
+        <li><a href="#">Connect</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-content">
+            <span class="hero-tag">System Online // v2.077</span>
+            <h1>
+              <span class="line-1">Welcome to</span>
+              <span class="line-2 glitch" data-text="The Future">The Future</span>
+              <span class="line-3">Of Design</span>
+            </h1>
+            <p class="hero-description">Jack into the neon-lit world of cyberpunk aesthetics. Where chrome meets code, and every pixel glows with electric intensity.</p>
+            <div class="hero-buttons">
+              <button class="btn-cyber btn-cyber-primary">Initialize_</button>
+              <button class="btn-cyber btn-cyber-secondary">Learn More_</button>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div class="cyber-frame">
+              <div class="cyber-image">
+                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80" alt="Neon-lit cyberpunk cityscape">
+              </div>
+              <div class="cyber-stats">
+                <div class="cyber-stat">
+                  <div class="cyber-stat-value">2077</div>
+                  <div class="cyber-stat-label">Year</div>
+                </div>
+                <div class="cyber-stat">
+                  <div class="cyber-stat-value">99.9%</div>
+                  <div class="cyber-stat-label">Uplink</div>
+                </div>
+                <div class="cyber-stat">
+                  <div class="cyber-stat-value">∞</div>
+                  <div class="cyber-stat-label">Power</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">System <span>Features</span></h2>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-number">01</div>
+            <h3 class="feature-title">Neon Glow</h3>
+            <p class="feature-description">Electric text shadows and glowing borders that pulse with cybernetic energy.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-number">02</div>
+            <h3 class="feature-title">CRT Scanlines</h3>
+            <p class="feature-description">Authentic retro monitor effects that add depth and nostalgia to modern interfaces.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-number">03</div>
+            <h3 class="feature-title">Glitch FX</h3>
+            <p class="feature-description">Digital distortion and chromatic aberration for that authentic hacked-system aesthetic.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-number">04</div>
+            <h3 class="feature-title">Chrome Text</h3>
+            <p class="feature-description">Metallic typography that reflects the cold beauty of a digital future.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-number">05</div>
+            <h3 class="feature-title">Grid Matrix</h3>
+            <p class="feature-description">Perspective grids that stretch into infinity, creating spatial depth.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-number">06</div>
+            <h3 class="feature-title">Cyber Colors</h3>
+            <p class="feature-description">Cyan and magenta on deep black—the iconic palette of the digital underground.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="terminal-section">
+      <div class="container">
+        <div class="terminal">
+          <div class="terminal-header">
+            <span class="terminal-dot red"></span>
+            <span class="terminal-dot yellow"></span>
+            <span class="terminal-dot green"></span>
+            <span class="terminal-title">neon@cyberdeck:~</span>
+          </div>
+          <div class="terminal-body">
+            <span class="terminal-line"><span class="terminal-prompt">$</span> <span class="terminal-command">initialize --style cyberpunk</span></span>
+            <span class="terminal-line"><span class="terminal-output">[OK] Loading neon gradients...</span></span>
+            <span class="terminal-line"><span class="terminal-output">[OK] Applying scanline overlay...</span></span>
+            <span class="terminal-line"><span class="terminal-output">[OK] Enabling glitch effects...</span></span>
+            <span class="terminal-line"><span class="terminal-output">[OK] System ready. Welcome to the future.</span></span>
+            <span class="terminal-line"><span class="terminal-prompt">$</span> <span class="terminal-cursor"></span></span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-logo">NEON//SYS</div>
+      <p>&copy; 2077 NeonSys Corp. All rights reserved in the digital realm.</p>
+    </div>
+  </footer>
+</body>
+</html>

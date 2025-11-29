@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>11 Aesthetic Directions v02 | Frontend Design Pro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #0a0a0a;
+      --color-surface: #111111;
+      --color-surface-elevated: #1a1a1a;
+      --color-text: #ffffff;
+      --color-text-muted: rgba(255, 255, 255, 0.6);
+      --color-text-subtle: rgba(255, 255, 255, 0.4);
+      --color-accent: #6366f1;
+      --color-accent-pink: #ec4899;
+      --color-accent-amber: #f59e0b;
+      --color-border: rgba(255, 255, 255, 0.08);
+      --font-main: 'Space Grotesk', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Header */
+    header {
+      padding: 5rem 0 4rem;
+      text-align: center;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      background: rgba(99, 102, 241, 0.1);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+
+    h1 span {
+      background: linear-gradient(135deg, var(--color-accent), var(--color-accent-pink), var(--color-accent-amber));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    header p {
+      font-size: 1.125rem;
+      color: var(--color-text-muted);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      gap: 2rem;
+      padding: 4rem 0;
+    }
+
+    /* Card */
+    .card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-preview {
+      height: 200px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .card:hover .card-preview img {
+      transform: scale(1.05);
+    }
+
+    .card-link {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.5rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: var(--color-text);
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+      border-radius: 8px;
+      transition: background 0.3s ease;
+    }
+
+    .card-link:hover {
+      background: var(--color-accent);
+    }
+
+    .card-content {
+      padding: 1.5rem;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .card-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--color-accent);
+      background: rgba(99, 102, 241, 0.15);
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+
+    .card h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-description {
+      font-size: 0.9375rem;
+      color: var(--color-text-muted);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    /* Tags */
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tag {
+      font-size: 0.6875rem;
+      font-weight: 500;
+      padding: 0.25rem 0.625rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+      color: var(--color-text-subtle);
+    }
+
+    /* Master Prompt */
+    .master-prompt {
+      padding: 1rem;
+      background: var(--color-surface-elevated);
+      border-radius: 12px;
+      border: 1px solid var(--color-border);
+    }
+
+    .prompt-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-text-subtle);
+      margin-bottom: 0.75rem;
+    }
+
+    .prompt-label::before {
+      content: '✨';
+      font-size: 0.75rem;
+    }
+
+    .prompt-text {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      line-height: 1.7;
+      color: var(--color-text-muted);
+      word-break: break-word;
+    }
+
+    .prompt-text strong {
+      color: var(--color-accent);
+      font-weight: 500;
+    }
+
+    /* Color Swatches */
+    .color-palette {
+      display: flex;
+      gap: 0.375rem;
+      margin-top: 0.75rem;
+    }
+
+    .color-swatch {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Footer */
+    footer {
+      padding: 3rem 0;
+      text-align: center;
+      border-top: 1px solid var(--color-border);
+    }
+
+    footer p {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+    }
+
+    footer a {
+      color: var(--color-accent);
+      text-decoration: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <span class="badge">Version 2.0</span>
+      <h1>11 <span>Aesthetic Directions</span></h1>
+      <p>A comprehensive showcase of modern frontend design aesthetics. Each demo includes master prompts, signature effects, and production-ready code.</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="grid">
+        <!-- 01 - Minimalism & Swiss Style -->
+        <div class="card">
+          <div class="card-preview">
+            <img src="screenshots/01-minimalism-swiss.png" alt="Minimalism & Swiss Style Preview" loading="lazy">
+            <a href="01-minimalism-swiss.html" class="card-link">View Demo →</a>
+          </div>
+          <div class="card-content">
+            <div class="card-header">
+              <span class="card-number">01</span>
+            </div>
+            <h2>Minimalism & Swiss Style</h2>
+            <p class="card-description">Clean, grid-based design with generous whitespace and typography-first approach.</p>
+            <div class="card-tags">
+              <span class="tag">grid-based</span>
+              <span class="tag">typography-first</span>
+              <span class="tag">whitespace</span>
+              <span class="tag">razor-sharp hierarchy</span>
+            </div>
+            <div class="master-prompt">
+              <div class="prompt-label">Master Prompt</div>
+              <p class="prompt-text"><strong>clean, swiss, grid-based, generous whitespace, typography-first</strong> — Monochrome + one bold accent, beige/gray neutrals. Razor-sharp hierarchy, subtle hover lifts, micro-animations, perfect alignment.</p>
+              <div class="color-palette">
+                <span class="color-swatch" style="background: #faf9f7;"></span>
+                <span class="color-swatch" style="background: #1a1a1a;"></span>
+                <span class="color-swatch" style="background: #666666;"></span>
+                <span class="color-swatch" style="background: #e53935;"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 02 - Neumorphism -->
+        <div class="card">
+          <div class="card-preview">
+            <img src="screenshots/02-neumorphism.png" alt="Neumorphism Preview" loading="lazy">
+            <a href="02-neumorphism.html" class="card-link">View Demo →</a>
+          </div>
+          <div class="card-content">
+            <div class="card-header">
+              <span class="card-number">02</span>
+            </div>
+            <h2>Neumorphism</h2>
+            <p class="card-description">Soft UI with embossed elements, multi-layer shadows, and tactile press effects.</p>
+            <div class="card-tags">
+              <span class="tag">soft-ui</span>
+              <span class="tag">embossed</span>
+              <span class="tag">concave/convex</span>
+              <span class="tag">monochromatic</span>
+            </div>
+            <div class="master-prompt">
+              <div class="prompt-label">Master Prompt</div>
+              <p class="prompt-text"><strong>soft ui, embossed, concave/convex, subtle depth, monochromatic</strong> — Single pastel + light/dark variations. Multi-layer soft shadows, press/release animations, no hard borders.</p>
+              <div class="color-palette">
+                <span class="color-swatch" style="background: #e0e5ec;"></span>
+                <span class="color-swatch" style="background: #a3b1c6;"></span>
+                <span class="color-swatch" style="background: #ffffff;"></span>
+                <span class="color-swatch" style="background: #6366f1;"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 03 - Glassmorphism -->
+        <div class="card">
+          <div class="card-preview">
+            <img src="screenshots/03-glassmorphism.png" alt="Glassmorphism Preview" loading="lazy">
+            <a href="03-glassmorphism.html" class="card-link">View Demo →</a>
+          </div>
+          <div class="card-content">
+            <div class="card-header">
+              <span class="card-number">03</span>
+            </div>
+            <h2>Glassmorphism</h2>
+            <p class="card-description">Frosted glass effects with backdrop blur, vibrant gradients, and layered translucency.</p>
+            <div class="card-tags">
+              <span class="tag">frosted glass</span>
+              <span class="tag">backdrop-blur</span>
+              <span class="tag">translucent</span>
+              <span class="tag">layered</span>
+            </div>
+            <div class="master-prompt">
+              <div class="prompt-label">Master Prompt</div>
+              <p class="prompt-text"><strong>frosted glass, translucent, vibrant backdrop, blur, layered</strong> — Aurora/sunset backgrounds + semi-transparent whites. backdrop-filter: blur(), glowing borders, light reflections, floating layers.</p>
+              <div class="color-palette">
+                <span class="color-swatch" style="background: #312e81;"></span>
+                <span class="color-swatch" style="background: #7c3aed;"></span>
+                <span class="color-swatch" style="background: #ec4899;"></span>
+                <span class="color-swatch" style="background: rgba(255,255,255,0.1);"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 04 - Brutalism -->
+        <div class="card">
+          <div class="card-preview">
+            <img src="screenshots/04-brutalism.png" alt="Brutalism Preview" loading="lazy">
+            <a href="04-brutalism.html" class="card-link">View Demo →</a>
+          </div>
+          <div class="card-content">
+            <div class="card-header">
+              <span class="card-number">04</span>
+            </div>
+            <h2>Brutalism</h2>
+            <p class="card-description">Raw, unpolished aesthetic with high contrast, bold typography, and intentional asymmetry.</p>
+            <div class="card-tags">
+              <span class="tag">raw</span>
+              <span class="tag">unpolished</span>
+              <span class="tag">high contrast</span>
+              <span class="tag">asymmetric</span>
+            </div>
+            <div class="master-prompt">
+              <div class="prompt-label">Master Prompt</div>
+              <p class="prompt-text"><strong>raw, unpolished, asymmetric, high contrast, intentionally ugly</strong> — Harsh primaries, black/white, occasional neon. Sharp corners, huge bold text, exposed grid, "broken" aesthetic.</p>
+              <div class="color-palette">
+                <span class="color-swatch" style="background: #0a0a0a;"></span>
+                <span class="color-swatch" style="background: #ffffff;"></span>
+                <span class="color-swatch" style="background: #ffff00;"></span>
+                <span class="color-swatch" style="background: #ff3366;"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 05 - Claymorphism -->
+        <div class="card">
+          <div class="card-preview">
+            <img src="screenshots/05-claymorphism.png" alt="Claymorphism Preview" loading="lazy">
+            <a href="05-claymorphism.html" class="card-link">View Demo →</a>
+          </div>
+          <div class="card-content">
+            <div class="card-header">
+              <span class="card-number">05</span>
+            </div>
+            <h2>Claymorphism</h2>
+            <p class="card-description">Chunky 3D elements with double shadows, pastel colors, and squishy interactions.</p>
+            <div class="card-tags">
+              <span class="tag">clay</span>
+              <span class="tag">chunky 3D</span>
+              <span class="tag">pastel</span>
+              <span class="tag">bubbly</span>
+            </div>
+            <div class="master-prompt">
+              <div class="prompt-label">Master Prompt</div>
+              <p class="prompt-text"><strong>clay, chunky 3D, toy-like, bubbly, double shadows, pastel</strong> — Candy pastels, soft gradients. Inner + outer shadows, squishy press effects, oversized rounded elements.</p>
+              <div class="color-palette">
+                <span class="color-swatch" style="background: #f5f0ff;"></span>
+                <span class="color-swatch" style="background: #ff6b9d;"></span>
+                <span class="color-swatch" style="background: #b388ff;"></span>
+                <span class="color-swatch" style="background: #86efac;"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 06 - Aurora / Mesh Gradient -->
+        <div class="card">
+          <div class="card-preview">
+            <img src="screenshots/06-aurora-mesh-gradient.png" alt="Aurora Mesh Gradient Preview" loading="lazy">
+            <a href="06-aurora-mesh-gradient.html" class="card-link">View Demo →</a>
+          </div>
+          <div class="card-content">
+            <div class="card-header">
+              <span class="card-number">06</span>
+            </div>
+            <h2>Aurora / Mesh Gradient</h2>
+            <p class="card-description">Flowing northern lights effects with animated mesh gradients and luminous colors.</p>
+            <div class="card-tags">
+              <span class="tag">aurora</span>
+              <span class="tag">mesh gradient</span>
+              <span class="tag">luminous</span>
+              <span class="tag">flowing</span>
+            </div>
+            <div class="master-prompt">
+              <div class="prompt-label">Master Prompt</div>
+              <p class="prompt-text"><strong>aurora, northern lights, mesh gradient, luminous, flowing</strong> — Teal → purple → pink smooth blends. Animated/static CSS or SVG mesh gradients, subtle color breathing, layered translucency.</p>
+              <div class="color-palette">
+                <span class="color-swatch" style="background: #0f0f1a;"></span>
+                <span class="color-swatch" style="background: #06b6d4;"></span>
+                <span class="color-swatch" style="background: #a855f7;"></span>
+                <span class="color-swatch" style="background: #ec4899;"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 07 - Retro-Futurism / Cyberpunk -->
+        <div class="card">
+          <div class="card-preview">
+            <img src="screenshots/07-retro-futurism-cyberpunk.png" alt="Retro-Futurism Cyberpunk Preview" loading="lazy">
+            <a href="07-retro-futurism-cyberpunk.html" class="card-link">View Demo →</a>
+          </div>
+          <div class="card-content">
+            <div class="card-header">
+              <span class="card-number">07</span>
+            </div>
+            <h2>Retro-Futurism / Cyberpunk</h2>
+            <p class="card-description">Neon glows, CRT scanlines, glitch effects, and chrome text inspired by 80s sci-fi.</p>
+            <div class="card-tags">
+              <span class="tag">neon glow</span>
+              <span class="tag">scanlines</span>
+              <span class="tag">glitch</span>
+              <span class="tag">chrome</span>
+            </div>
+            <div class="master-prompt">
+              <div class="prompt-label">Master Prompt</div>
+              <p class="prompt-text"><strong>vaporwave, 80s sci-fi, crt scanlines, neon glow, glitch, chrome</strong> — Neon cyan/magenta on deep black, chrome accents. Scanlines, chromatic aberration, glitch transitions, long glowing shadows.</p>
+              <div class="color-palette">
+                <span class="color-swatch" style="background: #0a0a0f;"></span>
+                <span class="color-swatch" style="background: #00ffff;"></span>
+                <span class="color-swatch" style="background: #ff00ff;"></span>
+                <span class="color-swatch" style="background: #ffff00;"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 08 - 3D Hyperrealism -->
+        <div class="card">
+          <div class="card-preview">
+            <img src="screenshots/08-3d-hyperrealism.png" alt="3D Hyperrealism Preview" loading="lazy">
+            <a href="08-3d-hyperrealism.html" class="card-link">View Demo →</a>
+          </div>
+          <div class="card-content">
+            <div class="card-header">
+              <span class="card-number">08</span>
+            </div>
+            <h2>3D Hyperrealism</h2>
+            <p class="card-description">Realistic textures, metallic finishes, and physics-based lighting with CSS 3D transforms.</p>
+            <div class="card-tags">
+              <span class="tag">realistic textures</span>
+              <span class="tag">metallic</span>
+              <span class="tag">3D transforms</span>
+              <span class="tag">lighting</span>
+            </div>
+            <div class="master-prompt">
+              <div class="prompt-label">Master Prompt</div>
+              <p class="prompt-text"><strong>realistic textures, skeuomorphic, metallic, WebGL, tactile</strong> — Rich metallics, deep gradients. Three.js / CSS 3D, physics-based motion, realistic lighting & reflections.</p>
+              <div class="color-palette">
+                <span class="color-swatch" style="background: #1a1a2e;"></span>
+                <span class="color-swatch" style="background: #d4af37;"></span>
+                <span class="color-swatch" style="background: #f4d160;"></span>
+                <span class="color-swatch" style="background: #c0c0c0;"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 09 - Vibrant Block / Maximalist -->
+        <div class="card">
+          <div class="card-preview">
+            <img src="screenshots/09-vibrant-block-maximalist.png" alt="Vibrant Block Maximalist Preview" loading="lazy">
+            <a href="09-vibrant-block-maximalist.html" class="card-link">View Demo →</a>
+          </div>
+          <div class="card-content">
+            <div class="card-header">
+              <span class="card-number">09</span>
+            </div>
+            <h2>Vibrant Block / Maximalist</h2>
+            <p class="card-description">Bold color blocks, oversized typography, and energetic compositions with scroll-snap.</p>
+            <div class="card-tags">
+              <span class="tag">bold blocks</span>
+              <span class="tag">duotone</span>
+              <span class="tag">high contrast</span>
+              <span class="tag">energetic</span>
+            </div>
+            <div class="master-prompt">
+              <div class="prompt-label">Master Prompt</div>
+              <p class="prompt-text"><strong>bold blocks, duotone, high contrast, geometric, energetic</strong> — Complementary/triadic brights, neon on dark. Large colorful sections, scroll-snap, dramatic hover scales, animated patterns.</p>
+              <div class="color-palette">
+                <span class="color-swatch" style="background: #0a0a0a;"></span>
+                <span class="color-swatch" style="background: #ffe600;"></span>
+                <span class="color-swatch" style="background: #ff3d8b;"></span>
+                <span class="color-swatch" style="background: #0066ff;"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10 - Dark OLED Luxury -->
+        <div class="card">
+          <div class="card-preview">
+            <img src="screenshots/10-dark-oled-luxury.png" alt="Dark OLED Luxury Preview" loading="lazy">
+            <a href="10-dark-oled-luxury.html" class="card-link">View Demo →</a>
+          </div>
+          <div class="card-content">
+            <div class="card-header">
+              <span class="card-number">10</span>
+            </div>
+            <h2>Dark OLED Luxury</h2>
+            <p class="card-description">Pure black backgrounds optimized for OLED, subtle glows, and premium typography.</p>
+            <div class="card-tags">
+              <span class="tag">true black</span>
+              <span class="tag">OLED-optimized</span>
+              <span class="tag">subtle glow</span>
+              <span class="tag">cinematic</span>
+            </div>
+            <div class="master-prompt">
+              <div class="prompt-label">Master Prompt</div>
+              <p class="prompt-text"><strong>deep black, oled-optimized, subtle glow, premium, cinematic</strong> — #000000 + vibrant accents (emerald, amber, electric blue). Minimal glows, velvet textures, cinematic entrances, reduced-motion support.</p>
+              <div class="color-palette">
+                <span class="color-swatch" style="background: #000000;"></span>
+                <span class="color-swatch" style="background: #10b981;"></span>
+                <span class="color-swatch" style="background: #ffffff;"></span>
+                <span class="color-swatch" style="background: rgba(255,255,255,0.08);"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 11 - Organic / Biomorphic -->
+        <div class="card">
+          <div class="card-preview">
+            <img src="screenshots/11-organic-biomorphic.png" alt="Organic Biomorphic Preview" loading="lazy">
+            <a href="11-organic-biomorphic.html" class="card-link">View Demo →</a>
+          </div>
+          <div class="card-content">
+            <div class="card-header">
+              <span class="card-number">11</span>
+            </div>
+            <h2>Organic / Biomorphic</h2>
+            <p class="card-description">Fluid shapes, blob animations, nature-inspired colors, and curved boundaries.</p>
+            <div class="card-tags">
+              <span class="tag">fluid shapes</span>
+              <span class="tag">blobs</span>
+              <span class="tag">nature-inspired</span>
+              <span class="tag">curved</span>
+            </div>
+            <div class="master-prompt">
+              <div class="prompt-label">Master Prompt</div>
+              <p class="prompt-text"><strong>fluid shapes, blobs, curved, nature-inspired, hand-drawn</strong> — Earthy or muted pastels. SVG morphing, gooey effects, irregular borders, gentle spring animations.</p>
+              <div class="color-palette">
+                <span class="color-swatch" style="background: #faf8f5;"></span>
+                <span class="color-swatch" style="background: #8fa68f;"></span>
+                <span class="color-swatch" style="background: #c67d5a;"></span>
+                <span class="color-swatch" style="background: #d4c4a8;"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>Frontend Design Pro — 11 Aesthetic Directions v02 | <a href="../demos-v01/index.html">View v01</a></p>
+    </div>
+  </footer>
+</body>
+</html>

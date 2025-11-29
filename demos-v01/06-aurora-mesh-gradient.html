@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aurora / Mesh Gradient | Aesthetic Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-text: #ffffff;
+      --color-text-muted: rgba(255, 255, 255, 0.7);
+      --color-cyan: #06b6d4;
+      --color-purple: #a855f7;
+      --color-pink: #ec4899;
+      --color-blue: #3b82f6;
+      --font-main: 'Sora', sans-serif;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-main);
+      color: var(--color-text);
+      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Animated Aurora Background */
+    .aurora-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: #0f0f1a;
+      overflow: hidden;
+    }
+
+    .aurora-layer {
+      position: absolute;
+      inset: -50%;
+      background:
+        radial-gradient(ellipse at 20% 30%, rgba(6, 182, 212, 0.4) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(168, 85, 247, 0.4) 0%, transparent 50%),
+        radial-gradient(ellipse at 40% 70%, rgba(236, 72, 153, 0.4) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 80%, rgba(59, 130, 246, 0.3) 0%, transparent 50%);
+      animation: aurora 15s ease-in-out infinite alternate;
+    }
+
+    .aurora-layer-2 {
+      animation-delay: -5s;
+      animation-duration: 20s;
+      opacity: 0.7;
+    }
+
+    @keyframes aurora {
+      0% {
+        transform: translate(0, 0) rotate(0deg) scale(1);
+      }
+      33% {
+        transform: translate(5%, -5%) rotate(3deg) scale(1.05);
+      }
+      66% {
+        transform: translate(-3%, 3%) rotate(-2deg) scale(0.98);
+      }
+      100% {
+        transform: translate(2%, -2%) rotate(1deg) scale(1.02);
+      }
+    }
+
+    /* Grain overlay */
+    .grain {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.5rem 0;
+    }
+
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--color-cyan), var(--color-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      padding: 0.5rem;
+      border-radius: 100px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    nav a {
+      display: block;
+      padding: 0.625rem 1.25rem;
+      text-decoration: none;
+      color: var(--color-text-muted);
+      font-size: 0.9375rem;
+      font-weight: 500;
+      border-radius: 100px;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: var(--color-text);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 0 4rem;
+      text-align: center;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 100px;
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .hero-badge span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-cyan);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.2); }
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 700;
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg,
+        var(--color-text) 0%,
+        var(--color-cyan) 25%,
+        var(--color-purple) 50%,
+        var(--color-pink) 75%,
+        var(--color-text) 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 5s linear infinite;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--color-text-muted);
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      border-radius: 100px;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+    }
+
+    .btn-glow {
+      background: linear-gradient(135deg, var(--color-cyan), var(--color-purple));
+      color: white;
+      position: relative;
+    }
+
+    .btn-glow::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 100px;
+      background: linear-gradient(135deg, var(--color-cyan), var(--color-purple), var(--color-pink));
+      z-index: -1;
+      filter: blur(15px);
+      opacity: 0.6;
+      transition: opacity 0.3s ease;
+    }
+
+    .btn-glow:hover::before {
+      opacity: 1;
+    }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--color-text);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Mesh Card */
+    .mesh-section {
+      padding: 6rem 0;
+    }
+
+    .mesh-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .mesh-card {
+      position: relative;
+      padding: 2.5rem;
+      border-radius: 24px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      transition: all 0.4s ease;
+    }
+
+    .mesh-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .mesh-card:nth-child(1)::before {
+      background: radial-gradient(circle at 30% 30%, rgba(6, 182, 212, 0.2) 0%, transparent 60%);
+    }
+
+    .mesh-card:nth-child(2)::before {
+      background: radial-gradient(circle at 70% 30%, rgba(168, 85, 247, 0.2) 0%, transparent 60%);
+    }
+
+    .mesh-card:nth-child(3)::before {
+      background: radial-gradient(circle at 50% 70%, rgba(236, 72, 153, 0.2) 0%, transparent 60%);
+    }
+
+    .mesh-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .mesh-card:hover::before {
+      opacity: 1;
+    }
+
+    .mesh-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .mesh-card:nth-child(1) .mesh-icon {
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(6, 182, 212, 0.05));
+      color: var(--color-cyan);
+    }
+
+    .mesh-card:nth-child(2) .mesh-icon {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(168, 85, 247, 0.05));
+      color: var(--color-purple);
+    }
+
+    .mesh-card:nth-child(3) .mesh-icon {
+      background: linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(236, 72, 153, 0.05));
+      color: var(--color-pink);
+    }
+
+    .mesh-card h3 {
+      font-size: 1.375rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .mesh-card p {
+      color: var(--color-text-muted);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    /* Showcase */
+    .showcase {
+      padding: 6rem 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-header h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--color-text), var(--color-cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-header p {
+      font-size: 1.125rem;
+      color: var(--color-text-muted);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .showcase-visual {
+      position: relative;
+      height: 500px;
+      border-radius: 32px;
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .mesh-gradient-demo {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(at 40% 20%, rgba(6, 182, 212, 0.6) 0%, transparent 50%),
+        radial-gradient(at 80% 0%, rgba(168, 85, 247, 0.5) 0%, transparent 40%),
+        radial-gradient(at 0% 50%, rgba(236, 72, 153, 0.4) 0%, transparent 50%),
+        radial-gradient(at 80% 50%, rgba(59, 130, 246, 0.5) 0%, transparent 40%),
+        radial-gradient(at 0% 100%, rgba(6, 182, 212, 0.3) 0%, transparent 40%),
+        radial-gradient(at 80% 100%, rgba(168, 85, 247, 0.4) 0%, transparent 40%),
+        radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.3) 0%, transparent 50%);
+      animation: mesh-morph 10s ease-in-out infinite alternate;
+    }
+
+    @keyframes mesh-morph {
+      0% {
+        filter: blur(0px);
+        transform: scale(1);
+      }
+      50% {
+        filter: blur(10px);
+        transform: scale(1.02);
+      }
+      100% {
+        filter: blur(0px);
+        transform: scale(1);
+      }
+    }
+
+    .showcase-content {
+      position: absolute;
+      bottom: 3rem;
+      left: 3rem;
+      right: 3rem;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .showcase-content h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .showcase-content p {
+      color: var(--color-text-muted);
+    }
+
+    /* Stats */
+    .stats {
+      padding: 6rem 0;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 2rem;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--color-cyan), var(--color-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 0.9375rem;
+      color: var(--color-text-muted);
+    }
+
+    /* Footer */
+    footer {
+      padding: 4rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-text {
+      color: var(--color-text-muted);
+      font-size: 0.9375rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .footer-links a {
+      color: var(--color-text-muted);
+      text-decoration: none;
+      font-size: 0.9375rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--color-text);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .mesh-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+        margin: 0 auto;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      nav ul {
+        display: none;
+      }
+
+      .btn-group {
+        flex-direction: column;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+      }
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      .aurora-layer,
+      .hero h1,
+      .hero-badge span,
+      .mesh-gradient-demo {
+        animation: none !important;
+      }
+
+      * {
+        transition: none !important;
+      }
+    }
+
+    /* Focus Styles */
+    :focus-visible {
+      outline: 2px solid var(--color-cyan);
+      outline-offset: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="aurora-bg">
+    <div class="aurora-layer"></div>
+    <div class="aurora-layer aurora-layer-2"></div>
+  </div>
+  <div class="grain"></div>
+
+  <nav>
+    <div class="container">
+      <div class="logo">Luminous</div>
+      <ul>
+        <li><a href="#" class="active">Home</a></li>
+        <li><a href="#">Features</a></li>
+        <li><a href="#">Gallery</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span></span>
+          Now with animated mesh gradients
+        </div>
+        <h1>Where light dances with color.</h1>
+        <p>Create mesmerizing interfaces with flowing aurora effects and luminous mesh gradients. Design that breathes, moves, and captivates.</p>
+        <div class="btn-group">
+          <button class="btn btn-glow">
+            Explore Effects
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button class="btn btn-ghost">View Gallery</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mesh-section">
+    <div class="container">
+      <div class="mesh-grid">
+        <div class="mesh-card">
+          <div class="mesh-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="5"/>
+              <path d="M12 1V3M12 21V23M4.22 4.22L5.64 5.64M18.36 18.36L19.78 19.78M1 12H3M21 12H23M4.22 19.78L5.64 18.36M18.36 5.64L19.78 4.22"/>
+            </svg>
+          </div>
+          <h3>Living Colors</h3>
+          <p>Gradients that shift and flow like the northern lights, creating an ever-changing backdrop.</p>
+        </div>
+        <div class="mesh-card">
+          <div class="mesh-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
+              <path d="M2 17L12 22L22 17"/>
+              <path d="M2 12L12 17L22 12"/>
+            </svg>
+          </div>
+          <h3>Deep Layers</h3>
+          <p>Multiple translucent layers create rich depth and dimensional interest in every composition.</p>
+        </div>
+        <div class="mesh-card">
+          <div class="mesh-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+            </svg>
+          </div>
+          <h3>Subtle Motion</h3>
+          <p>Gentle animations that feel organic and natural, adding life without distraction.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="showcase">
+    <div class="container">
+      <div class="section-header">
+        <h2>Mesh Gradient Magic</h2>
+        <p>CSS-only gradients that create stunning, complex color compositions.</p>
+      </div>
+      <div class="showcase-visual">
+        <div class="mesh-gradient-demo"></div>
+        <div class="showcase-content">
+          <h3>Pure CSS Implementation</h3>
+          <p>No images, no JavaScript — just layered radial gradients creating organic color flow.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">60fps</div>
+          <div class="stat-label">Smooth Animation</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">0kb</div>
+          <div class="stat-label">Image Assets</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">CSS Native</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">∞</div>
+          <div class="stat-label">Possibilities</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-text">© 2024 Luminous — Light in motion.</div>
+        <div class="footer-links">
+          <a href="#">Twitter</a>
+          <a href="#">Dribbble</a>
+          <a href="#">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

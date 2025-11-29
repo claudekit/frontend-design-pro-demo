@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glassmorphism | Aesthetic Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-text: #ffffff;
+      --color-text-muted: rgba(255, 255, 255, 0.7);
+      --color-accent: #a855f7;
+      --color-accent-light: #c084fc;
+      --glass-bg: rgba(255, 255, 255, 0.1);
+      --glass-border: rgba(255, 255, 255, 0.2);
+      --font-main: 'Outfit', sans-serif;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-main);
+      color: var(--color-text);
+      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Animated Background */
+    .bg-wrapper {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 25%, #4c1d95 50%, #6b21a8 75%, #86198f 100%);
+    }
+
+    .bg-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      animation: float 20s ease-in-out infinite;
+    }
+
+    .bg-orb-1 {
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, #ec4899 0%, transparent 70%);
+      top: -200px;
+      right: -100px;
+      animation-delay: 0s;
+    }
+
+    .bg-orb-2 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, #06b6d4 0%, transparent 70%);
+      bottom: -150px;
+      left: -100px;
+      animation-delay: -7s;
+    }
+
+    .bg-orb-3 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
+      top: 40%;
+      left: 30%;
+      animation-delay: -14s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(50px, -50px) scale(1.1); }
+      50% { transform: translate(-30px, 30px) scale(0.95); }
+      75% { transform: translate(-50px, -30px) scale(1.05); }
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Glass Effect */
+    .glass {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+    }
+
+    nav .glass {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 100px;
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--color-accent-light), var(--color-accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 0.25rem;
+    }
+
+    nav a {
+      display: block;
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      color: var(--color-text-muted);
+      font-size: 0.9375rem;
+      font-weight: 500;
+      border-radius: 100px;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: var(--color-text);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 0 4rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-content h1 {
+      font-size: clamp(3rem, 6vw, 4.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-content h1 span {
+      background: linear-gradient(135deg, #f472b6, #c084fc, #60a5fa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-content p {
+      font-size: 1.25rem;
+      color: var(--color-text-muted);
+      margin-bottom: 2rem;
+      max-width: 480px;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      border-radius: 100px;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--color-accent-light), var(--color-accent));
+      color: white;
+      box-shadow: 0 8px 32px rgba(168, 85, 247, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(168, 85, 247, 0.5);
+    }
+
+    .btn-glass {
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      color: var(--color-text);
+      border: 1px solid var(--glass-border);
+    }
+
+    .btn-glass:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Card Stack */
+    .card-stack {
+      position: relative;
+      height: 500px;
+    }
+
+    .glass-card {
+      position: absolute;
+      padding: 2rem;
+      transition: all 0.4s ease;
+    }
+
+    .glass-card-1 {
+      width: 320px;
+      height: 200px;
+      top: 0;
+      right: 0;
+      z-index: 3;
+    }
+
+    .glass-card-2 {
+      width: 280px;
+      height: 350px;
+      top: 80px;
+      left: 0;
+      z-index: 2;
+    }
+
+    .glass-card-3 {
+      width: 300px;
+      height: 180px;
+      bottom: 0;
+      right: 40px;
+      z-index: 1;
+    }
+
+    .card-stack:hover .glass-card-1 {
+      transform: translate(-10px, -10px) rotate(-2deg);
+    }
+
+    .card-stack:hover .glass-card-2 {
+      transform: translate(10px, 10px) rotate(1deg);
+    }
+
+    .card-stack:hover .glass-card-3 {
+      transform: translate(-5px, 5px) rotate(3deg);
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .glass-card h3 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .glass-card p {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+    }
+
+    /* Glow Border Card */
+    .glow-border {
+      position: relative;
+    }
+
+    .glow-border::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 26px;
+      background: linear-gradient(135deg, #f472b6, #c084fc, #60a5fa, #f472b6);
+      background-size: 300% 300%;
+      animation: glow-rotate 4s linear infinite;
+      z-index: -1;
+      opacity: 0.6;
+    }
+
+    @keyframes glow-rotate {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Features */
+    .features {
+      padding: 6rem 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-header h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .section-header p {
+      font-size: 1.125rem;
+      color: var(--color-text-muted);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .feature-card {
+      padding: 2.5rem;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .feature-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(244, 114, 182, 0.3), rgba(192, 132, 252, 0.3));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .feature-card p {
+      color: var(--color-text-muted);
+      font-size: 0.9375rem;
+    }
+
+    /* Pricing */
+    .pricing {
+      padding: 6rem 0;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .pricing-card {
+      padding: 2.5rem;
+      text-align: center;
+    }
+
+    .pricing-card.featured {
+      padding: 3.5rem 2.5rem;
+      transform: scale(1.05);
+    }
+
+    .pricing-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-accent-light);
+      margin-bottom: 0.5rem;
+    }
+
+    .pricing-card h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .pricing-amount {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .pricing-amount span {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--color-text-muted);
+    }
+
+    .pricing-desc {
+      color: var(--color-text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .pricing-features {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 2rem;
+    }
+
+    .pricing-features li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.9375rem;
+    }
+
+    .pricing-features li svg {
+      color: var(--color-accent-light);
+      flex-shrink: 0;
+    }
+
+    /* Footer */
+    footer {
+      padding: 4rem 0;
+    }
+
+    .footer-glass {
+      padding: 3rem;
+    }
+
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-brand {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .footer-links a {
+      color: var(--color-text-muted);
+      text-decoration: none;
+      font-size: 0.9375rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--color-text);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .hero-content p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .btn-group {
+        justify-content: center;
+      }
+
+      .card-stack {
+        display: none;
+      }
+
+      .features-grid,
+      .pricing-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
+      .pricing-card.featured {
+        transform: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      nav ul {
+        display: none;
+      }
+
+      .footer-grid {
+        flex-direction: column;
+        gap: 2rem;
+        text-align: center;
+      }
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      .bg-orb,
+      .glow-border::before {
+        animation: none !important;
+      }
+
+      * {
+        transition: none !important;
+      }
+    }
+
+    /* Focus Styles */
+    :focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-wrapper">
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+    <div class="bg-orb bg-orb-3"></div>
+  </div>
+
+  <nav>
+    <div class="glass">
+      <div class="logo">Prism</div>
+      <ul>
+        <li><a href="#" class="active">Home</a></li>
+        <li><a href="#">Features</a></li>
+        <li><a href="#">Pricing</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <h1>Design with <span>translucent</span> elegance.</h1>
+          <p>Create stunning interfaces with frosted glass effects that bring depth, vibrancy, and modern sophistication to your projects.</p>
+          <div class="btn-group">
+            <button class="btn btn-primary">
+              Start Building
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <button class="btn btn-glass">View Demo</button>
+          </div>
+        </div>
+
+        <div class="card-stack">
+          <div class="glass glass-card glass-card-1">
+            <div class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
+                <path d="M2 17L12 22L22 17"/>
+                <path d="M2 12L12 17L22 12"/>
+              </svg>
+            </div>
+            <h3>Layered Effects</h3>
+            <p>Stack multiple translucent layers for depth.</p>
+          </div>
+          <div class="glass glass-card glass-card-2 glow-border">
+            <div class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="5"/>
+                <path d="M12 1V3M12 21V23M4.22 4.22L5.64 5.64M18.36 18.36L19.78 19.78M1 12H3M21 12H23M4.22 19.78L5.64 18.36M18.36 5.64L19.78 4.22"/>
+              </svg>
+            </div>
+            <h3>Vibrant Backdrops</h3>
+            <p>Blur effects that reveal colorful backgrounds in stunning new ways.</p>
+          </div>
+          <div class="glass glass-card glass-card-3">
+            <div class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 16V8C21 6.9 20.1 6 19 6H5C3.9 6 3 6.9 3 8V16C3 17.1 3.9 18 5 18H19C20.1 18 21 17.1 21 16Z"/>
+                <path d="M7 6V4C7 2.9 7.9 2 9 2H15C16.1 2 17 2.9 17 4V6"/>
+              </svg>
+            </div>
+            <h3>Light Borders</h3>
+            <p>Subtle edge highlights add dimension.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="container">
+      <div class="section-header">
+        <h2>Why Glassmorphism?</h2>
+        <p>A modern aesthetic that combines beauty with functionality.</p>
+      </div>
+      <div class="features-grid">
+        <div class="glass feature-card">
+          <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <path d="M3 9H21"/>
+            </svg>
+          </div>
+          <h3>Modern Hierarchy</h3>
+          <p>Create clear visual layers that guide users through your interface naturally.</p>
+        </div>
+        <div class="glass feature-card">
+          <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 3C16.97 3 21 7.03 21 12C21 16.97 16.97 21 12 21"/>
+              <path d="M12 21C7.03 21 3 16.97 3 12C3 7.03 7.03 3 12 3"/>
+              <path d="M12 7V12L15 15"/>
+            </svg>
+          </div>
+          <h3>Timeless Design</h3>
+          <p>A sophisticated look that stays fresh and relevant across evolving trends.</p>
+        </div>
+        <div class="glass feature-card">
+          <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22Z"/>
+              <path d="M9 12L11 14L15 10"/>
+            </svg>
+          </div>
+          <h3>Accessibility Ready</h3>
+          <p>Properly implemented blur maintains contrast and readability standards.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pricing">
+    <div class="container">
+      <div class="section-header">
+        <h2>Simple Pricing</h2>
+        <p>Choose the plan that works for your needs.</p>
+      </div>
+      <div class="pricing-grid">
+        <div class="glass pricing-card">
+          <h3>Starter</h3>
+          <div class="pricing-amount">$9<span>/mo</span></div>
+          <p class="pricing-desc">Perfect for side projects</p>
+          <ul class="pricing-features">
+            <li>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 10L8 14L16 6"/>
+              </svg>
+              5 Projects
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 10L8 14L16 6"/>
+              </svg>
+              Basic Components
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 10L8 14L16 6"/>
+              </svg>
+              Community Support
+            </li>
+          </ul>
+          <button class="btn btn-glass" style="width: 100%;">Get Started</button>
+        </div>
+        <div class="glass pricing-card featured glow-border">
+          <div class="pricing-label">Most Popular</div>
+          <h3>Pro</h3>
+          <div class="pricing-amount">$29<span>/mo</span></div>
+          <p class="pricing-desc">For growing teams</p>
+          <ul class="pricing-features">
+            <li>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 10L8 14L16 6"/>
+              </svg>
+              Unlimited Projects
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 10L8 14L16 6"/>
+              </svg>
+              All Components
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 10L8 14L16 6"/>
+              </svg>
+              Priority Support
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 10L8 14L16 6"/>
+              </svg>
+              Custom Themes
+            </li>
+          </ul>
+          <button class="btn btn-primary" style="width: 100%;">Get Started</button>
+        </div>
+        <div class="glass pricing-card">
+          <h3>Enterprise</h3>
+          <div class="pricing-amount">$99<span>/mo</span></div>
+          <p class="pricing-desc">For large organizations</p>
+          <ul class="pricing-features">
+            <li>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 10L8 14L16 6"/>
+              </svg>
+              Everything in Pro
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 10L8 14L16 6"/>
+              </svg>
+              White-label Option
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 10L8 14L16 6"/>
+              </svg>
+              Dedicated Support
+            </li>
+          </ul>
+          <button class="btn btn-glass" style="width: 100%;">Contact Sales</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="glass footer-glass">
+        <div class="footer-grid">
+          <div class="footer-brand">Prism</div>
+          <div class="footer-links">
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Contact</a>
+            <a href="#">Twitter</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

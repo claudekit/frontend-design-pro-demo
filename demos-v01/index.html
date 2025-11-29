@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>11 Aesthetic Directions | Frontend Design Pro Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #0a0a0a;
+      --color-text: #ffffff;
+      --color-text-muted: rgba(255, 255, 255, 0.6);
+      --color-accent: #6366f1;
+      --font-main: 'Space Grotesk', sans-serif;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background: var(--color-bg);
+      color: var(--color-text);
+      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    header {
+      padding: 4rem 0 3rem;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+
+    h1 span {
+      background: linear-gradient(135deg, #6366f1, #ec4899, #f59e0b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    header p {
+      font-size: 1.125rem;
+      color: var(--color-text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 1.5rem;
+      padding: 4rem 0;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .card:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .card-preview {
+      height: 200px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .card:hover .card-preview img {
+      transform: scale(1.05);
+    }
+
+    .card-content {
+      padding: 1.5rem;
+    }
+
+    .card-number {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.25rem 0.75rem;
+      background: rgba(99, 102, 241, 0.2);
+      color: #818cf8;
+      border-radius: 100px;
+      margin-bottom: 0.75rem;
+    }
+
+    .card h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      font-size: 0.9375rem;
+      color: var(--color-text-muted);
+      line-height: 1.6;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+      color: var(--color-text-muted);
+    }
+
+    footer {
+      padding: 3rem 0;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    footer p {
+      color: var(--color-text-muted);
+      font-size: 0.875rem;
+    }
+
+    @media (max-width: 640px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>11 <span>Aesthetic Directions</span></h1>
+      <p>A comprehensive showcase of modern frontend design aesthetics. Each demo is a production-ready, fully responsive HTML page.</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="grid">
+        <a href="01-minimalism-swiss.html" class="card">
+          <div class="card-preview" style="background: linear-gradient(135deg, #fafaf9, #e5e5e5);"></div>
+          <div class="card-content">
+            <span class="card-number">01</span>
+            <h2>Minimalism & Swiss Style</h2>
+            <p>Clean, grid-based design with generous whitespace and typography-first approach.</p>
+            <div class="card-tags">
+              <span class="tag">grid</span>
+              <span class="tag">typography</span>
+              <span class="tag">whitespace</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="02-neumorphism.html" class="card">
+          <div class="card-preview" style="background: linear-gradient(135deg, #e0e5ec, #c8d0dc);"></div>
+          <div class="card-content">
+            <span class="card-number">02</span>
+            <h2>Neumorphism</h2>
+            <p>Soft UI with embossed elements, multi-layer shadows, and tactile press effects.</p>
+            <div class="card-tags">
+              <span class="tag">soft-ui</span>
+              <span class="tag">shadows</span>
+              <span class="tag">monochrome</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="03-glassmorphism.html" class="card">
+          <div class="card-preview" style="background: linear-gradient(135deg, #312e81, #86198f);"></div>
+          <div class="card-content">
+            <span class="card-number">03</span>
+            <h2>Glassmorphism</h2>
+            <p>Frosted glass effects with backdrop blur, vibrant gradients, and layered translucency.</p>
+            <div class="card-tags">
+              <span class="tag">blur</span>
+              <span class="tag">translucent</span>
+              <span class="tag">gradients</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="04-brutalism.html" class="card">
+          <div class="card-preview" style="background: linear-gradient(135deg, #0a0a0a, #ffff00);"></div>
+          <div class="card-content">
+            <span class="card-number">04</span>
+            <h2>Brutalism</h2>
+            <p>Raw, unpolished aesthetic with high contrast, bold typography, and intentional asymmetry.</p>
+            <div class="card-tags">
+              <span class="tag">raw</span>
+              <span class="tag">bold</span>
+              <span class="tag">contrast</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="05-claymorphism.html" class="card">
+          <div class="card-preview" style="background: linear-gradient(135deg, #f0e6ff, #ffb3d9);"></div>
+          <div class="card-content">
+            <span class="card-number">05</span>
+            <h2>Claymorphism</h2>
+            <p>Chunky 3D elements with double shadows, pastel colors, and squishy interactions.</p>
+            <div class="card-tags">
+              <span class="tag">3d</span>
+              <span class="tag">pastel</span>
+              <span class="tag">playful</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="06-aurora-mesh-gradient.html" class="card">
+          <div class="card-preview" style="background: linear-gradient(135deg, #0f0f1a, #06b6d4, #a855f7);"></div>
+          <div class="card-content">
+            <span class="card-number">06</span>
+            <h2>Aurora / Mesh Gradient</h2>
+            <p>Flowing northern lights effects with animated mesh gradients and luminous colors.</p>
+            <div class="card-tags">
+              <span class="tag">aurora</span>
+              <span class="tag">animated</span>
+              <span class="tag">gradient</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="07-retro-futurism-cyberpunk.html" class="card">
+          <div class="card-preview" style="background: linear-gradient(135deg, #0a0a0f, #00ffff, #ff00ff);"></div>
+          <div class="card-content">
+            <span class="card-number">07</span>
+            <h2>Retro-Futurism / Cyberpunk</h2>
+            <p>Neon glows, CRT scanlines, glitch effects, and chrome text inspired by 80s sci-fi.</p>
+            <div class="card-tags">
+              <span class="tag">neon</span>
+              <span class="tag">glitch</span>
+              <span class="tag">scanlines</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="08-3d-hyperrealism.html" class="card">
+          <div class="card-preview" style="background: linear-gradient(135deg, #1a1a2e, #d4af37);"></div>
+          <div class="card-content">
+            <span class="card-number">08</span>
+            <h2>3D Hyperrealism</h2>
+            <p>Realistic textures, metallic finishes, and physics-based lighting with CSS 3D transforms.</p>
+            <div class="card-tags">
+              <span class="tag">3d</span>
+              <span class="tag">metallic</span>
+              <span class="tag">lighting</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="09-vibrant-block-maximalist.html" class="card">
+          <div class="card-preview" style="background: linear-gradient(135deg, #ffe600, #ff3d8b, #0066ff);"></div>
+          <div class="card-content">
+            <span class="card-number">09</span>
+            <h2>Vibrant Block / Maximalist</h2>
+            <p>Bold color blocks, oversized typography, and energetic compositions with scroll-snap.</p>
+            <div class="card-tags">
+              <span class="tag">bold</span>
+              <span class="tag">colorful</span>
+              <span class="tag">energetic</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="10-dark-oled-luxury.html" class="card">
+          <div class="card-preview" style="background: linear-gradient(135deg, #000000, #10b981);"></div>
+          <div class="card-content">
+            <span class="card-number">10</span>
+            <h2>Dark OLED Luxury</h2>
+            <p>Pure black backgrounds optimized for OLED, subtle glows, and premium typography.</p>
+            <div class="card-tags">
+              <span class="tag">oled</span>
+              <span class="tag">luxury</span>
+              <span class="tag">minimal</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="11-organic-biomorphic.html" class="card">
+          <div class="card-preview" style="background: linear-gradient(135deg, #faf8f5, #8fa68f, #c67d5a);"></div>
+          <div class="card-content">
+            <span class="card-number">11</span>
+            <h2>Organic / Biomorphic</h2>
+            <p>Fluid shapes, blob animations, nature-inspired colors, and curved boundaries.</p>
+            <div class="card-tags">
+              <span class="tag">organic</span>
+              <span class="tag">nature</span>
+              <span class="tag">blobs</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>Frontend Design Pro — 11 Aesthetic Directions Demo Collection</p>
+    </div>
+  </footer>
+</body>
+</html>

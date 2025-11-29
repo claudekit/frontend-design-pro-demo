@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Hyperrealism | Aesthetic Direction 08</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #1a1a2e;
+      --color-bg-alt: #16162a;
+      --color-text: #ffffff;
+      --color-text-muted: rgba(255, 255, 255, 0.6);
+      --color-gold: #d4af37;
+      --color-gold-light: #f4d160;
+      --color-gold-dark: #a08628;
+      --color-silver: #c0c0c0;
+      --font-display: 'Playfair Display', serif;
+      --font-body: 'Outfit', sans-serif;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Metallic Text */
+    .metallic-gold {
+      background: linear-gradient(
+        135deg,
+        var(--color-gold-dark) 0%,
+        var(--color-gold-light) 25%,
+        var(--color-gold) 50%,
+        var(--color-gold-light) 75%,
+        var(--color-gold-dark) 100%
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 2px 4px rgba(212, 175, 55, 0.3));
+    }
+
+    .metallic-silver {
+      background: linear-gradient(
+        135deg,
+        #888 0%,
+        #fff 25%,
+        #c0c0c0 50%,
+        #fff 75%,
+        #888 100%
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.5rem 0;
+      background: rgba(26, 26, 46, 0.9);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    }
+
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.9375rem;
+      font-weight: 500;
+      text-decoration: none;
+      color: var(--color-text-muted);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--color-gold-dark), var(--color-gold-light));
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-gold);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 0 80px;
+      position: relative;
+      perspective: 1000px;
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background:
+        radial-gradient(ellipse at 30% 20%, rgba(212, 175, 55, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+      z-index: -1;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-content h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 6vw, 4.5rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-description {
+      font-size: 1.125rem;
+      color: var(--color-text-muted);
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      font-family: inherit;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.4s ease;
+    }
+
+    .btn-gold {
+      color: var(--color-bg);
+      background: linear-gradient(135deg, var(--color-gold-dark), var(--color-gold-light), var(--color-gold));
+      box-shadow:
+        0 4px 15px rgba(212, 175, 55, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 8px 25px rgba(212, 175, 55, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-outline {
+      color: var(--color-gold);
+      background: transparent;
+      border: 2px solid var(--color-gold);
+    }
+
+    .btn-outline:hover {
+      background: rgba(212, 175, 55, 0.1);
+    }
+
+    /* 3D Card */
+    .hero-visual {
+      perspective: 1000px;
+    }
+
+    .card-3d {
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .card-3d:hover {
+      transform: rotateY(-5deg) rotateX(5deg);
+    }
+
+    .card-3d-inner {
+      padding: 2.5rem;
+      background: linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0.05) 50%,
+        rgba(0, 0, 0, 0.1) 100%
+      );
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 16px;
+      box-shadow:
+        0 25px 50px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-3d-inner::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.5), transparent);
+    }
+
+    .card-image {
+      width: 100%;
+      aspect-ratio: 4/3;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 2rem;
+      box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.4),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+    }
+
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .card-badge {
+      padding: 0.5rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-bg);
+      background: linear-gradient(135deg, var(--color-gold-dark), var(--color-gold-light));
+      border-radius: 100px;
+    }
+
+    /* Products Section */
+    .products {
+      padding: 100px 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-tag {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      border: 1px solid var(--color-gold);
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .product-card {
+      perspective: 1000px;
+    }
+
+    .product-card-inner {
+      padding: 2rem;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      transform-style: preserve-3d;
+      transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    }
+
+    .product-card:hover .product-card-inner {
+      transform: translateY(-10px) rotateX(5deg);
+      border-color: rgba(212, 175, 55, 0.3);
+      box-shadow:
+        0 25px 50px rgba(0, 0, 0, 0.4),
+        0 0 30px rgba(212, 175, 55, 0.1);
+    }
+
+    .product-image {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(145deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4));
+      box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .product-card:hover .product-image img {
+      transform: scale(1.05);
+    }
+
+    .product-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .product-price {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--color-gold);
+    }
+
+    /* Materials Section */
+    .materials {
+      padding: 100px 0;
+      background: var(--color-bg-alt);
+    }
+
+    .materials-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    .material-card {
+      aspect-ratio: 1;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.4s ease;
+    }
+
+    .material-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .material-gold {
+      background: linear-gradient(
+        135deg,
+        #b8860b 0%,
+        #ffd700 25%,
+        #daa520 50%,
+        #ffd700 75%,
+        #b8860b 100%
+      );
+    }
+
+    .material-silver {
+      background: linear-gradient(
+        135deg,
+        #696969 0%,
+        #e0e0e0 25%,
+        #c0c0c0 50%,
+        #e0e0e0 75%,
+        #696969 100%
+      );
+    }
+
+    .material-bronze {
+      background: linear-gradient(
+        135deg,
+        #8b4513 0%,
+        #cd853f 25%,
+        #b87333 50%,
+        #cd853f 75%,
+        #8b4513 100%
+      );
+    }
+
+    .material-platinum {
+      background: linear-gradient(
+        135deg,
+        #8e8e8e 0%,
+        #f5f5f5 25%,
+        #e5e4e2 50%,
+        #f5f5f5 75%,
+        #8e8e8e 100%
+      );
+    }
+
+    .material-label {
+      position: absolute;
+      bottom: 1rem;
+      left: 1rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(0, 0, 0, 0.7);
+    }
+
+    /* CTA Section */
+    .cta {
+      padding: 100px 0;
+    }
+
+    .cta-card {
+      padding: 5rem 3rem;
+      text-align: center;
+      background: linear-gradient(145deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05));
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 24px;
+      box-shadow:
+        0 30px 60px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .cta-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .cta-description {
+      font-size: 1.125rem;
+      color: var(--color-text-muted);
+      max-width: 500px;
+      margin: 0 auto 2rem;
+    }
+
+    /* Footer */
+    footer {
+      padding: 60px 0 40px;
+      border-top: 1px solid rgba(212, 175, 55, 0.2);
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    footer p {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-visual { margin-top: 3rem; }
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+      .materials-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .products-grid { grid-template-columns: 1fr; }
+      .hero-buttons { flex-direction: column; }
+      .cta-card { padding: 3rem 1.5rem; }
+    }
+
+    /* Focus States */
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--color-gold);
+      outline-offset: 4px;
+    }
+
+    /* Micro Animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(60px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes shine {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+
+    @keyframes float3D {
+      0%, 100% { transform: translateZ(0) rotateX(0); }
+      50% { transform: translateZ(20px) rotateX(2deg); }
+    }
+
+    @keyframes goldGlow {
+      0%, 100% { box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); }
+      50% { box-shadow: 0 4px 30px rgba(212, 175, 55, 0.5), 0 0 50px rgba(212, 175, 55, 0.2); }
+    }
+
+    .hero-content { animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both; }
+    .hero-visual { animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both; }
+
+    .metallic-gold {
+      background-size: 200% auto;
+      animation: shine 3s linear infinite;
+    }
+
+    .card-3d {
+      animation: float3D 6s ease-in-out infinite;
+    }
+
+    .btn-gold {
+      animation: goldGlow 2s ease-in-out infinite;
+    }
+    .btn-gold:hover {
+      animation: none;
+    }
+
+    .product-card { animation: fadeInUp 0.6s ease-out both; }
+    .product-card:nth-child(1) { animation-delay: 0.1s; }
+    .product-card:nth-child(2) { animation-delay: 0.2s; }
+    .product-card:nth-child(3) { animation-delay: 0.3s; }
+
+    .product-card-inner {
+      transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.5s ease;
+    }
+    .product-card:hover .product-card-inner {
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), 0 0 50px rgba(212, 175, 55, 0.15);
+    }
+
+    .product-price {
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.3s ease;
+    }
+    .product-card:hover .product-price {
+      transform: scale(1.1);
+    }
+
+    .material-card { animation: fadeInUp 0.5s ease-out both; }
+    .material-card:nth-child(1) { animation-delay: 0.1s; }
+    .material-card:nth-child(2) { animation-delay: 0.15s; }
+    .material-card:nth-child(3) { animation-delay: 0.2s; }
+    .material-card:nth-child(4) { animation-delay: 0.25s; }
+
+    .material-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .material-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      transition: left 0.5s ease;
+    }
+    .material-card:hover::after {
+      left: 150%;
+    }
+
+    .section-tag {
+      animation: fadeInUp 0.6s ease-out both;
+    }
+
+    .cta-card { animation: fadeInUp 0.8s ease-out 0.2s both; }
+
+    .nav-links a::after {
+      transition: width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, .hero-content, .hero-visual, .card-3d, .product-card, .material-card, .cta-card, .btn-gold {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        animation-delay: 0ms !important;
+      }
+      .metallic-gold { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container">
+      <a href="#" class="logo metallic-gold">LUXE</a>
+      <ul class="nav-links">
+        <li><a href="#">Collections</a></li>
+        <li><a href="#">Craftsmanship</a></li>
+        <li><a href="#">Heritage</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-content">
+            <h1>Experience <span class="metallic-gold">Premium</span> Design</h1>
+            <p class="hero-description">Discover the art of hyperrealistic 3D interfaces. Where metallic finishes, realistic textures, and physics-based lighting create an unparalleled visual experience.</p>
+            <div class="hero-buttons">
+              <button class="btn btn-gold">Explore Collection</button>
+              <button class="btn btn-outline">Watch Showcase</button>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div class="card-3d">
+              <div class="card-3d-inner">
+                <div class="card-image">
+                  <img src="https://images.unsplash.com/photo-1617038220319-276d3cfab638?w=600&q=80" alt="Luxury gold watch on velvet">
+                </div>
+                <div class="card-meta">
+                  <h3 class="card-title metallic-gold">Signature Piece</h3>
+                  <span class="card-badge">Limited</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="products">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Collection</span>
+          <h2 class="section-title">Featured <span class="metallic-gold">Pieces</span></h2>
+        </div>
+        <div class="products-grid">
+          <div class="product-card">
+            <div class="product-card-inner">
+              <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80" alt="Elegant gold watch">
+              </div>
+              <h3 class="product-title">Chronograph Elite</h3>
+              <p class="product-price">$12,500</p>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-card-inner">
+              <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1600003014755-ba31aa59c4b6?w=400&q=80" alt="Diamond ring">
+              </div>
+              <h3 class="product-title">Eternal Diamond</h3>
+              <p class="product-price">$8,900</p>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-card-inner">
+              <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=400&q=80" alt="Gold necklace">
+              </div>
+              <h3 class="product-title">Heritage Chain</h3>
+              <p class="product-price">$6,200</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="materials">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Materials</span>
+          <h2 class="section-title">Premium <span class="metallic-silver">Finishes</span></h2>
+        </div>
+        <div class="materials-grid">
+          <div class="material-card material-gold">
+            <span class="material-label">24K Gold</span>
+          </div>
+          <div class="material-card material-silver">
+            <span class="material-label">Sterling Silver</span>
+          </div>
+          <div class="material-card material-bronze">
+            <span class="material-label">Rose Bronze</span>
+          </div>
+          <div class="material-card material-platinum">
+            <span class="material-label">Platinum</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container">
+        <div class="cta-card">
+          <h2 class="cta-title">Experience <span class="metallic-gold">Luxury</span></h2>
+          <p class="cta-description">Book a private viewing and discover our exclusive collection in person.</p>
+          <button class="btn btn-gold">Schedule Appointment</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-logo metallic-gold">LUXE</div>
+      <p>&copy; 2024 LUXE. Crafted with hyperrealistic precision.</p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vibrant Block / Maximalist | Aesthetic Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-black: #0d0d0d;
+      --color-white: #ffffff;
+      --color-yellow: #ffe600;
+      --color-pink: #ff3d8b;
+      --color-blue: #0066ff;
+      --color-green: #00ff88;
+      --color-purple: #9933ff;
+      --color-orange: #ff6600;
+      --font-display: 'Archivo Black', sans-serif;
+      --font-body: 'Manrope', sans-serif;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--color-black);
+      color: var(--color-white);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      mix-blend-mode: difference;
+      padding: 1.5rem 2rem;
+    }
+
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--color-white);
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--color-white);
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: opacity 0.3s ease;
+    }
+
+    nav a:hover {
+      opacity: 0.6;
+    }
+
+    /* Sections */
+    section {
+      min-height: 100vh;
+      scroll-snap-align: start;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Hero */
+    .hero {
+      background: var(--color-yellow);
+      color: var(--color-black);
+      display: flex;
+      align-items: center;
+      padding: 0 4rem;
+    }
+
+    .hero-content {
+      max-width: 1600px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 12vw, 12rem);
+      line-height: 0.9;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-visual {
+      position: relative;
+    }
+
+    .hero-shape {
+      width: 100%;
+      aspect-ratio: 1;
+      background: var(--color-pink);
+      border-radius: 50%;
+      position: relative;
+      animation: morph 8s ease-in-out infinite;
+    }
+
+    @keyframes morph {
+      0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+      25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+      50% { border-radius: 50% 60% 30% 60% / 30% 40% 70% 50%; }
+      75% { border-radius: 60% 40% 60% 40% / 70% 30% 50% 60%; }
+    }
+
+    .hero-cta {
+      position: absolute;
+      bottom: 4rem;
+      right: 4rem;
+    }
+
+    .btn-block {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1.25rem 2.5rem;
+      background: var(--color-black);
+      color: var(--color-white);
+      font-family: var(--font-display);
+      font-size: 1rem;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn-block:hover {
+      transform: scale(1.05);
+    }
+
+    /* Split Section */
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .split-left {
+      background: var(--color-blue);
+      padding: 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .split-right {
+      background: var(--color-pink);
+      padding: 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .split h2 {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 6vw, 6rem);
+      text-transform: uppercase;
+      line-height: 0.95;
+      margin-bottom: 2rem;
+    }
+
+    .split p {
+      font-size: 1.25rem;
+      max-width: 400px;
+      opacity: 0.9;
+    }
+
+    .stat-block {
+      margin-top: 3rem;
+    }
+
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 8vw, 8rem);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      opacity: 0.8;
+    }
+
+    /* Cards Section */
+    .cards-section {
+      background: var(--color-white);
+      color: var(--color-black);
+      padding: 6rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .cards-header {
+      max-width: 1600px;
+      margin: 0 auto 4rem;
+      width: 100%;
+    }
+
+    .cards-header h2 {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 6vw, 5rem);
+      text-transform: uppercase;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      max-width: 1600px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .card {
+      padding: 2.5rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:nth-child(1) { background: var(--color-green); }
+    .card:nth-child(2) { background: var(--color-purple); color: var(--color-white); }
+    .card:nth-child(3) { background: var(--color-orange); }
+    .card:nth-child(4) { background: var(--color-blue); color: var(--color-white); }
+
+    .card:hover {
+      transform: scale(1.05);
+      z-index: 10;
+    }
+
+    .card-number {
+      font-family: var(--font-display);
+      font-size: 6rem;
+      line-height: 1;
+      opacity: 0.3;
+    }
+
+    .card h3 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      margin: 2rem 0 1rem;
+    }
+
+    .card p {
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+
+    /* Marquee Section */
+    .marquee-section {
+      background: var(--color-purple);
+      padding: 3rem 0;
+      overflow: hidden;
+    }
+
+    .marquee {
+      display: flex;
+      animation: scroll-marquee 20s linear infinite;
+    }
+
+    .marquee-text {
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 10vw, 10rem);
+      text-transform: uppercase;
+      white-space: nowrap;
+      padding: 0 2rem;
+      -webkit-text-stroke: 2px var(--color-white);
+      color: transparent;
+    }
+
+    .marquee-text.filled {
+      color: var(--color-white);
+      -webkit-text-stroke: none;
+    }
+
+    @keyframes scroll-marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Grid Gallery */
+    .gallery {
+      background: var(--color-black);
+      padding: 6rem 4rem;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      grid-template-rows: repeat(2, 300px);
+      gap: 1rem;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.02);
+      z-index: 10;
+    }
+
+    .gallery-item:nth-child(1) {
+      grid-column: span 2;
+      background: var(--color-yellow);
+    }
+
+    .gallery-item:nth-child(2) {
+      grid-column: span 2;
+      background: var(--color-pink);
+    }
+
+    .gallery-item:nth-child(3) {
+      grid-column: span 2;
+      background: var(--color-green);
+    }
+
+    .gallery-item:nth-child(4) {
+      grid-column: span 3;
+      background: var(--color-blue);
+    }
+
+    .gallery-item:nth-child(5) {
+      grid-column: span 3;
+      background: var(--color-orange);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      mix-blend-mode: multiply;
+      filter: grayscale(100%) contrast(1.2);
+    }
+
+    .gallery-item-content {
+      position: absolute;
+      inset: 0;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      color: var(--color-black);
+    }
+
+    .gallery-item h3 {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      text-transform: uppercase;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--color-yellow);
+      color: var(--color-black);
+      padding: 6rem 4rem;
+    }
+
+    .footer-content {
+      max-width: 1600px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .footer-brand h2 {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 8vw, 8rem);
+      text-transform: uppercase;
+      line-height: 0.9;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 3rem;
+    }
+
+    .footer-col h4 {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-col a {
+      color: var(--color-black);
+      text-decoration: none;
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+    }
+
+    .footer-col a:hover {
+      opacity: 1;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .hero-visual {
+        max-width: 300px;
+        margin: 0 auto;
+      }
+
+      .split {
+        grid-template-columns: 1fr;
+      }
+
+      .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+      }
+
+      .gallery-item {
+        grid-column: span 1 !important;
+        min-height: 250px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      nav ul {
+        display: none;
+      }
+
+      .hero,
+      .split-left,
+      .split-right,
+      .cards-section,
+      .gallery,
+      footer {
+        padding: 4rem 2rem;
+      }
+
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 3rem;
+      }
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-snap-type: none;
+      }
+
+      .hero-shape,
+      .marquee {
+        animation: none;
+      }
+
+      * {
+        transition: none !important;
+      }
+    }
+
+    /* Focus Styles */
+    :focus-visible {
+      outline: 4px solid var(--color-black);
+      outline-offset: 4px;
+    }
+
+    .split-left :focus-visible,
+    .split-right :focus-visible,
+    .card:nth-child(2) :focus-visible,
+    .card:nth-child(4) :focus-visible {
+      outline-color: var(--color-white);
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container">
+      <div class="logo">BOLD.</div>
+      <ul>
+        <li><a href="#">Work</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Make It<br>Loud</h1>
+      <div class="hero-visual">
+        <div class="hero-shape"></div>
+      </div>
+    </div>
+    <a href="#work" class="hero-cta btn-block">
+      See Work
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M10 3V17M10 17L17 10M10 17L3 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </section>
+
+  <section class="split">
+    <div class="split-left">
+      <h2>Design Without<br>Limits</h2>
+      <p>Bold colors, massive typography, and fearless compositions that demand attention.</p>
+      <div class="stat-block">
+        <div class="stat-number">147</div>
+        <div class="stat-label">Projects Shipped</div>
+      </div>
+    </div>
+    <div class="split-right">
+      <h2>Break The<br>Rules</h2>
+      <p>Maximalism isn't chaos — it's controlled energy that makes every pixel count.</p>
+      <div class="stat-block">
+        <div class="stat-number">98%</div>
+        <div class="stat-label">Client Love</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cards-section" id="work">
+    <div class="cards-header">
+      <h2>What We Do</h2>
+    </div>
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-number">01</div>
+        <h3>Brand Identity</h3>
+        <p>Memorable visual systems that capture attention and don't let go.</p>
+      </div>
+      <div class="card">
+        <div class="card-number">02</div>
+        <h3>Web Design</h3>
+        <p>Digital experiences that push boundaries and break conventions.</p>
+      </div>
+      <div class="card">
+        <div class="card-number">03</div>
+        <h3>Motion</h3>
+        <p>Dynamic animations that bring energy and life to every interaction.</p>
+      </div>
+      <div class="card">
+        <div class="card-number">04</div>
+        <h3>Strategy</h3>
+        <p>Bold thinking that positions brands for maximum impact.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="marquee-section">
+    <div class="marquee">
+      <span class="marquee-text">Bold & Beautiful</span>
+      <span class="marquee-text filled">Maximum Impact</span>
+      <span class="marquee-text">Bold & Beautiful</span>
+      <span class="marquee-text filled">Maximum Impact</span>
+    </div>
+  </section>
+
+  <section class="gallery">
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80" alt="Bold architecture">
+        <div class="gallery-item-content">
+          <h3>Project One</h3>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1550684376-efcbd6e3f031?w=800&q=80" alt="Vibrant design">
+        <div class="gallery-item-content">
+          <h3>Project Two</h3>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=800&q=80" alt="Abstract colors">
+        <div class="gallery-item-content">
+          <h3>Project Three</h3>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=800&q=80" alt="Purple gradient">
+        <div class="gallery-item-content">
+          <h3>Project Four</h3>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1557683316-973673baf926?w=800&q=80" alt="Orange gradient">
+        <div class="gallery-item-content">
+          <h3>Project Five</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand">
+        <h2>Let's<br>Create</h2>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="#">Work</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Social</h4>
+          <ul>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Dribbble</a></li>
+            <li><a href="#">LinkedIn</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

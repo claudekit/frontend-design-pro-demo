@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Organic / Biomorphic | Aesthetic Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #faf8f5;
+      --color-bg-warm: #f5f0e8;
+      --color-text: #2d3a3a;
+      --color-text-muted: #5f6e6e;
+      --color-sage: #8fa68f;
+      --color-sage-dark: #6b8c6b;
+      --color-terracotta: #c67d5a;
+      --color-cream: #f0e8d8;
+      --color-moss: #3d5a4c;
+      --font-display: 'Fraunces', serif;
+      --font-body: 'Outfit', sans-serif;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--color-bg);
+      color: var(--color-text);
+      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Animated blob background */
+    .blob-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+      filter: blur(60px);
+      opacity: 0.4;
+      animation: morph 15s ease-in-out infinite;
+    }
+
+    .blob-1 {
+      width: 500px;
+      height: 500px;
+      background: var(--color-sage);
+      top: -150px;
+      right: -100px;
+      animation-delay: 0s;
+    }
+
+    .blob-2 {
+      width: 400px;
+      height: 400px;
+      background: var(--color-terracotta);
+      bottom: -100px;
+      left: -100px;
+      animation-delay: -5s;
+    }
+
+    .blob-3 {
+      width: 300px;
+      height: 300px;
+      background: var(--color-cream);
+      top: 40%;
+      left: 30%;
+      animation-delay: -10s;
+    }
+
+    @keyframes morph {
+      0%, 100% {
+        border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        transform: translate(0, 0) rotate(0deg);
+      }
+      25% {
+        border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%;
+        transform: translate(20px, -30px) rotate(5deg);
+      }
+      50% {
+        border-radius: 50% 60% 30% 60% / 70% 40% 50% 40%;
+        transform: translate(-20px, 20px) rotate(-5deg);
+      }
+      75% {
+        border-radius: 60% 40% 60% 40% / 50% 60% 30% 60%;
+        transform: translate(10px, 10px) rotate(3deg);
+      }
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.5rem 0;
+    }
+
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--color-moss);
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 0.5rem;
+      border-radius: 100px;
+    }
+
+    nav a {
+      display: block;
+      padding: 0.625rem 1.25rem;
+      text-decoration: none;
+      color: var(--color-text-muted);
+      font-size: 0.9375rem;
+      font-weight: 500;
+      border-radius: 100px;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover,
+    nav a.active {
+      background: var(--color-sage);
+      color: white;
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 0 4rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-content h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 6vw, 4.5rem);
+      font-weight: 400;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+      color: var(--color-moss);
+    }
+
+    .hero-content h1 em {
+      font-style: italic;
+      color: var(--color-terracotta);
+    }
+
+    .hero-content p {
+      font-size: 1.125rem;
+      color: var(--color-text-muted);
+      margin-bottom: 2rem;
+      max-width: 440px;
+      line-height: 1.8;
+    }
+
+    .btn-organic {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 2rem;
+      background: var(--color-moss);
+      color: white;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: 100px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .btn-organic:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(61, 90, 76, 0.3);
+    }
+
+    /* Organic Shape Visual */
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .organic-shape {
+      width: 400px;
+      height: 450px;
+      position: relative;
+    }
+
+    .organic-shape svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 20px 40px rgba(143, 166, 143, 0.3));
+    }
+
+    .shape-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 4rem;
+    }
+
+    .shape-icon {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 1.5rem;
+    }
+
+    .shape-content h3 {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 400;
+      color: var(--color-moss);
+      margin-bottom: 0.5rem;
+    }
+
+    .shape-content p {
+      color: var(--color-text-muted);
+      font-size: 0.9375rem;
+    }
+
+    /* Features */
+    .features {
+      padding: 6rem 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-header h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      color: var(--color-moss);
+      margin-bottom: 1rem;
+    }
+
+    .section-header p {
+      font-size: 1.125rem;
+      color: var(--color-text-muted);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 30px 60px 30px 60px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px) rotate(-1deg);
+      box-shadow: 0 15px 40px rgba(143, 166, 143, 0.2);
+    }
+
+    .feature-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50% 30% 50% 70%;
+      background: linear-gradient(135deg, var(--color-sage), var(--color-sage-dark));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      color: white;
+    }
+
+    .feature-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.375rem;
+      font-weight: 500;
+      color: var(--color-moss);
+      margin-bottom: 0.75rem;
+    }
+
+    .feature-card p {
+      color: var(--color-text-muted);
+      font-size: 0.9375rem;
+      line-height: 1.7;
+    }
+
+    /* Testimonials */
+    .testimonials {
+      padding: 6rem 0;
+      background: var(--color-bg-warm);
+      border-radius: 60px 0 60px 0;
+      margin: 4rem 0;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+
+    .testimonial-card {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 20px 40px 20px 40px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .testimonial-text {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 400;
+      line-height: 1.7;
+      color: var(--color-moss);
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .testimonial-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50% 30% 50% 30%;
+      overflow: hidden;
+    }
+
+    .testimonial-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .testimonial-name {
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    .testimonial-role {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+    }
+
+    /* CTA */
+    .cta {
+      padding: 6rem 0;
+      text-align: center;
+    }
+
+    .cta-blob {
+      position: relative;
+      display: inline-block;
+      padding: 4rem 6rem;
+    }
+
+    .cta-blob svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .cta-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      color: white;
+      margin-bottom: 1rem;
+    }
+
+    .cta p {
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 2rem;
+      font-size: 1.125rem;
+    }
+
+    .cta .btn-organic {
+      background: white;
+      color: var(--color-moss);
+    }
+
+    /* Footer */
+    footer {
+      padding: 4rem 0;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-brand {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      color: var(--color-moss);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .footer-links a {
+      color: var(--color-text-muted);
+      text-decoration: none;
+      font-size: 0.9375rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--color-moss);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .hero-content p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-visual {
+        order: -1;
+      }
+
+      .organic-shape {
+        width: 300px;
+        height: 350px;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+        max-width: 450px;
+        margin: 0 auto;
+      }
+
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      nav ul {
+        display: none;
+      }
+
+      .cta-blob {
+        padding: 3rem 2rem;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+      }
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      .blob {
+        animation: none;
+      }
+
+      * {
+        transition: none !important;
+      }
+    }
+
+    /* Focus Styles */
+    :focus-visible {
+      outline: 2px solid var(--color-sage);
+      outline-offset: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="blob-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <nav>
+    <div class="container">
+      <div class="logo">flora</div>
+      <ul>
+        <li><a href="#" class="active">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Products</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <h1>Design that <em>breathes</em> with nature.</h1>
+          <p>Organic shapes, flowing curves, and nature-inspired aesthetics that create interfaces as alive as the world around us.</p>
+          <button class="btn-organic">
+            Explore Nature
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="hero-visual">
+          <div class="organic-shape">
+            <svg viewBox="0 0 400 450" fill="none">
+              <path d="M350 200C370 280 340 380 260 420C180 460 80 420 40 340C0 260 20 140 100 80C180 20 280 40 340 100C380 140 330 120 350 200Z" fill="var(--color-sage)" fill-opacity="0.2"/>
+              <path d="M330 190C345 260 320 350 250 385C180 420 95 385 60 315C25 245 45 140 115 90C185 40 265 55 320 105C360 140 315 120 330 190Z" fill="var(--color-cream)"/>
+            </svg>
+            <div class="shape-content">
+              <svg class="shape-icon" viewBox="0 0 24 24" fill="none" stroke="var(--color-moss)" stroke-width="1.5">
+                <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z"/>
+                <path d="M12 6V12L16 14"/>
+              </svg>
+              <h3>Living Design</h3>
+              <p>Shapes that flow and evolve</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="container">
+      <div class="section-header">
+        <h2>Nature-Inspired Elements</h2>
+        <p>Every curve and contour drawn from the organic world.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22Z"/>
+              <path d="M2 12H22"/>
+            </svg>
+          </div>
+          <h3>Fluid Shapes</h3>
+          <p>Irregular, blob-like forms that break away from rigid geometry and feel alive.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+            </svg>
+          </div>
+          <h3>Earthy Palettes</h3>
+          <p>Muted greens, warm terracottas, and soft creams inspired by the natural world.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
+              <path d="M2 17L12 22L22 17"/>
+            </svg>
+          </div>
+          <h3>Gentle Motion</h3>
+          <p>Spring animations and morphing effects that mimic natural movement.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials">
+    <div class="container">
+      <div class="section-header">
+        <h2>What People Feel</h2>
+        <p>Experiences that connect on an emotional level.</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <p class="testimonial-text">"The organic aesthetic transformed our wellness app. Users describe it as 'calming' and 'natural' — exactly the feeling we wanted."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">
+              <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80" alt="Emma Wilson">
+            </div>
+            <div>
+              <div class="testimonial-name">Emma Wilson</div>
+              <div class="testimonial-role">Product Designer, Bloom</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-text">"Moving away from sharp corners completely changed our brand perception. The biomorphic shapes feel friendly and approachable."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">
+              <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80" alt="James Chen">
+            </div>
+            <div>
+              <div class="testimonial-name">James Chen</div>
+              <div class="testimonial-role">Creative Director</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container">
+      <div class="cta-blob">
+        <svg viewBox="0 0 600 300" fill="none" preserveAspectRatio="none">
+          <path d="M550 150C570 200 520 280 420 290C320 300 180 280 100 230C20 180 0 100 60 50C120 0 220 10 320 30C420 50 530 100 550 150Z" fill="var(--color-moss)"/>
+        </svg>
+        <div class="cta-content">
+          <h2>Ready to Go Organic?</h2>
+          <p>Start creating interfaces that feel natural and alive.</p>
+          <button class="btn-organic">
+            Get Started
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">flora</div>
+        <div class="footer-links">
+          <a href="#">Twitter</a>
+          <a href="#">Instagram</a>
+          <a href="#">Dribbble</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

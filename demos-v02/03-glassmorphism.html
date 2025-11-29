@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glassmorphism | Aesthetic Direction 03</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-text: #ffffff;
+      --color-text-muted: rgba(255, 255, 255, 0.7);
+      --color-accent: #f472b6;
+      --color-accent-alt: #60a5fa;
+      --glass-bg: rgba(255, 255, 255, 0.1);
+      --glass-border: rgba(255, 255, 255, 0.2);
+      --glass-shadow: rgba(0, 0, 0, 0.2);
+      --font-main: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-main);
+      color: var(--color-text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 25%, #4c1d95 50%, #7c3aed 75%, #6366f1 100%);
+      background-attachment: fixed;
+    }
+
+    /* Animated Background Orbs */
+    .bg-orbs {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.6;
+      animation: float 20s ease-in-out infinite;
+    }
+
+    .orb-1 {
+      width: 600px;
+      height: 600px;
+      background: linear-gradient(135deg, #ec4899, #f472b6);
+      top: -200px;
+      right: -200px;
+      animation-delay: 0s;
+    }
+
+    .orb-2 {
+      width: 500px;
+      height: 500px;
+      background: linear-gradient(135deg, #3b82f6, #60a5fa);
+      bottom: -150px;
+      left: -150px;
+      animation-delay: -5s;
+    }
+
+    .orb-3 {
+      width: 400px;
+      height: 400px;
+      background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation-delay: -10s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(50px, -50px) scale(1.1); }
+      50% { transform: translate(-30px, 30px) scale(0.95); }
+      75% { transform: translate(20px, 20px) scale(1.05); }
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Glass Card Utility */
+    .glass {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      box-shadow: 0 8px 32px var(--glass-shadow);
+    }
+
+    .glass-subtle {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1rem 0;
+    }
+
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-glass {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 1.5rem;
+      width: 100%;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.5rem;
+      text-decoration: none;
+      color: var(--color-text);
+      background: linear-gradient(135deg, var(--color-accent), var(--color-accent-alt));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      display: block;
+      padding: 0.625rem 1.25rem;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      text-decoration: none;
+      color: var(--color-text-muted);
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--color-text);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-cta {
+      padding: 0.625rem 1.5rem;
+      font-family: inherit;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: white;
+      background: linear-gradient(135deg, var(--color-accent), #ec4899);
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(244, 114, 182, 0.4);
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 0 80px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-content h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-content h1 span {
+      background: linear-gradient(135deg, var(--color-accent), var(--color-accent-alt));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-description {
+      font-size: 1.125rem;
+      color: var(--color-text-muted);
+      margin-bottom: 2rem;
+      max-width: 480px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      color: white;
+      background: linear-gradient(135deg, var(--color-accent), #ec4899);
+      box-shadow: 0 10px 30px rgba(244, 114, 182, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 40px rgba(244, 114, 182, 0.4);
+    }
+
+    .btn-glass {
+      color: var(--color-text);
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+    }
+
+    .btn-glass:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Hero Card Preview */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+    }
+
+    .preview-card {
+      width: 100%;
+      max-width: 380px;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .preview-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .preview-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 2px solid var(--glass-border);
+    }
+
+    .preview-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .preview-info h3 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 0.125rem;
+    }
+
+    .preview-info p {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+    }
+
+    .preview-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .preview-stat {
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .preview-stat-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .preview-stat-label {
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .preview-chart {
+      height: 120px;
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .chart-line {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+    }
+
+    .chart-line svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .preview-btn {
+      width: 100%;
+      padding: 1rem;
+      font-family: inherit;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: white;
+      background: linear-gradient(135deg, var(--color-accent-alt), #3b82f6);
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .preview-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(96, 165, 250, 0.4);
+    }
+
+    /* Features Section */
+    .features {
+      padding: 100px 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-tag {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      background: rgba(244, 114, 182, 0.2);
+      border-radius: 100px;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .feature-card {
+      padding: 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .feature-icon {
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, var(--color-accent), var(--color-accent-alt));
+      border-radius: 16px;
+    }
+
+    .feature-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .feature-description {
+      font-size: 0.9375rem;
+      color: var(--color-text-muted);
+      line-height: 1.7;
+    }
+
+    /* Pricing Section */
+    .pricing {
+      padding: 100px 0;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    .price-card {
+      padding: 2.5rem;
+      text-align: center;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .price-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .price-card.featured {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: var(--color-accent);
+    }
+
+    .price-card.featured::before {
+      content: 'Popular';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0.375rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: white;
+      background: linear-gradient(135deg, var(--color-accent), #ec4899);
+      border-radius: 100px;
+    }
+
+    .price-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .price-value {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .price-value span {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--color-text-muted);
+    }
+
+    .price-features {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 2rem;
+    }
+
+    .price-features li {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.9375rem;
+      color: var(--color-text-muted);
+    }
+
+    .price-features li::before {
+      content: '✓';
+      margin-right: 0.75rem;
+      color: var(--color-accent);
+    }
+
+    .price-btn {
+      width: 100%;
+      padding: 1rem;
+      font-family: inherit;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .price-btn-primary {
+      color: white;
+      background: linear-gradient(135deg, var(--color-accent), #ec4899);
+    }
+
+    .price-btn-glass {
+      color: var(--color-text);
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--glass-border);
+    }
+
+    /* Footer */
+    footer {
+      padding: 60px 0 40px;
+      text-align: center;
+    }
+
+    .footer-glass {
+      padding: 3rem;
+    }
+
+    footer p {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero-grid { grid-template-columns: 1fr; text-align: center; }
+      .hero-description { margin: 0 auto 2rem; }
+      .hero-buttons { justify-content: center; }
+      .hero-visual { margin-top: 3rem; }
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .features-grid { grid-template-columns: 1fr; }
+      .hero-buttons { flex-direction: column; align-items: center; }
+    }
+
+    /* Focus States */
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 4px;
+    }
+
+    /* Micro Animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInScale {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+
+    @keyframes glowPulse {
+      0%, 100% { box-shadow: 0 8px 32px var(--glass-shadow); }
+      50% { box-shadow: 0 8px 32px var(--glass-shadow), 0 0 40px rgba(244, 114, 182, 0.2); }
+    }
+
+    .hero-content { animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both; }
+    .preview-card { animation: fadeInScale 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both; }
+
+    .hero-content h1 span {
+      background-size: 200% auto;
+      animation: shimmer 3s linear infinite;
+    }
+
+    .preview-stat { animation: fadeInUp 0.5s ease-out both; }
+    .preview-stat:nth-child(1) { animation-delay: 0.6s; }
+    .preview-stat:nth-child(2) { animation-delay: 0.7s; }
+    .preview-stat:nth-child(3) { animation-delay: 0.8s; }
+
+    .feature-card {
+      animation: fadeInUp 0.6s ease-out both;
+    }
+    .feature-card:nth-child(1) { animation-delay: 0.1s; }
+    .feature-card:nth-child(2) { animation-delay: 0.15s; }
+    .feature-card:nth-child(3) { animation-delay: 0.2s; }
+    .feature-card:nth-child(4) { animation-delay: 0.25s; }
+    .feature-card:nth-child(5) { animation-delay: 0.3s; }
+    .feature-card:nth-child(6) { animation-delay: 0.35s; }
+
+    .feature-icon {
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+    }
+    .feature-card:hover .feature-icon {
+      transform: scale(1.15) rotate(-5deg);
+      box-shadow: 0 0 30px rgba(244, 114, 182, 0.4);
+    }
+
+    .price-card { animation: fadeInUp 0.6s ease-out both; }
+    .price-card:nth-child(1) { animation-delay: 0.2s; }
+    .price-card:nth-child(2) { animation-delay: 0.3s; }
+    .price-card:nth-child(3) { animation-delay: 0.4s; }
+
+    .price-value {
+      display: inline-block;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .price-card:hover .price-value {
+      transform: scale(1.1);
+    }
+
+    .btn {
+      position: relative;
+      overflow: hidden;
+    }
+    .btn::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.4s ease, height 0.4s ease;
+    }
+    .btn:hover::after {
+      width: 300px;
+      height: 300px;
+    }
+
+    .nav-glass { animation: fadeInUp 0.6s ease-out 0.1s both; }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, .orb, .hero-content, .preview-card, .preview-stat, .feature-card, .price-card, .nav-glass {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        animation-delay: 0ms !important;
+      }
+      .hero-content h1 span { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <nav>
+    <div class="container">
+      <div class="nav-glass glass">
+        <a href="#" class="logo">Aura</a>
+        <ul class="nav-links">
+          <li><a href="#" class="active">Home</a></li>
+          <li><a href="#">Features</a></li>
+          <li><a href="#">Pricing</a></li>
+          <li><a href="#">About</a></li>
+        </ul>
+        <button class="nav-cta">Get Started</button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-content">
+            <h1>Build <span>beautiful</span> interfaces with glass</h1>
+            <p class="hero-description">Create stunning frosted glass effects with layered translucency and vibrant gradients. The future of UI design is transparent.</p>
+            <div class="hero-buttons">
+              <button class="btn btn-primary">Start Building</button>
+              <button class="btn btn-glass">Watch Demo</button>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div class="preview-card glass">
+              <div class="preview-header">
+                <div class="preview-avatar">
+                  <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80" alt="User avatar">
+                </div>
+                <div class="preview-info">
+                  <h3>Sarah Chen</h3>
+                  <p>Product Designer</p>
+                </div>
+              </div>
+              <div class="preview-stats">
+                <div class="preview-stat glass-subtle">
+                  <div class="preview-stat-value">847</div>
+                  <div class="preview-stat-label">Projects</div>
+                </div>
+                <div class="preview-stat glass-subtle">
+                  <div class="preview-stat-value">12K</div>
+                  <div class="preview-stat-label">Followers</div>
+                </div>
+                <div class="preview-stat glass-subtle">
+                  <div class="preview-stat-value">98%</div>
+                  <div class="preview-stat-label">Success</div>
+                </div>
+              </div>
+              <div class="preview-chart glass-subtle">
+                <div class="chart-line">
+                  <svg viewBox="0 0 300 100" preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#f472b6"/>
+                        <stop offset="100%" stop-color="#60a5fa"/>
+                      </linearGradient>
+                    </defs>
+                    <path d="M0,80 Q50,60 100,70 T200,40 T300,50" stroke="url(#gradient)" stroke-width="3" fill="none"/>
+                    <path d="M0,80 Q50,60 100,70 T200,40 T300,50 V100 H0 Z" fill="url(#gradient)" fill-opacity="0.2"/>
+                  </svg>
+                </div>
+              </div>
+              <button class="preview-btn">View Profile</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Features</span>
+          <h2 class="section-title">Everything you need</h2>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card glass">
+            <div class="feature-icon">&#10024;</div>
+            <h3 class="feature-title">Frosted Glass</h3>
+            <p class="feature-description">Beautiful backdrop blur effects that create depth and visual hierarchy in your interface.</p>
+          </div>
+          <div class="feature-card glass">
+            <div class="feature-icon">&#127752;</div>
+            <h3 class="feature-title">Vibrant Gradients</h3>
+            <p class="feature-description">Rich color gradients that bring life and energy to your backgrounds and elements.</p>
+          </div>
+          <div class="feature-card glass">
+            <div class="feature-icon">&#9733;</div>
+            <h3 class="feature-title">Light Borders</h3>
+            <p class="feature-description">Subtle glowing borders that define shapes while maintaining the transparent aesthetic.</p>
+          </div>
+          <div class="feature-card glass">
+            <div class="feature-icon">&#9881;</div>
+            <h3 class="feature-title">Layered Design</h3>
+            <p class="feature-description">Multiple translucent layers create sophisticated depth and visual interest.</p>
+          </div>
+          <div class="feature-card glass">
+            <div class="feature-icon">&#9889;</div>
+            <h3 class="feature-title">Smooth Animations</h3>
+            <p class="feature-description">Fluid transitions and hover effects that feel natural and responsive.</p>
+          </div>
+          <div class="feature-card glass">
+            <div class="feature-icon">&#128736;</div>
+            <h3 class="feature-title">Easy to Build</h3>
+            <p class="feature-description">Simple CSS properties make glassmorphism accessible for any project.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pricing">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Pricing</span>
+          <h2 class="section-title">Choose your plan</h2>
+        </div>
+        <div class="pricing-grid">
+          <div class="price-card glass">
+            <h3 class="price-name">Starter</h3>
+            <div class="price-value">$9<span>/mo</span></div>
+            <ul class="price-features">
+              <li>5 glass components</li>
+              <li>Basic gradients</li>
+              <li>Email support</li>
+              <li>1 project</li>
+            </ul>
+            <button class="price-btn price-btn-glass">Get Started</button>
+          </div>
+          <div class="price-card glass featured">
+            <h3 class="price-name">Pro</h3>
+            <div class="price-value">$29<span>/mo</span></div>
+            <ul class="price-features">
+              <li>Unlimited components</li>
+              <li>Custom gradients</li>
+              <li>Priority support</li>
+              <li>10 projects</li>
+            </ul>
+            <button class="price-btn price-btn-primary">Get Started</button>
+          </div>
+          <div class="price-card glass">
+            <h3 class="price-name">Enterprise</h3>
+            <div class="price-value">$99<span>/mo</span></div>
+            <ul class="price-features">
+              <li>Everything in Pro</li>
+              <li>White-label</li>
+              <li>Dedicated support</li>
+              <li>Unlimited projects</li>
+            </ul>
+            <button class="price-btn price-btn-glass">Contact Us</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-glass glass">
+        <p>&copy; 2024 Aura. Crafted with frosted glass and gradients.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claymorphism | Aesthetic Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #f0e6ff;
+      --color-bg-secondary: #e8d9ff;
+      --color-text: #2d1b4e;
+      --color-text-muted: #6b5b8a;
+      --color-pink: #ffb3d9;
+      --color-pink-dark: #ff8cc7;
+      --color-blue: #b3d9ff;
+      --color-blue-dark: #8cc7ff;
+      --color-green: #b3ffcc;
+      --color-green-dark: #8cffa8;
+      --color-orange: #ffccb3;
+      --color-orange-dark: #ffb38c;
+      --font-main: 'Nunito', sans-serif;
+
+      /* Clay shadows */
+      --clay-shadow:
+        8px 8px 16px rgba(45, 27, 78, 0.15),
+        -4px -4px 12px rgba(255, 255, 255, 0.8),
+        inset 2px 2px 4px rgba(255, 255, 255, 0.6),
+        inset -2px -2px 4px rgba(45, 27, 78, 0.08);
+      --clay-shadow-hover:
+        12px 12px 24px rgba(45, 27, 78, 0.2),
+        -6px -6px 16px rgba(255, 255, 255, 0.9),
+        inset 2px 2px 4px rgba(255, 255, 255, 0.6),
+        inset -2px -2px 4px rgba(45, 27, 78, 0.08);
+      --clay-shadow-pressed:
+        4px 4px 8px rgba(45, 27, 78, 0.15),
+        -2px -2px 6px rgba(255, 255, 255, 0.8),
+        inset 4px 4px 8px rgba(45, 27, 78, 0.12),
+        inset -2px -2px 6px rgba(255, 255, 255, 0.4);
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-secondary) 100%);
+      color: var(--color-text);
+      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Clay Card Base */
+    .clay {
+      background: linear-gradient(145deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.2) 100%);
+      border-radius: 24px;
+      box-shadow: var(--clay-shadow);
+      border: none;
+      transition: all 0.3s ease;
+    }
+
+    .clay:hover {
+      box-shadow: var(--clay-shadow-hover);
+      transform: translateY(-4px);
+    }
+
+    /* Navigation */
+    nav {
+      padding: 1.5rem 0;
+    }
+
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      width: 56px;
+      height: 56px;
+      border-radius: 18px;
+      background: linear-gradient(145deg, var(--color-pink) 0%, var(--color-pink-dark) 100%);
+      box-shadow: var(--clay-shadow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: var(--color-text);
+    }
+
+    .nav-pills {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .nav-pill {
+      padding: 0.875rem 1.5rem;
+      border: none;
+      background: linear-gradient(145deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.3) 100%);
+      border-radius: 16px;
+      box-shadow: var(--clay-shadow);
+      font-family: inherit;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .nav-pill:hover {
+      color: var(--color-text);
+      transform: translateY(-2px);
+    }
+
+    .nav-pill.active {
+      background: linear-gradient(145deg, var(--color-blue) 0%, var(--color-blue-dark) 100%);
+      color: var(--color-text);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 4rem 0 6rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 6vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--color-pink-dark), var(--color-orange-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--color-text-muted);
+      margin-bottom: 2rem;
+      max-width: 440px;
+    }
+
+    .btn-clay {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1.125rem 2rem;
+      background: linear-gradient(145deg, var(--color-pink) 0%, var(--color-pink-dark) 100%);
+      border: none;
+      border-radius: 20px;
+      box-shadow: var(--clay-shadow);
+      font-family: inherit;
+      font-size: 1.0625rem;
+      font-weight: 700;
+      color: var(--color-text);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-clay:hover {
+      box-shadow: var(--clay-shadow-hover);
+      transform: translateY(-4px);
+    }
+
+    .btn-clay:active {
+      box-shadow: var(--clay-shadow-pressed);
+      transform: translateY(0);
+    }
+
+    /* App Preview */
+    .app-preview {
+      position: relative;
+    }
+
+    .phone-frame {
+      width: 320px;
+      height: 640px;
+      border-radius: 48px;
+      background: linear-gradient(145deg, #2d1b4e 0%, #1a0f2e 100%);
+      box-shadow: var(--clay-shadow-hover);
+      padding: 16px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      border-radius: 36px;
+      background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-secondary) 100%);
+      padding: 2rem 1.25rem;
+      overflow: hidden;
+    }
+
+    .phone-notch {
+      width: 120px;
+      height: 28px;
+      background: #2d1b4e;
+      border-radius: 14px;
+      margin: -0.5rem auto 1.5rem;
+    }
+
+    .app-header {
+      margin-bottom: 1.5rem;
+    }
+
+    .app-greeting {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+    }
+
+    .app-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+    }
+
+    .app-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .app-card {
+      padding: 1.25rem;
+      border-radius: 20px;
+    }
+
+    .app-card.pink {
+      background: linear-gradient(145deg, var(--color-pink) 0%, var(--color-pink-dark) 100%);
+    }
+
+    .app-card.blue {
+      background: linear-gradient(145deg, var(--color-blue) 0%, var(--color-blue-dark) 100%);
+    }
+
+    .app-card.green {
+      background: linear-gradient(145deg, var(--color-green) 0%, var(--color-green-dark) 100%);
+    }
+
+    .app-card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .app-card h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .app-card p {
+      font-size: 0.8125rem;
+      color: rgba(45, 27, 78, 0.7);
+    }
+
+    /* Floating elements */
+    .floating-blob {
+      position: absolute;
+      border-radius: 50%;
+      box-shadow: var(--clay-shadow);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .blob-1 {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(145deg, var(--color-orange) 0%, var(--color-orange-dark) 100%);
+      top: -20px;
+      right: 20px;
+      animation-delay: 0s;
+    }
+
+    .blob-2 {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(145deg, var(--color-green) 0%, var(--color-green-dark) 100%);
+      bottom: 40px;
+      left: 10px;
+      animation-delay: -2s;
+    }
+
+    .blob-3 {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(145deg, var(--color-blue) 0%, var(--color-blue-dark) 100%);
+      top: 120px;
+      left: -20px;
+      animation-delay: -4s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(10deg); }
+    }
+
+    /* Features */
+    .features {
+      padding: 6rem 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-header h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .section-header p {
+      font-size: 1.125rem;
+      color: var(--color-text-muted);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .feature-card {
+      padding: 2.5rem;
+      text-align: center;
+    }
+
+    .feature-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      box-shadow: var(--clay-shadow);
+    }
+
+    .feature-icon.pink {
+      background: linear-gradient(145deg, var(--color-pink) 0%, var(--color-pink-dark) 100%);
+    }
+
+    .feature-icon.blue {
+      background: linear-gradient(145deg, var(--color-blue) 0%, var(--color-blue-dark) 100%);
+    }
+
+    .feature-icon.green {
+      background: linear-gradient(145deg, var(--color-green) 0%, var(--color-green-dark) 100%);
+    }
+
+    .feature-card h3 {
+      font-size: 1.375rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .feature-card p {
+      color: var(--color-text-muted);
+      font-size: 1rem;
+    }
+
+    /* Testimonials */
+    .testimonials {
+      padding: 6rem 0;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+
+    .testimonial-card {
+      padding: 2.5rem;
+    }
+
+    .testimonial-text {
+      font-size: 1.125rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .testimonial-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 18px;
+      box-shadow: var(--clay-shadow);
+      overflow: hidden;
+    }
+
+    .testimonial-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .testimonial-name {
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .testimonial-role {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+    }
+
+    /* CTA */
+    .cta {
+      padding: 6rem 0;
+    }
+
+    .cta-card {
+      padding: 4rem;
+      text-align: center;
+      background: linear-gradient(145deg, var(--color-orange) 0%, var(--color-orange-dark) 100%);
+    }
+
+    .cta h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .cta p {
+      font-size: 1.125rem;
+      color: rgba(45, 27, 78, 0.8);
+      margin-bottom: 2rem;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta .btn-clay {
+      background: linear-gradient(145deg, #2d1b4e 0%, #1a0f2e 100%);
+      color: white;
+    }
+
+    /* Footer */
+    footer {
+      padding: 3rem 0;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-text {
+      color: var(--color-text-muted);
+      font-size: 0.9375rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .footer-links a {
+      color: var(--color-text-muted);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--color-text);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .hero p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .app-preview {
+        display: none;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav-pills {
+        display: none;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+      }
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      .floating-blob {
+        animation: none;
+      }
+
+      * {
+        transition: none !important;
+      }
+    }
+
+    /* Focus Styles */
+    :focus-visible {
+      outline: 3px solid var(--color-pink-dark);
+      outline-offset: 4px;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container">
+      <div class="logo">C</div>
+      <div class="nav-pills">
+        <button class="nav-pill active">Home</button>
+        <button class="nav-pill">Features</button>
+        <button class="nav-pill">Pricing</button>
+        <button class="nav-pill">About</button>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <h1>Playful design that <span>feels alive</span>.</h1>
+          <p>Build interfaces with squishy, tactile components that bring joy to every interaction. Design meets delight.</p>
+          <button class="btn-clay">
+            Get Started
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="app-preview">
+          <div class="floating-blob blob-1"></div>
+          <div class="floating-blob blob-2"></div>
+          <div class="floating-blob blob-3"></div>
+
+          <div class="phone-frame">
+            <div class="phone-screen">
+              <div class="phone-notch"></div>
+              <div class="app-header">
+                <div class="app-greeting">Good morning</div>
+                <div class="app-title">Dashboard</div>
+              </div>
+              <div class="app-cards">
+                <div class="app-card pink clay">
+                  <div class="app-card-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
+                      <path d="M2 17L12 22L22 17"/>
+                    </svg>
+                  </div>
+                  <h4>Projects</h4>
+                  <p>12 active tasks</p>
+                </div>
+                <div class="app-card blue clay">
+                  <div class="app-card-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <circle cx="12" cy="12" r="10"/>
+                      <path d="M12 6V12L16 14"/>
+                    </svg>
+                  </div>
+                  <h4>Schedule</h4>
+                  <p>3 meetings today</p>
+                </div>
+                <div class="app-card green clay">
+                  <div class="app-card-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <path d="M22 11.08V12C22 17.52 17.52 22 12 22C6.48 22 2 17.52 2 12C2 6.48 6.48 2 12 2"/>
+                      <path d="M22 4L12 14.01L9 11.01"/>
+                    </svg>
+                  </div>
+                  <h4>Completed</h4>
+                  <p>48 this week</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="container">
+      <div class="section-header">
+        <h2>Why You'll Love It</h2>
+        <p>Components designed to bring happiness to your users.</p>
+      </div>
+      <div class="features-grid">
+        <div class="clay feature-card">
+          <div class="feature-icon pink">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20.84 4.61C20.3292 4.09924 19.7228 3.69395 19.0554 3.41723C18.3879 3.14052 17.6725 2.99817 16.95 2.99817C16.2275 2.99817 15.5121 3.14052 14.8446 3.41723C14.1772 3.69395 13.5708 4.09924 13.06 4.61L12 5.67L10.94 4.61C9.9083 3.57831 8.50903 2.99871 7.05 2.99871C5.59096 2.99871 4.19169 3.57831 3.16 4.61C2.1283 5.64169 1.54871 7.04097 1.54871 8.5C1.54871 9.95903 2.1283 11.3583 3.16 12.39L12 21.23L20.84 12.39C21.3508 11.8792 21.7561 11.2728 22.0328 10.6054C22.3095 9.93789 22.4518 9.22249 22.4518 8.5C22.4518 7.77751 22.3095 7.0621 22.0328 6.39464C21.7561 5.72718 21.3508 5.12075 20.84 4.61Z"/>
+            </svg>
+          </div>
+          <h3>Delightful UX</h3>
+          <p>Every interaction feels satisfying with our squishy, bouncy animations.</p>
+        </div>
+        <div class="clay feature-card">
+          <div class="feature-icon blue">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <path d="M3 9H21"/>
+              <path d="M9 21V9"/>
+            </svg>
+          </div>
+          <h3>Easy to Build</h3>
+          <p>Simple CSS techniques create complex-looking 3D effects with minimal code.</p>
+        </div>
+        <div class="clay feature-card">
+          <div class="feature-icon green">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M8 14S9.5 16 12 16S16 14 16 14"/>
+              <line x1="9" y1="9" x2="9.01" y2="9"/>
+              <line x1="15" y1="9" x2="15.01" y2="9"/>
+            </svg>
+          </div>
+          <h3>User Friendly</h3>
+          <p>Soft, approachable aesthetic that makes your app feel welcoming.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials">
+    <div class="container">
+      <div class="section-header">
+        <h2>What People Say</h2>
+        <p>Join thousands of happy designers and developers.</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="clay testimonial-card">
+          <p class="testimonial-text">"The clay aesthetic brought so much personality to our product. Users constantly tell us how fun it feels to use."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80" alt="Sarah Chen">
+            </div>
+            <div>
+              <div class="testimonial-name">Sarah Chen</div>
+              <div class="testimonial-role">Product Designer</div>
+            </div>
+          </div>
+        </div>
+        <div class="clay testimonial-card">
+          <p class="testimonial-text">"Finally, a design trend that doesn't take itself too seriously. Our engagement metrics went through the roof!"</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80" alt="Marcus Johnson">
+            </div>
+            <div>
+              <div class="testimonial-name">Marcus Johnson</div>
+              <div class="testimonial-role">Startup Founder</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container">
+      <div class="clay cta-card">
+        <h2>Ready to Make It Squishy?</h2>
+        <p>Start building playful, tactile interfaces that users will love to interact with.</p>
+        <button class="btn-clay">
+          Start Free Trial
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-text">© 2024 Claymorphism — Made with play.</div>
+        <div class="footer-links">
+          <a href="#">Twitter</a>
+          <a href="#">Instagram</a>
+          <a href="#">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

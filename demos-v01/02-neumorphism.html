@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neumorphism | Aesthetic Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #e0e5ec;
+      --color-text: #2d3748;
+      --color-text-muted: #718096;
+      --color-accent: #6366f1;
+      --color-accent-soft: #818cf8;
+      --shadow-light: #ffffff;
+      --shadow-dark: #a3b1c6;
+      --font-main: 'Plus Jakarta Sans', sans-serif;
+
+      /* Neumorphic shadows */
+      --neu-flat:
+        6px 6px 12px var(--shadow-dark),
+        -6px -6px 12px var(--shadow-light);
+      --neu-pressed:
+        inset 4px 4px 8px var(--shadow-dark),
+        inset -4px -4px 8px var(--shadow-light);
+      --neu-convex:
+        6px 6px 12px var(--shadow-dark),
+        -6px -6px 12px var(--shadow-light),
+        inset 2px 2px 4px var(--shadow-light),
+        inset -2px -2px 4px rgba(163, 177, 198, 0.3);
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background: var(--color-bg);
+      color: var(--color-text);
+      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Navigation */
+    nav {
+      padding: 1.5rem 0;
+    }
+
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      width: 50px;
+      height: 50px;
+      border-radius: 14px;
+      background: var(--color-bg);
+      box-shadow: var(--neu-convex);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--color-accent);
+    }
+
+    .nav-pills {
+      display: flex;
+      gap: 0.5rem;
+      background: var(--color-bg);
+      padding: 0.5rem;
+      border-radius: 16px;
+      box-shadow: var(--neu-pressed);
+    }
+
+    .nav-pill {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      background: transparent;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .nav-pill:hover {
+      color: var(--color-text);
+    }
+
+    .nav-pill.active {
+      background: var(--color-bg);
+      box-shadow: var(--neu-flat);
+      color: var(--color-accent);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 5rem 0;
+    }
+
+    .hero-card {
+      background: var(--color-bg);
+      border-radius: 32px;
+      box-shadow: var(--neu-flat);
+      padding: 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-content h1 {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+      color: var(--color-text);
+    }
+
+    .hero-content h1 span {
+      color: var(--color-accent);
+    }
+
+    .hero-content p {
+      font-size: 1.125rem;
+      color: var(--color-text-muted);
+      margin-bottom: 2rem;
+      max-width: 400px;
+    }
+
+    .btn-neu {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 2rem;
+      background: var(--color-bg);
+      border: none;
+      border-radius: 16px;
+      box-shadow: var(--neu-convex);
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-accent);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-neu:hover {
+      box-shadow:
+        8px 8px 16px var(--shadow-dark),
+        -8px -8px 16px var(--shadow-light),
+        inset 2px 2px 4px var(--shadow-light),
+        inset -2px -2px 4px rgba(163, 177, 198, 0.3);
+    }
+
+    .btn-neu:active {
+      box-shadow: var(--neu-pressed);
+    }
+
+    /* Player Card */
+    .player-card {
+      background: var(--color-bg);
+      border-radius: 24px;
+      box-shadow: var(--neu-flat);
+      padding: 2.5rem;
+    }
+
+    .album-art {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 20px;
+      box-shadow: var(--neu-pressed);
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+
+    .album-art img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .track-info {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .track-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .track-artist {
+      color: var(--color-text-muted);
+      font-size: 0.9375rem;
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: var(--color-bg);
+      border-radius: 4px;
+      box-shadow: var(--neu-pressed);
+      margin-bottom: 0.75rem;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 35%;
+      background: linear-gradient(90deg, var(--color-accent), var(--color-accent-soft));
+      border-radius: 4px;
+    }
+
+    .progress-time {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .control-btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--color-bg);
+      border: none;
+      box-shadow: var(--neu-flat);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--color-text-muted);
+      transition: all 0.2s ease;
+    }
+
+    .control-btn:hover {
+      color: var(--color-accent);
+    }
+
+    .control-btn:active {
+      box-shadow: var(--neu-pressed);
+    }
+
+    .control-btn.play {
+      width: 70px;
+      height: 70px;
+      color: var(--color-accent);
+    }
+
+    /* Features */
+    .features {
+      padding: 5rem 0;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .feature-card {
+      background: var(--color-bg);
+      border-radius: 24px;
+      box-shadow: var(--neu-flat);
+      padding: 2.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .feature-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 16px;
+      background: var(--color-bg);
+      box-shadow: var(--neu-pressed);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      color: var(--color-accent);
+    }
+
+    .feature-card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .feature-card p {
+      color: var(--color-text-muted);
+      font-size: 0.9375rem;
+    }
+
+    /* Toggle & Inputs Section */
+    .controls-section {
+      padding: 5rem 0;
+    }
+
+    .controls-card {
+      background: var(--color-bg);
+      border-radius: 32px;
+      box-shadow: var(--neu-flat);
+      padding: 3rem;
+    }
+
+    .controls-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .control-group h4 {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    /* Toggle Switch */
+    .toggle-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .toggle {
+      width: 60px;
+      height: 32px;
+      border-radius: 16px;
+      background: var(--color-bg);
+      box-shadow: var(--neu-pressed);
+      position: relative;
+      cursor: pointer;
+    }
+
+    .toggle::after {
+      content: '';
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--color-bg);
+      box-shadow: var(--neu-flat);
+      transition: all 0.3s ease;
+    }
+
+    .toggle.active::after {
+      left: 32px;
+      background: var(--color-accent);
+    }
+
+    /* Slider */
+    .slider-track {
+      height: 8px;
+      background: var(--color-bg);
+      border-radius: 4px;
+      box-shadow: var(--neu-pressed);
+      position: relative;
+    }
+
+    .slider-thumb {
+      position: absolute;
+      top: 50%;
+      left: 60%;
+      transform: translate(-50%, -50%);
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--color-bg);
+      box-shadow: var(--neu-convex);
+      cursor: pointer;
+    }
+
+    /* Input */
+    .input-neu {
+      width: 100%;
+      padding: 1rem 1.25rem;
+      border: none;
+      border-radius: 12px;
+      background: var(--color-bg);
+      box-shadow: var(--neu-pressed);
+      font-family: inherit;
+      font-size: 1rem;
+      color: var(--color-text);
+      outline: none;
+    }
+
+    .input-neu::placeholder {
+      color: var(--color-text-muted);
+    }
+
+    .input-neu:focus {
+      box-shadow:
+        var(--neu-pressed),
+        0 0 0 2px var(--color-accent);
+    }
+
+    /* Checkbox */
+    .checkbox-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .checkbox {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--color-bg);
+      box-shadow: var(--neu-pressed);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: transparent;
+      transition: all 0.2s ease;
+    }
+
+    .checkbox.checked {
+      color: var(--color-accent);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero-card {
+        grid-template-columns: 1fr;
+        padding: 2.5rem;
+      }
+
+      .player-card {
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .controls-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav-pills {
+        display: none;
+      }
+
+      .controls-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+      }
+    }
+
+    /* Focus Styles */
+    :focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 4px;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container">
+      <div class="logo">N</div>
+      <div class="nav-pills">
+        <button class="nav-pill active">Home</button>
+        <button class="nav-pill">Features</button>
+        <button class="nav-pill">Pricing</button>
+        <button class="nav-pill">About</button>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-card">
+        <div class="hero-content">
+          <h1>Soft UI for the <span>modern</span> web.</h1>
+          <p>Experience the gentle depth and tactile feel of neumorphic design. Interfaces that feel as good as they look.</p>
+          <button class="btn-neu">
+            Get Started
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="player-card">
+          <div class="album-art">
+            <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&q=80" alt="Abstract music visualization with purple and blue tones">
+          </div>
+          <div class="track-info">
+            <div class="track-title">Midnight Dreams</div>
+            <div class="track-artist">Ambient Collective</div>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill"></div>
+          </div>
+          <div class="progress-time">
+            <span>1:24</span>
+            <span>4:02</span>
+          </div>
+          <div class="controls">
+            <button class="control-btn">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M15 4L5 10L15 16V4Z"/>
+              </svg>
+            </button>
+            <button class="control-btn play">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8 5V19L19 12L8 5Z"/>
+              </svg>
+            </button>
+            <button class="control-btn">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M5 4L15 10L5 16V4Z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="container">
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
+              <path d="M2 17L12 22L22 17"/>
+              <path d="M2 12L12 17L22 12"/>
+            </svg>
+          </div>
+          <h3>Layered Depth</h3>
+          <p>Multiple shadow layers create realistic depth that feels natural and inviting.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 6V12L16 14"/>
+            </svg>
+          </div>
+          <h3>Smooth Motion</h3>
+          <p>Press and release animations provide satisfying tactile feedback on every interaction.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20.24 12.24C21.37 11.11 21.37 9.27 20.24 8.14L15.86 3.76C14.73 2.63 12.89 2.63 11.76 3.76L3.76 11.76C2.63 12.89 2.63 14.73 3.76 15.86L8.14 20.24C9.27 21.37 11.11 21.37 12.24 20.24L20.24 12.24Z"/>
+            </svg>
+          </div>
+          <h3>Soft Aesthetic</h3>
+          <p>Monochromatic palettes with subtle variations create a cohesive, calming experience.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="controls-section">
+    <div class="container">
+      <div class="controls-card">
+        <div class="controls-grid">
+          <div class="control-group">
+            <h4>Toggle Switches</h4>
+            <div class="toggle-wrapper">
+              <div class="toggle active" onclick="this.classList.toggle('active')"></div>
+              <div class="toggle" onclick="this.classList.toggle('active')"></div>
+            </div>
+          </div>
+          <div class="control-group">
+            <h4>Volume Slider</h4>
+            <div class="slider-track">
+              <div class="slider-thumb"></div>
+            </div>
+          </div>
+          <div class="control-group">
+            <h4>Text Input</h4>
+            <input type="text" class="input-neu" placeholder="Type something...">
+          </div>
+          <div class="control-group">
+            <h4>Checkboxes</h4>
+            <div class="checkbox-wrapper">
+              <div class="checkbox checked" onclick="this.classList.toggle('checked')">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M3 8L6.5 11.5L13 5"/>
+                </svg>
+              </div>
+              <div class="checkbox" onclick="this.classList.toggle('checked')">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M3 8L6.5 11.5L13 5"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

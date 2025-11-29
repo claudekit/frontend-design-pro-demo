@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neumorphism | Aesthetic Direction 02</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #e0e5ec;
+      --color-bg-dark: #d1d9e6;
+      --color-text: #2d3748;
+      --color-text-muted: #718096;
+      --color-accent: #6366f1;
+      --color-accent-light: #818cf8;
+      --shadow-light: #ffffff;
+      --shadow-dark: #a3b1c6;
+      --font-main: 'DM Sans', sans-serif;
+      --neu-distance: 8px;
+      --neu-blur: 16px;
+      --neu-distance-sm: 4px;
+      --neu-blur-sm: 8px;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Neumorphic Utilities */
+    .neu-convex {
+      background: linear-gradient(145deg, #f0f5fc, #d1d9e6);
+      box-shadow:
+        var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--shadow-dark),
+        calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) var(--neu-blur) var(--shadow-light);
+      border-radius: 20px;
+    }
+
+    .neu-concave {
+      background: linear-gradient(145deg, #d1d9e6, #f0f5fc);
+      box-shadow:
+        inset var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--shadow-dark),
+        inset calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) var(--neu-blur) var(--shadow-light);
+      border-radius: 20px;
+    }
+
+    .neu-flat {
+      background: var(--color-bg);
+      box-shadow:
+        var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--shadow-dark),
+        calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) var(--neu-blur) var(--shadow-light);
+      border-radius: 20px;
+    }
+
+    /* Navigation */
+    nav {
+      padding: 1.5rem 0;
+    }
+
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--color-accent);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      display: block;
+      padding: 0.75rem 1.25rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      color: var(--color-text-muted);
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--color-accent);
+      background: var(--color-bg);
+      box-shadow:
+        var(--neu-distance-sm) var(--neu-distance-sm) var(--neu-blur-sm) var(--shadow-dark),
+        calc(var(--neu-distance-sm) * -1) calc(var(--neu-distance-sm) * -1) var(--neu-blur-sm) var(--shadow-light);
+    }
+
+    .nav-links a:active {
+      box-shadow:
+        inset var(--neu-distance-sm) var(--neu-distance-sm) var(--neu-blur-sm) var(--shadow-dark),
+        inset calc(var(--neu-distance-sm) * -1) calc(var(--neu-distance-sm) * -1) var(--neu-blur-sm) var(--shadow-light);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 80px 0;
+    }
+
+    .hero-card {
+      padding: 4rem;
+      text-align: center;
+    }
+
+    .hero-icon {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      color: var(--color-text);
+    }
+
+    .hero-description {
+      font-size: 1.125rem;
+      color: var(--color-text-muted);
+      max-width: 500px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      font-family: inherit;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(145deg, var(--color-accent-light), var(--color-accent));
+      color: white;
+      border-radius: 14px;
+      box-shadow:
+        6px 6px 12px var(--shadow-dark),
+        -6px -6px 12px var(--shadow-light);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        8px 8px 16px var(--shadow-dark),
+        -8px -8px 16px var(--shadow-light);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+      box-shadow:
+        inset 4px 4px 8px rgba(0,0,0,0.2),
+        inset -4px -4px 8px rgba(255,255,255,0.1);
+    }
+
+    .btn-secondary {
+      background: var(--color-bg);
+      color: var(--color-text);
+      border-radius: 14px;
+      box-shadow:
+        6px 6px 12px var(--shadow-dark),
+        -6px -6px 12px var(--shadow-light);
+    }
+
+    .btn-secondary:hover {
+      color: var(--color-accent);
+    }
+
+    .btn-secondary:active {
+      box-shadow:
+        inset 4px 4px 8px var(--shadow-dark),
+        inset -4px -4px 8px var(--shadow-light);
+    }
+
+    /* Stats Section */
+    .stats {
+      padding: 60px 0;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    .stat-card {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--color-accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Features Section */
+    .features {
+      padding: 60px 0;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .feature-card {
+      padding: 2.5rem;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .feature-icon {
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+    }
+
+    .feature-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .feature-description {
+      font-size: 0.9375rem;
+      color: var(--color-text-muted);
+      line-height: 1.6;
+    }
+
+    /* Form Section */
+    .form-section {
+      padding: 60px 0;
+    }
+
+    .form-card {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 3rem;
+    }
+
+    .form-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 1rem 1.25rem;
+      font-family: inherit;
+      font-size: 1rem;
+      color: var(--color-text);
+      background: var(--color-bg);
+      border: none;
+      border-radius: 12px;
+      box-shadow:
+        inset 4px 4px 8px var(--shadow-dark),
+        inset -4px -4px 8px var(--shadow-light);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .form-input:focus {
+      outline: none;
+      box-shadow:
+        inset 6px 6px 12px var(--shadow-dark),
+        inset -6px -6px 12px var(--shadow-light),
+        0 0 0 3px rgba(99, 102, 241, 0.2);
+    }
+
+    .form-input::placeholder {
+      color: var(--color-text-muted);
+    }
+
+    .toggle-group {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .toggle {
+      position: relative;
+      width: 60px;
+      height: 32px;
+      background: var(--color-bg);
+      border-radius: 16px;
+      cursor: pointer;
+      box-shadow:
+        inset 4px 4px 8px var(--shadow-dark),
+        inset -4px -4px 8px var(--shadow-light);
+    }
+
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .toggle-slider {
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 24px;
+      height: 24px;
+      background: linear-gradient(145deg, #f0f5fc, #d1d9e6);
+      border-radius: 50%;
+      box-shadow:
+        2px 2px 4px var(--shadow-dark),
+        -2px -2px 4px var(--shadow-light);
+      transition: transform 0.3s ease;
+    }
+
+    .toggle input:checked + .toggle-slider {
+      transform: translateX(28px);
+      background: linear-gradient(145deg, var(--color-accent-light), var(--color-accent));
+    }
+
+    /* Player Section */
+    .player-section {
+      padding: 60px 0;
+    }
+
+    .player-card {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 2.5rem;
+    }
+
+    .player-artwork {
+      aspect-ratio: 1;
+      margin-bottom: 2rem;
+      overflow: hidden;
+    }
+
+    .player-artwork img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 16px;
+    }
+
+    .player-info {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .player-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .player-artist {
+      font-size: 0.9375rem;
+      color: var(--color-text-muted);
+    }
+
+    .player-progress {
+      margin-bottom: 1.5rem;
+    }
+
+    .progress-bar {
+      height: 8px;
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 35%;
+      background: linear-gradient(90deg, var(--color-accent), var(--color-accent-light));
+      border-radius: 4px;
+    }
+
+    .progress-time {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+    }
+
+    .player-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .control-btn {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      color: var(--color-text);
+      background: var(--color-bg);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow:
+        4px 4px 8px var(--shadow-dark),
+        -4px -4px 8px var(--shadow-light);
+      transition: all 0.2s ease;
+    }
+
+    .control-btn:hover {
+      color: var(--color-accent);
+    }
+
+    .control-btn:active {
+      box-shadow:
+        inset 4px 4px 8px var(--shadow-dark),
+        inset -4px -4px 8px var(--shadow-light);
+    }
+
+    .control-btn.play {
+      width: 70px;
+      height: 70px;
+      font-size: 1.5rem;
+      background: linear-gradient(145deg, var(--color-accent-light), var(--color-accent));
+      color: white;
+    }
+
+    .control-btn.play:active {
+      box-shadow:
+        inset 4px 4px 8px rgba(0,0,0,0.2),
+        inset -4px -4px 8px rgba(255,255,255,0.1);
+    }
+
+    /* Footer */
+    footer {
+      padding: 60px 0 40px;
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero-card { padding: 2.5rem; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      .btn-group { flex-direction: column; align-items: center; }
+    }
+
+    /* Focus States */
+    a:focus-visible, button:focus-visible, input:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 4px;
+    }
+
+    /* Micro Animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes popIn {
+      0% { opacity: 0; transform: scale(0.8); }
+      70% { transform: scale(1.05); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes breathe {
+      0%, 100% { box-shadow: var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--shadow-dark), calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) var(--neu-blur) var(--shadow-light); }
+      50% { box-shadow: calc(var(--neu-distance) * 1.2) calc(var(--neu-distance) * 1.2) calc(var(--neu-blur) * 1.2) var(--shadow-dark), calc(var(--neu-distance) * -1.2) calc(var(--neu-distance) * -1.2) calc(var(--neu-blur) * 1.2) var(--shadow-light); }
+    }
+
+    .hero-card { animation: fadeInUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both; }
+    .hero-icon { animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s both; }
+
+    .stat-card { animation: fadeInUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+    .stat-card:nth-child(1) { animation-delay: 0.1s; }
+    .stat-card:nth-child(2) { animation-delay: 0.2s; }
+    .stat-card:nth-child(3) { animation-delay: 0.3s; }
+    .stat-card:nth-child(4) { animation-delay: 0.4s; }
+
+    .feature-card { animation: fadeInUp 0.5s ease-out both; }
+    .feature-card:nth-child(1) { animation-delay: 0.1s; }
+    .feature-card:nth-child(2) { animation-delay: 0.2s; }
+    .feature-card:nth-child(3) { animation-delay: 0.3s; }
+
+    .feature-icon {
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .feature-card:hover .feature-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .stat-value {
+      display: inline-block;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.3s ease;
+    }
+    .stat-card:hover .stat-value {
+      transform: scale(1.15);
+    }
+
+    .control-btn {
+      transition: all 0.2s ease, transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .control-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .progress-fill {
+      animation: progressGrow 1.5s ease-out 1s both;
+    }
+    @keyframes progressGrow {
+      from { width: 0; }
+      to { width: 35%; }
+    }
+
+    .toggle-slider {
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease;
+    }
+
+    .form-card { animation: fadeInUp 0.7s ease-out 0.3s both; }
+    .player-card { animation: fadeInUp 0.7s ease-out 0.4s both; }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, .hero-card, .hero-icon, .stat-card, .feature-card, .form-card, .player-card, .progress-fill {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        animation-delay: 0ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container">
+      <a href="#" class="logo">Softify</a>
+      <ul class="nav-links">
+        <li><a href="#" class="active">Home</a></li>
+        <li><a href="#">Features</a></li>
+        <li><a href="#">Pricing</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-card neu-flat">
+          <div class="hero-icon neu-convex">
+            <span>&#9672;</span>
+          </div>
+          <h1>Soft UI Experience</h1>
+          <p class="hero-description">Experience the future of interface design with tactile, embossed elements that feel natural and intuitive.</p>
+          <div class="btn-group">
+            <button class="btn btn-primary">Get Started</button>
+            <button class="btn btn-secondary">Learn More</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-card neu-flat">
+            <div class="stat-value">50K+</div>
+            <div class="stat-label">Active Users</div>
+          </div>
+          <div class="stat-card neu-flat">
+            <div class="stat-value">99.9%</div>
+            <div class="stat-label">Uptime</div>
+          </div>
+          <div class="stat-card neu-flat">
+            <div class="stat-value">24/7</div>
+            <div class="stat-label">Support</div>
+          </div>
+          <div class="stat-card neu-flat">
+            <div class="stat-value">4.9</div>
+            <div class="stat-label">Rating</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="container">
+        <h2 class="section-title">Core Features</h2>
+        <div class="features-grid">
+          <div class="feature-card neu-flat">
+            <div class="feature-icon neu-convex">&#9881;</div>
+            <h3 class="feature-title">Easy Setup</h3>
+            <p class="feature-description">Get started in minutes with our intuitive onboarding process and smart defaults.</p>
+          </div>
+          <div class="feature-card neu-flat">
+            <div class="feature-icon neu-convex">&#9733;</div>
+            <h3 class="feature-title">Premium Quality</h3>
+            <p class="feature-description">Every component is crafted with attention to detail and pixel-perfect precision.</p>
+          </div>
+          <div class="feature-card neu-flat">
+            <div class="feature-icon neu-convex">&#9889;</div>
+            <h3 class="feature-title">Fast Performance</h3>
+            <p class="feature-description">Optimized for speed with minimal overhead and maximum efficiency.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="form-section">
+      <div class="container">
+        <div class="form-card neu-flat">
+          <h3 class="form-title">Contact Us</h3>
+          <form>
+            <div class="form-group">
+              <label class="form-label">Full Name</label>
+              <input type="text" class="form-input" placeholder="John Doe">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input type="email" class="form-input" placeholder="john@example.com">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Subscribe to newsletter</label>
+              <div class="toggle-group">
+                <label class="toggle">
+                  <input type="checkbox" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+                <span style="font-size: 0.875rem; color: var(--color-text-muted);">Yes, keep me updated</span>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="player-section">
+      <div class="container">
+        <div class="player-card neu-flat">
+          <div class="player-artwork neu-concave">
+            <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&q=80" alt="Album artwork with abstract gradient">
+          </div>
+          <div class="player-info">
+            <h4 class="player-title">Soft Horizons</h4>
+            <p class="player-artist">Ambient Dreams</p>
+          </div>
+          <div class="player-progress">
+            <div class="progress-bar neu-concave">
+              <div class="progress-fill"></div>
+            </div>
+            <div class="progress-time">
+              <span>1:24</span>
+              <span>4:02</span>
+            </div>
+          </div>
+          <div class="player-controls">
+            <button class="control-btn">&#9664;&#9664;</button>
+            <button class="control-btn play">&#9654;</button>
+            <button class="control-btn">&#9654;&#9654;</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2024 Softify. Crafted with soft shadows.</p>
+    </div>
+  </footer>
+</body>
+</html>

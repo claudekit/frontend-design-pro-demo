@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vibrant Block / Maximalist | Aesthetic Direction 09</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-black: #0a0a0a;
+      --color-white: #ffffff;
+      --color-yellow: #ffe600;
+      --color-pink: #ff3d8b;
+      --color-blue: #0066ff;
+      --color-green: #00e676;
+      --color-orange: #ff6b00;
+      --color-purple: #9c27b0;
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body: 'Work Sans', sans-serif;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--color-black);
+      color: var(--color-white);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Scroll Snap Sections */
+    section {
+      min-height: 100vh;
+      scroll-snap-align: start;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      mix-blend-mode: difference;
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      text-decoration: none;
+      color: var(--color-white);
+      letter-spacing: 0.05em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--color-white);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: opacity 0.3s;
+    }
+
+    .nav-links a:hover {
+      opacity: 0.7;
+    }
+
+    /* Hero Section */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 100vh;
+    }
+
+    .hero-left {
+      background: var(--color-yellow);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 4rem;
+      position: relative;
+    }
+
+    .hero-left::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 80px;
+      background: repeating-linear-gradient(
+        -45deg,
+        var(--color-black),
+        var(--color-black) 10px,
+        var(--color-yellow) 10px,
+        var(--color-yellow) 20px
+      );
+    }
+
+    .hero-tag {
+      font-size: 0.875rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--color-black);
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(5rem, 12vw, 12rem);
+      line-height: 0.85;
+      color: var(--color-black);
+      text-transform: uppercase;
+    }
+
+    .hero-description {
+      font-size: 1.125rem;
+      font-weight: 500;
+      color: var(--color-black);
+      max-width: 400px;
+      margin-top: 2rem;
+      opacity: 0.8;
+    }
+
+    .hero-right {
+      background: var(--color-pink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .hero-image {
+      width: 80%;
+      max-width: 500px;
+      position: relative;
+      transform: rotate(-5deg);
+    }
+
+    .hero-image img {
+      width: 100%;
+      display: block;
+      box-shadow: 20px 20px 0 var(--color-black);
+    }
+
+    .hero-badge {
+      position: absolute;
+      top: -30px;
+      right: -30px;
+      width: 120px;
+      height: 120px;
+      background: var(--color-blue);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1rem;
+      text-align: center;
+      transform: rotate(15deg);
+      animation: spin 20s linear infinite;
+    }
+
+    @keyframes spin {
+      100% { transform: rotate(375deg); }
+    }
+
+    /* Block Section */
+    .blocks {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      min-height: 100vh;
+    }
+
+    .block {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 3rem;
+      position: relative;
+    }
+
+    .block-1 { background: var(--color-blue); }
+    .block-2 { background: var(--color-green); }
+    .block-3 { background: var(--color-orange); }
+    .block-4 { background: var(--color-purple); }
+
+    .block-number {
+      font-family: var(--font-display);
+      font-size: 8rem;
+      line-height: 1;
+      opacity: 0.3;
+      position: absolute;
+      top: 2rem;
+      left: 2rem;
+    }
+
+    .block-title {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .block-description {
+      font-size: 1rem;
+      opacity: 0.8;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Feature Section */
+    .feature-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 100vh;
+    }
+
+    .feature-content {
+      background: var(--color-black);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 5rem;
+    }
+
+    .feature-tag {
+      font-size: 0.875rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--color-yellow);
+      margin-bottom: 1.5rem;
+    }
+
+    .feature-title {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 8vw, 6rem);
+      line-height: 0.9;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+
+    .feature-title span {
+      color: var(--color-pink);
+    }
+
+    .feature-description {
+      font-size: 1.125rem;
+      color: rgba(255, 255, 255, 0.7);
+      max-width: 450px;
+      margin-bottom: 2rem;
+    }
+
+    .feature-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .stat {
+      border-left: 4px solid var(--color-yellow);
+      padding-left: 1rem;
+    }
+
+    .stat-value {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      color: var(--color-yellow);
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .feature-visual {
+      background: var(--color-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .feature-image {
+      width: 80%;
+      position: relative;
+    }
+
+    .feature-image img {
+      width: 100%;
+      display: block;
+    }
+
+    .feature-image::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      right: -20px;
+      bottom: -20px;
+      background: var(--color-black);
+      z-index: -1;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--color-yellow) 0%, var(--color-pink) 50%, var(--color-blue) 100%);
+      padding: 4rem;
+    }
+
+    .cta-title {
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 15vw, 15rem);
+      line-height: 0.9;
+      text-transform: uppercase;
+      color: var(--color-black);
+      margin-bottom: 2rem;
+    }
+
+    .cta-description {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--color-black);
+      max-width: 600px;
+      margin-bottom: 3rem;
+    }
+
+    .btn-max {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.5rem 3rem;
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      color: var(--color-white);
+      background: var(--color-black);
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .btn-max::after {
+      content: '→';
+      font-size: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    .btn-max:hover {
+      transform: scale(1.05);
+    }
+
+    .btn-max:hover::after {
+      transform: translateX(10px);
+    }
+
+    /* Marquee */
+    .marquee-section {
+      background: var(--color-black);
+      padding: 2rem 0;
+      overflow: hidden;
+      border-top: 4px solid var(--color-white);
+      border-bottom: 4px solid var(--color-white);
+      min-height: auto;
+      scroll-snap-align: none;
+    }
+
+    .marquee-track {
+      display: flex;
+      animation: marquee 20s linear infinite;
+    }
+
+    .marquee-content {
+      display: flex;
+      gap: 4rem;
+      padding: 0 2rem;
+      white-space: nowrap;
+    }
+
+    .marquee-content span {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      text-transform: uppercase;
+    }
+
+    .marquee-content span:nth-child(odd) {
+      color: var(--color-yellow);
+    }
+
+    .marquee-content span:nth-child(even) {
+      color: var(--color-pink);
+      -webkit-text-stroke: 1px var(--color-pink);
+      -webkit-text-fill-color: transparent;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Footer */
+    footer {
+      background: var(--color-black);
+      padding: 4rem;
+      text-align: center;
+      min-height: auto;
+      scroll-snap-align: none;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      color: var(--color-white);
+      margin-bottom: 1rem;
+    }
+
+    footer p {
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-left::after { display: none; }
+      .hero-right { min-height: 50vh; }
+      .blocks { grid-template-columns: repeat(2, 1fr); }
+      .feature-section { grid-template-columns: 1fr; }
+      .feature-visual { min-height: 50vh; }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .blocks { grid-template-columns: 1fr; }
+      .feature-stats { grid-template-columns: 1fr; }
+      .hero-left, .feature-content { padding: 3rem 1.5rem; }
+    }
+
+    /* Focus States */
+    a:focus-visible, button:focus-visible {
+      outline: 4px solid var(--color-yellow);
+      outline-offset: 4px;
+    }
+
+    /* Micro Animations */
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-100px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(100px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes popBounce {
+      0% { transform: scale(0) rotate(-15deg); }
+      70% { transform: scale(1.1) rotate(5deg); }
+      100% { transform: scale(1) rotate(0deg); }
+    }
+
+    .hero-left { animation: slideInLeft 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both; }
+    .hero-right { animation: slideInRight 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both; }
+
+    .hero-image {
+      animation: popBounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s both;
+    }
+
+    h1 {
+      overflow: hidden;
+    }
+    h1 br + br ~ * {
+      animation: slideInLeft 0.4s ease-out both;
+    }
+
+    .block { animation: scaleIn 0.5s ease-out both; }
+    .block:nth-child(1) { animation-delay: 0.1s; }
+    .block:nth-child(2) { animation-delay: 0.2s; }
+    .block:nth-child(3) { animation-delay: 0.3s; }
+    .block:nth-child(4) { animation-delay: 0.4s; }
+
+    .block {
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .block:hover {
+      transform: scale(1.02);
+      z-index: 10;
+    }
+
+    .block-number {
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .block:hover .block-number {
+      transform: scale(1.2) rotate(-5deg);
+      opacity: 0.5;
+    }
+
+    .block-title {
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), letter-spacing 0.3s ease;
+    }
+    .block:hover .block-title {
+      transform: translateX(10px);
+      letter-spacing: 0.05em;
+    }
+
+    .feature-content { animation: slideInLeft 0.6s ease-out 0.2s both; }
+    .feature-visual { animation: slideInRight 0.6s ease-out 0.2s both; }
+
+    .stat { animation: scaleIn 0.4s ease-out both; }
+    .stat:nth-child(1) { animation-delay: 0.4s; }
+    .stat:nth-child(2) { animation-delay: 0.5s; }
+    .stat:nth-child(3) { animation-delay: 0.6s; }
+
+    .stat-value {
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .stat:hover .stat-value {
+      transform: scale(1.15);
+    }
+
+    .cta-title {
+      animation: scaleIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+    }
+
+    .btn-max {
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-max::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.4s ease;
+    }
+    .btn-max:hover::before {
+      transform: translateX(100%);
+    }
+
+    .nav-links a {
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    .nav-links a:hover {
+      transform: scale(1.1);
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-snap-type: none; }
+      .marquee-track, .hero-badge {
+        animation: none;
+      }
+      *, .hero-left, .hero-right, .hero-image, .block, .feature-content, .feature-visual, .stat, .cta-title {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        animation-delay: 0ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="#" class="logo">MAXIMAL</a>
+    <ul class="nav-links">
+      <li><a href="#">Work</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="hero-left">
+        <span class="hero-tag">Creative Studio</span>
+        <h1>Go<br>Bold<br>Or Go<br>Home</h1>
+        <p class="hero-description">We don't do subtle. We create explosive, attention-grabbing designs that demand to be noticed.</p>
+      </div>
+      <div class="hero-right">
+        <div class="hero-image">
+          <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&q=80" alt="Abstract colorful geometric shapes">
+          <div class="hero-badge">NEW<br>2024</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="blocks">
+      <div class="block block-1">
+        <span class="block-number">01</span>
+        <h3 class="block-title">Bold Colors</h3>
+        <p class="block-description">High-contrast palettes that pop off the screen.</p>
+      </div>
+      <div class="block block-2">
+        <span class="block-number">02</span>
+        <h3 class="block-title">Big Type</h3>
+        <p class="block-description">Oversized typography that demands attention.</p>
+      </div>
+      <div class="block block-3">
+        <span class="block-number">03</span>
+        <h3 class="block-title">Geometric</h3>
+        <p class="block-description">Strong shapes and patterns that create energy.</p>
+      </div>
+      <div class="block block-4">
+        <span class="block-number">04</span>
+        <h3 class="block-title">Max Impact</h3>
+        <p class="block-description">Designs that leave a lasting impression.</p>
+      </div>
+    </section>
+
+    <div class="marquee-section">
+      <div class="marquee-track">
+        <div class="marquee-content">
+          <span>Design</span>
+          <span>Create</span>
+          <span>Innovate</span>
+          <span>Impact</span>
+          <span>Bold</span>
+          <span>Vibrant</span>
+        </div>
+        <div class="marquee-content">
+          <span>Design</span>
+          <span>Create</span>
+          <span>Innovate</span>
+          <span>Impact</span>
+          <span>Bold</span>
+          <span>Vibrant</span>
+        </div>
+      </div>
+    </div>
+
+    <section class="feature-section">
+      <div class="feature-content">
+        <span class="feature-tag">Our Approach</span>
+        <h2 class="feature-title">Maximum <span>Visual</span> Impact</h2>
+        <p class="feature-description">We believe design should be felt, not just seen. Every project is an opportunity to create something unforgettable.</p>
+        <div class="feature-stats">
+          <div class="stat">
+            <div class="stat-value">150+</div>
+            <div class="stat-label">Projects</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">98%</div>
+            <div class="stat-label">Satisfaction</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">24</div>
+            <div class="stat-label">Awards</div>
+          </div>
+        </div>
+      </div>
+      <div class="feature-visual">
+        <div class="feature-image">
+          <img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?w=600&q=80" alt="Bold abstract design">
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <h2 class="cta-title">Ready to<br>Stand Out?</h2>
+      <p class="cta-description">Let's create something bold together. No boring designs allowed.</p>
+      <button class="btn-max">Start Project</button>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-logo">MAXIMAL</div>
+    <p>&copy; 2024 Maximal. Bold by design.</p>
+  </footer>
+</body>
+</html>

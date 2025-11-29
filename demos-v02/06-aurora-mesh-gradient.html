@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aurora / Mesh Gradient | Aesthetic Direction 06</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #0f0f1a;
+      --color-text: #ffffff;
+      --color-text-muted: rgba(255, 255, 255, 0.6);
+      --color-cyan: #06b6d4;
+      --color-purple: #a855f7;
+      --color-pink: #ec4899;
+      --color-blue: #3b82f6;
+      --font-main: 'Sora', sans-serif;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Aurora Background */
+    .aurora-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .aurora-layer {
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      top: -50%;
+      left: -50%;
+      opacity: 0.5;
+    }
+
+    .aurora-layer-1 {
+      background:
+        radial-gradient(ellipse 80% 50% at 20% 40%, var(--color-cyan) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 40% at 70% 60%, var(--color-purple) 0%, transparent 50%);
+      animation: aurora-drift 25s ease-in-out infinite;
+    }
+
+    .aurora-layer-2 {
+      background:
+        radial-gradient(ellipse 70% 60% at 60% 30%, var(--color-pink) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 50% at 30% 70%, var(--color-blue) 0%, transparent 50%);
+      animation: aurora-drift 30s ease-in-out infinite reverse;
+    }
+
+    .aurora-layer-3 {
+      background:
+        radial-gradient(ellipse 90% 40% at 50% 50%, var(--color-purple) 0%, transparent 40%);
+      animation: aurora-pulse 20s ease-in-out infinite;
+    }
+
+    @keyframes aurora-drift {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      25% { transform: translate(5%, -5%) rotate(5deg); }
+      50% { transform: translate(-5%, 5%) rotate(-5deg); }
+      75% { transform: translate(3%, 3%) rotate(3deg); }
+    }
+
+    @keyframes aurora-pulse {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.2); }
+    }
+
+    /* Mesh Overlay */
+    .mesh-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background-image:
+        radial-gradient(circle at 25% 25%, rgba(6, 182, 212, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
+      filter: blur(60px);
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.5rem 0;
+    }
+
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 0.75rem 1.5rem;
+      background: rgba(15, 15, 26, 0.6);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 100px;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      text-decoration: none;
+      background: linear-gradient(135deg, var(--color-cyan), var(--color-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      display: block;
+      padding: 0.625rem 1.25rem;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      text-decoration: none;
+      color: var(--color-text-muted);
+      border-radius: 100px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--color-text);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-cta {
+      padding: 0.625rem 1.5rem;
+      font-family: inherit;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--color-bg);
+      background: linear-gradient(135deg, var(--color-cyan), var(--color-purple));
+      border: none;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .nav-cta:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(6, 182, 212, 0.5);
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 0 80px;
+      text-align: center;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-cyan);
+      background: rgba(6, 182, 212, 0.1);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      border-radius: 100px;
+      margin-bottom: 2rem;
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--color-cyan);
+      border-radius: 50%;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.5); }
+    }
+
+    h1 {
+      font-size: clamp(3rem, 7vw, 5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 span {
+      background: linear-gradient(135deg, var(--color-cyan), var(--color-purple), var(--color-pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-description {
+      font-size: 1.25rem;
+      color: var(--color-text-muted);
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      color: var(--color-bg);
+      background: linear-gradient(135deg, var(--color-cyan), var(--color-purple));
+      box-shadow: 0 0 30px rgba(6, 182, 212, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 50px rgba(6, 182, 212, 0.5);
+    }
+
+    .btn-secondary {
+      color: var(--color-text);
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Features Section */
+    .features {
+      padding: 100px 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-tag {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, var(--color-cyan), var(--color-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .feature-card {
+      padding: 2.5rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--color-cyan), var(--color-purple), var(--color-pink));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .feature-card:hover::before {
+      opacity: 1;
+    }
+
+    .feature-icon {
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(168, 85, 247, 0.2));
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+    }
+
+    .feature-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .feature-description {
+      font-size: 0.9375rem;
+      color: var(--color-text-muted);
+      line-height: 1.7;
+    }
+
+    /* Stats Section */
+    .stats {
+      padding: 80px 0;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+
+    .stat-card {
+      text-align: center;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      background: linear-gradient(to top, rgba(6, 182, 212, 0.1), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .stat-card:hover::after {
+      opacity: 1;
+    }
+
+    .stat-value {
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--color-cyan), var(--color-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .stat-label {
+      font-size: 0.9375rem;
+      color: var(--color-text-muted);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* CTA Section */
+    .cta {
+      padding: 100px 0;
+    }
+
+    .cta-card {
+      text-align: center;
+      padding: 5rem 3rem;
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(168, 85, 247, 0.1));
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(6, 182, 212, 0.2) 0%, transparent 40%),
+        radial-gradient(circle at 70% 70%, rgba(168, 85, 247, 0.2) 0%, transparent 40%);
+      animation: aurora-drift 20s ease-in-out infinite;
+    }
+
+    .cta-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .cta-description {
+      font-size: 1.125rem;
+      color: var(--color-text-muted);
+      max-width: 500px;
+      margin: 0 auto 2rem;
+    }
+
+    /* Footer */
+    footer {
+      padding: 60px 0 40px;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .footer-logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--color-cyan), var(--color-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+    }
+
+    footer p {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .features-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .hero-buttons { flex-direction: column; align-items: center; }
+      .cta-card { padding: 3rem 1.5rem; }
+    }
+
+    /* Focus States */
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--color-cyan);
+      outline-offset: 4px;
+    }
+
+    /* Micro Animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes glowIn {
+      from { opacity: 0; filter: blur(10px); }
+      to { opacity: 1; filter: blur(0); }
+    }
+
+    @keyframes textGradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    @keyframes borderGlow {
+      0%, 100% { border-color: rgba(255, 255, 255, 0.08); }
+      50% { border-color: rgba(6, 182, 212, 0.3); }
+    }
+
+    .hero-content { animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both; }
+    .hero-tag { animation: glowIn 0.8s ease-out 0.5s both; }
+
+    h1 span {
+      background-size: 200% auto;
+      animation: textGradientShift 4s ease-in-out infinite;
+    }
+
+    .feature-card {
+      animation: fadeInUp 0.7s ease-out both;
+    }
+    .feature-card:nth-child(1) { animation-delay: 0.1s; }
+    .feature-card:nth-child(2) { animation-delay: 0.15s; }
+    .feature-card:nth-child(3) { animation-delay: 0.2s; }
+    .feature-card:nth-child(4) { animation-delay: 0.25s; }
+    .feature-card:nth-child(5) { animation-delay: 0.3s; }
+    .feature-card:nth-child(6) { animation-delay: 0.35s; }
+
+    .feature-card:hover {
+      animation: borderGlow 1.5s ease-in-out infinite;
+    }
+
+    .feature-icon {
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+    }
+    .feature-card:hover .feature-icon {
+      transform: scale(1.15);
+      box-shadow: 0 0 30px rgba(6, 182, 212, 0.4);
+    }
+
+    .stat-card {
+      animation: fadeInUp 0.6s ease-out both;
+    }
+    .stat-card:nth-child(1) { animation-delay: 0.1s; }
+    .stat-card:nth-child(2) { animation-delay: 0.2s; }
+    .stat-card:nth-child(3) { animation-delay: 0.3s; }
+    .stat-card:nth-child(4) { animation-delay: 0.4s; }
+
+    .stat-value {
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), text-shadow 0.3s ease;
+    }
+    .stat-card:hover .stat-value {
+      transform: scale(1.1);
+      text-shadow: 0 0 30px rgba(6, 182, 212, 0.6);
+    }
+
+    .cta-card { animation: fadeInUp 0.8s ease-out 0.2s both; }
+
+    .btn {
+      position: relative;
+      overflow: hidden;
+    }
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s ease;
+    }
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .nav-inner { animation: fadeInUp 0.6s ease-out 0.1s both; }
+    .nav-cta {
+      transition: all 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      .aurora-layer, .aurora-layer-1, .aurora-layer-2, .aurora-layer-3, .cta-card::before {
+        animation: none;
+      }
+      *, .hero-content, .hero-tag, .feature-card, .stat-card, .cta-card, .nav-inner {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        animation-delay: 0ms !important;
+      }
+      h1 span { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="aurora-bg">
+    <div class="aurora-layer aurora-layer-1"></div>
+    <div class="aurora-layer aurora-layer-2"></div>
+    <div class="aurora-layer aurora-layer-3"></div>
+  </div>
+  <div class="mesh-overlay"></div>
+
+  <nav>
+    <div class="container">
+      <div class="nav-inner">
+        <a href="#" class="logo">Aurora</a>
+        <ul class="nav-links">
+          <li><a href="#" class="active">Home</a></li>
+          <li><a href="#">Features</a></li>
+          <li><a href="#">Pricing</a></li>
+          <li><a href="#">About</a></li>
+        </ul>
+        <button class="nav-cta">Get Started</button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <span class="hero-tag">Introducing Aurora 2.0</span>
+          <h1>Design with <span>luminous gradients</span></h1>
+          <p class="hero-description">Experience the mesmerizing beauty of flowing northern lights effects with animated mesh gradients that breathe life into your interfaces.</p>
+          <div class="hero-buttons">
+            <button class="btn btn-primary">Explore Now</button>
+            <button class="btn btn-secondary">Watch Demo</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Features</span>
+          <h2 class="section-title">Illuminate your design</h2>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">🌈</div>
+            <h3 class="feature-title">Mesh Gradients</h3>
+            <p class="feature-description">Complex, multi-point gradients that create depth and dimension impossible with linear gradients.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">✨</div>
+            <h3 class="feature-title">Color Breathing</h3>
+            <p class="feature-description">Subtle animations that make colors feel alive and responsive to user presence.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🌊</div>
+            <h3 class="feature-title">Flowing Motion</h3>
+            <p class="feature-description">Organic, wave-like animations inspired by real aurora borealis phenomena.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🎨</div>
+            <h3 class="feature-title">Luminous Colors</h3>
+            <p class="feature-description">Carefully curated palettes of cyan, purple, and pink that glow beautifully on dark backgrounds.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📐</div>
+            <h3 class="feature-title">Layered Depth</h3>
+            <p class="feature-description">Multiple translucent layers create sophisticated visual hierarchy and dimension.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3 class="feature-title">Performance First</h3>
+            <p class="feature-description">Optimized CSS animations that run smoothly without impacting page performance.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value">50K+</div>
+            <div class="stat-label">Active Users</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">99.9%</div>
+            <div class="stat-label">Uptime</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">150+</div>
+            <div class="stat-label">Gradient Presets</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">4.9</div>
+            <div class="stat-label">User Rating</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container">
+        <div class="cta-card">
+          <div class="cta-content">
+            <h2 class="cta-title">Ready to illuminate?</h2>
+            <p class="cta-description">Join thousands of designers creating stunning aurora-inspired interfaces.</p>
+            <button class="btn btn-primary">Start Free Trial</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-logo">Aurora</div>
+      <p>&copy; 2024 Aurora. Crafted with luminous gradients.</p>
+    </div>
+  </footer>
+</body>
+</html>

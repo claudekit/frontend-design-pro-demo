@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minimalism & Swiss Style | Aesthetic Direction 01</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #faf9f7;
+      --color-text: #1a1a1a;
+      --color-text-muted: #666666;
+      --color-accent: #e53935;
+      --color-border: #e5e5e5;
+      --font-sans: 'Instrument Sans', sans-serif;
+      --font-serif: 'Newsreader', serif;
+      --grid-gap: 2rem;
+      --container-max: 1400px;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Grid System */
+    .container {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 clamp(1.5rem, 4vw, 4rem);
+    }
+
+    .grid-12 {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: var(--grid-gap);
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: var(--color-bg);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 72px;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.125rem;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      color: var(--color-text);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      color: var(--color-text-muted);
+      transition: color 0.2s ease;
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-text);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--color-accent);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 160px 0 120px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .hero-content {
+      grid-column: 1 / 8;
+    }
+
+    .hero-meta {
+      grid-column: 9 / 13;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: 1rem;
+    }
+
+    .overline {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 2rem;
+    }
+
+    .hero-description {
+      font-size: 1.125rem;
+      color: var(--color-text-muted);
+      max-width: 480px;
+      line-height: 1.7;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .stat {
+      text-align: left;
+    }
+
+    .stat-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 0.8125rem;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Projects Section */
+    .projects {
+      padding: 100px 0;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 4rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+    }
+
+    .section-count {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem 2rem;
+    }
+
+    .project-card {
+      position: relative;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .project-image {
+      aspect-ratio: 4/3;
+      background: var(--color-border);
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .project-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .project-card:hover .project-image img {
+      transform: scale(1.05);
+    }
+
+    .project-number {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+    }
+
+    .project-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .project-title {
+      font-size: 1.25rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.25rem;
+    }
+
+    .project-category {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+    }
+
+    .project-year {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+    }
+
+    /* Featured Quote */
+    .quote-section {
+      padding: 100px 0;
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .quote-content {
+      grid-column: 2 / 12;
+      text-align: center;
+    }
+
+    blockquote {
+      font-family: var(--font-serif);
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 400;
+      line-height: 1.4;
+      letter-spacing: -0.02em;
+      margin-bottom: 2rem;
+    }
+
+    .quote-author {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+    }
+
+    .quote-author span {
+      color: var(--color-accent);
+    }
+
+    /* Services Section */
+    .services {
+      padding: 100px 0;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+
+    .service-item {
+      padding: 2rem 0;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .service-number {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--color-accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .service-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+
+    .service-description {
+      font-size: 0.9375rem;
+      color: var(--color-text-muted);
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    footer {
+      padding: 80px 0;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .footer-left h3 {
+      font-family: var(--font-serif);
+      font-size: 2.5rem;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .footer-left p {
+      font-size: 0.9375rem;
+      color: var(--color-text-muted);
+    }
+
+    .footer-right {
+      text-align: right;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer-links a {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--color-text);
+    }
+
+    .copyright {
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero-content { grid-column: 1 / 9; }
+      .hero-meta { grid-column: 9 / 13; }
+      .project-grid { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero { padding: 120px 0 80px; }
+      .hero-content { grid-column: 1 / -1; }
+      .hero-meta { grid-column: 1 / -1; margin-top: 3rem; }
+      .quote-content { grid-column: 1 / -1; }
+      .services-grid { grid-template-columns: 1fr; }
+      .footer-grid { flex-direction: column; gap: 2rem; }
+      .footer-right { text-align: left; }
+    }
+
+    /* Focus States */
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 4px;
+    }
+
+    /* Micro Animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes lineExpand {
+      from { width: 0; }
+      to { width: 40px; }
+    }
+
+    .hero-content { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both; }
+    .hero-meta { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both; }
+    .overline::before {
+      content: '';
+      display: inline-block;
+      width: 40px;
+      height: 1px;
+      background: var(--color-accent);
+      margin-right: 1rem;
+      vertical-align: middle;
+      animation: lineExpand 0.6s ease-out 0.6s both;
+    }
+
+    .project-card { animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both; }
+    .project-card:nth-child(1) { animation-delay: 0.1s; }
+    .project-card:nth-child(2) { animation-delay: 0.2s; }
+    .project-card:nth-child(3) { animation-delay: 0.3s; }
+    .project-card:nth-child(4) { animation-delay: 0.4s; }
+
+    .service-item { animation: fadeInUp 0.5s ease-out both; }
+    .service-item:nth-child(1) { animation-delay: 0.1s; }
+    .service-item:nth-child(2) { animation-delay: 0.15s; }
+    .service-item:nth-child(3) { animation-delay: 0.2s; }
+    .service-item:nth-child(4) { animation-delay: 0.25s; }
+
+    .stat { animation: fadeIn 0.5s ease-out both; }
+    .stat:nth-child(1) { animation-delay: 0.5s; }
+    .stat:nth-child(2) { animation-delay: 0.6s; }
+    .stat:nth-child(3) { animation-delay: 0.7s; }
+    .stat:nth-child(4) { animation-delay: 0.8s; }
+
+    .stat-value {
+      display: inline-block;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .stat:hover .stat-value {
+      transform: scale(1.1);
+    }
+
+    .nav-links a { transition: color 0.2s ease, transform 0.2s ease; }
+    .nav-links a:hover { transform: translateY(-2px); }
+
+    .footer-left h3 { transition: letter-spacing 0.3s ease; }
+    .footer-left:hover h3 { letter-spacing: 0.02em; }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, .hero-content, .hero-meta, .project-card, .service-item, .stat {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        animation-delay: 0ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container">
+      <a href="#" class="logo">STUDIO</a>
+      <ul class="nav-links">
+        <li><a href="#">Work</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="container grid-12">
+        <div class="hero-content">
+          <span class="overline">Design Studio</span>
+          <h1>We craft digital experiences that matter</h1>
+          <p class="hero-description">A design-led studio creating purposeful brands and digital products for forward-thinking companies.</p>
+        </div>
+        <div class="hero-meta">
+          <div class="hero-stats">
+            <div class="stat">
+              <div class="stat-value">127</div>
+              <div class="stat-label">Projects</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">12</div>
+              <div class="stat-label">Years</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">48</div>
+              <div class="stat-label">Clients</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">15</div>
+              <div class="stat-label">Awards</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="projects">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Selected Work</h2>
+          <span class="section-count">01 — 04</span>
+        </div>
+        <div class="project-grid">
+          <a href="#" class="project-card">
+            <div class="project-image">
+              <span class="project-number">01</span>
+              <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80" alt="Abstract geometric shapes in warm tones">
+            </div>
+            <div class="project-info">
+              <div>
+                <h3 class="project-title">Meridian Identity</h3>
+                <p class="project-category">Brand Design</p>
+              </div>
+              <span class="project-year">2024</span>
+            </div>
+          </a>
+          <a href="#" class="project-card">
+            <div class="project-image">
+              <span class="project-number">02</span>
+              <img src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?w=800&q=80" alt="Minimalist architectural interior">
+            </div>
+            <div class="project-info">
+              <div>
+                <h3 class="project-title">Arch Studio</h3>
+                <p class="project-category">Digital Experience</p>
+              </div>
+              <span class="project-year">2024</span>
+            </div>
+          </a>
+          <a href="#" class="project-card">
+            <div class="project-image">
+              <span class="project-number">03</span>
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80" alt="Clean product photography">
+            </div>
+            <div class="project-info">
+              <div>
+                <h3 class="project-title">Lumina Products</h3>
+                <p class="project-category">E-Commerce</p>
+              </div>
+              <span class="project-year">2023</span>
+            </div>
+          </a>
+          <a href="#" class="project-card">
+            <div class="project-image">
+              <span class="project-number">04</span>
+              <img src="https://images.unsplash.com/photo-1493932484895-752d1471eab5?w=800&q=80" alt="Typography poster design">
+            </div>
+            <div class="project-info">
+              <div>
+                <h3 class="project-title">Type Festival</h3>
+                <p class="project-category">Event Branding</p>
+              </div>
+              <span class="project-year">2023</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="quote-section">
+      <div class="container grid-12">
+        <div class="quote-content">
+          <blockquote>"Good design is as little design as possible. Less, but better, because it concentrates on the essential aspects."</blockquote>
+          <p class="quote-author"><span>—</span> Dieter Rams</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="services">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Services</h2>
+        </div>
+        <div class="services-grid">
+          <div class="service-item">
+            <span class="service-number">01</span>
+            <h3 class="service-title">Brand Strategy</h3>
+            <p class="service-description">Research-driven positioning and messaging frameworks that differentiate.</p>
+          </div>
+          <div class="service-item">
+            <span class="service-number">02</span>
+            <h3 class="service-title">Visual Identity</h3>
+            <p class="service-description">Distinctive visual systems built for consistency and scalability.</p>
+          </div>
+          <div class="service-item">
+            <span class="service-number">03</span>
+            <h3 class="service-title">Digital Product</h3>
+            <p class="service-description">User-centered design and development for web and mobile.</p>
+          </div>
+          <div class="service-item">
+            <span class="service-number">04</span>
+            <h3 class="service-title">Art Direction</h3>
+            <p class="service-description">Creative direction for campaigns, content, and experiences.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-left">
+          <h3>Let's work together</h3>
+          <p>hello@studio.design</p>
+        </div>
+        <div class="footer-right">
+          <div class="footer-links">
+            <a href="#">Twitter</a>
+            <a href="#">Instagram</a>
+            <a href="#">LinkedIn</a>
+          </div>
+          <p class="copyright">&copy; 2024 Studio. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brutalism | Aesthetic Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-black: #0a0a0a;
+      --color-white: #f5f5f5;
+      --color-yellow: #ffff00;
+      --color-red: #ff0000;
+      --color-blue: #0000ff;
+      --font-main: 'Space Mono', monospace;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background: var(--color-white);
+      color: var(--color-black);
+      line-height: 1.4;
+      cursor: crosshair;
+    }
+
+    ::selection {
+      background: var(--color-yellow);
+      color: var(--color-black);
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: var(--color-black);
+      border-bottom: 4px solid var(--color-white);
+    }
+
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-white);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .logo span {
+      color: var(--color-yellow);
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 0;
+    }
+
+    nav a {
+      display: block;
+      padding: 0.75rem 1.5rem;
+      color: var(--color-white);
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: 0.875rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      border-left: 2px solid var(--color-white);
+      transition: all 0.1s ease;
+    }
+
+    nav a:hover {
+      background: var(--color-yellow);
+      color: var(--color-black);
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      padding-top: 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .hero-left {
+      background: var(--color-black);
+      color: var(--color-white);
+      padding: 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-right: 4px solid var(--color-white);
+    }
+
+    .hero-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--color-yellow);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hero-label::before {
+      content: '';
+      width: 40px;
+      height: 2px;
+      background: var(--color-yellow);
+    }
+
+    .hero h1 {
+      font-size: clamp(4rem, 10vw, 10rem);
+      font-weight: 700;
+      line-height: 0.85;
+      text-transform: uppercase;
+      letter-spacing: -0.05em;
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 .outline {
+      color: transparent;
+      -webkit-text-stroke: 2px var(--color-white);
+    }
+
+    .hero-right {
+      background: var(--color-yellow);
+      padding: 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .hero-text {
+      max-width: 400px;
+    }
+
+    .hero-text p {
+      font-size: 1.125rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .btn-brutal {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: var(--color-black);
+      color: var(--color-white);
+      text-decoration: none;
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 0.875rem;
+      letter-spacing: 0.1em;
+      border: 4px solid var(--color-black);
+      position: relative;
+      transition: transform 0.1s ease;
+    }
+
+    .btn-brutal::after {
+      content: '';
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      right: -6px;
+      bottom: -6px;
+      border: 4px solid var(--color-black);
+      z-index: -1;
+    }
+
+    .btn-brutal:hover {
+      transform: translate(3px, 3px);
+    }
+
+    .btn-brutal:hover::after {
+      top: 3px;
+      left: 3px;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+
+    .stat {
+      border-top: 4px solid var(--color-black);
+      padding-top: 1rem;
+    }
+
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* Marquee */
+    .marquee {
+      background: var(--color-red);
+      color: var(--color-white);
+      padding: 1rem 0;
+      overflow: hidden;
+      border-top: 4px solid var(--color-black);
+      border-bottom: 4px solid var(--color-black);
+    }
+
+    .marquee-inner {
+      display: flex;
+      animation: scroll 20s linear infinite;
+    }
+
+    .marquee-text {
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      white-space: nowrap;
+      padding: 0 2rem;
+    }
+
+    .marquee-text span {
+      color: var(--color-yellow);
+    }
+
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Services */
+    .services {
+      padding: 6rem 2rem;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 4rem;
+      border-bottom: 4px solid var(--color-black);
+      padding-bottom: 2rem;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .section-number {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .service-card {
+      border: 4px solid var(--color-black);
+      padding: 2rem;
+      margin: -2px;
+      transition: all 0.1s ease;
+    }
+
+    .service-card:hover {
+      background: var(--color-black);
+      color: var(--color-white);
+    }
+
+    .service-number {
+      font-size: 4rem;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 2rem;
+      color: var(--color-red);
+    }
+
+    .service-card:hover .service-number {
+      color: var(--color-yellow);
+    }
+
+    .service-card h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .service-card p {
+      font-size: 0.875rem;
+      line-height: 1.6;
+    }
+
+    /* Projects */
+    .projects {
+      background: var(--color-black);
+      color: var(--color-white);
+      padding: 6rem 2rem;
+    }
+
+    .projects .section-header {
+      border-color: var(--color-white);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 4px;
+    }
+
+    .project-card {
+      background: var(--color-white);
+      color: var(--color-black);
+      aspect-ratio: 16/9;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card.tall {
+      grid-row: span 2;
+      aspect-ratio: auto;
+    }
+
+    .project-card img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%) contrast(1.2);
+      mix-blend-mode: multiply;
+      opacity: 0.5;
+      transition: all 0.3s ease;
+    }
+
+    .project-card:hover img {
+      opacity: 0.8;
+      filter: none;
+    }
+
+    .project-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .project-number {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+    }
+
+    .project-title {
+      font-size: clamp(1.5rem, 3vw, 2.5rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Contact */
+    .contact {
+      padding: 6rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .contact-left {
+      padding-right: 4rem;
+      border-right: 4px solid var(--color-black);
+    }
+
+    .contact-left h2 {
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      line-height: 0.9;
+      margin-bottom: 2rem;
+    }
+
+    .contact-left p {
+      font-size: 1.125rem;
+      max-width: 400px;
+    }
+
+    .contact-right {
+      padding-left: 4rem;
+    }
+
+    .form-group {
+      margin-bottom: 2rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 1rem;
+      border: 4px solid var(--color-black);
+      background: transparent;
+      font-family: inherit;
+      font-size: 1rem;
+      resize: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      background: var(--color-yellow);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--color-blue);
+      color: var(--color-white);
+      padding: 2rem;
+      border-top: 4px solid var(--color-black);
+    }
+
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-text {
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .footer-links a {
+      color: var(--color-white);
+      text-decoration: none;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .footer-links a:hover {
+      color: var(--color-yellow);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-left {
+        border-right: none;
+        border-bottom: 4px solid var(--color-white);
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-card.tall {
+        grid-row: auto;
+      }
+
+      .contact {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-left {
+        padding-right: 0;
+        border-right: none;
+        border-bottom: 4px solid var(--color-black);
+        padding-bottom: 4rem;
+        margin-bottom: 4rem;
+      }
+
+      .contact-right {
+        padding-left: 0;
+      }
+    }
+
+    @media (max-width: 640px) {
+      nav ul {
+        display: none;
+      }
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      .marquee-inner {
+        animation: none;
+      }
+
+      * {
+        transition: none !important;
+      }
+    }
+
+    /* Focus Styles */
+    :focus-visible {
+      outline: 4px solid var(--color-yellow);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container">
+      <div class="logo">BRUT<span>AL</span></div>
+      <ul>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-label">Digital Agency</div>
+      <h1>
+        <span class="outline">Raw</span><br>
+        Design<br>
+        <span class="outline">Power</span>
+      </h1>
+    </div>
+    <div class="hero-right">
+      <div class="hero-text">
+        <p>We reject polish. We embrace honesty. Every pixel has purpose. No decoration, no pretense—just design stripped to its functional core.</p>
+        <a href="#work" class="btn-brutal">View Work</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-number">127</div>
+          <div class="stat-label">Projects</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">98%</div>
+          <div class="stat-label">Satisfaction</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">24</div>
+          <div class="stat-label">Awards</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">∞</div>
+          <div class="stat-label">Ambition</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee">
+    <div class="marquee-inner">
+      <span class="marquee-text">Design without compromise <span>★</span> Brutally honest <span>★</span> Raw creativity <span>★</span> Function over form <span>★</span> Design without compromise <span>★</span> Brutally honest <span>★</span> Raw creativity <span>★</span> Function over form <span>★</span></span>
+      <span class="marquee-text">Design without compromise <span>★</span> Brutally honest <span>★</span> Raw creativity <span>★</span> Function over form <span>★</span> Design without compromise <span>★</span> Brutally honest <span>★</span> Raw creativity <span>★</span> Function over form <span>★</span></span>
+    </div>
+  </div>
+
+  <section class="services" id="services">
+    <div class="section-header">
+      <h2 class="section-title">What We Do</h2>
+      <span class="section-number">(01)</span>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-number">01</div>
+        <h3>Brand Identity</h3>
+        <p>No-nonsense visual systems that communicate with clarity and impact. Logos, typography, and guidelines built to last.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-number">02</div>
+        <h3>Web Design</h3>
+        <p>Websites that load fast, work everywhere, and don't apologize for being different. Performance meets personality.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-number">03</div>
+        <h3>Art Direction</h3>
+        <p>Bold creative vision for campaigns that cut through noise. We make work people actually remember.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="projects" id="work">
+    <div class="section-header">
+      <h2 class="section-title">Selected Work</h2>
+      <span class="section-number">(02)</span>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80" alt="Industrial architecture with raw concrete">
+        <div class="project-content">
+          <div class="project-number">Project 001</div>
+        </div>
+        <div class="project-title">Concrete Studios</div>
+      </div>
+      <div class="project-card tall">
+        <img src="https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?w=800&q=80" alt="Minimalist typography poster">
+        <div class="project-content">
+          <div class="project-number">Project 002</div>
+        </div>
+        <div class="project-title">Type Foundry</div>
+      </div>
+      <div class="project-card">
+        <img src="https://images.unsplash.com/photo-1545987796-200677ee1011?w=1200&q=80" alt="Dark moody product shot">
+        <div class="project-content">
+          <div class="project-number">Project 003</div>
+        </div>
+        <div class="project-title">Raw Supply</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="contact-left">
+      <h2>Let's Build Something Brutal</h2>
+      <p>Have a project that needs honest design? Drop us a line. No fluff, no sales pitch—just conversation about what you're building.</p>
+    </div>
+    <div class="contact-right">
+      <form>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn-brutal">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-text">© 2024 BRUTAL — No Rights Reserved</div>
+      <div class="footer-links">
+        <a href="#">Instagram</a>
+        <a href="#">Twitter</a>
+        <a href="#">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

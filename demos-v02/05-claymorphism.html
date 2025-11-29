@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claymorphism | Aesthetic Direction 05</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #f5f0ff;
+      --color-bg-alt: #ffe8f5;
+      --color-text: #2d1b4e;
+      --color-text-muted: #6b5b8a;
+      --color-pink: #ff6b9d;
+      --color-purple: #b388ff;
+      --color-blue: #7dd3fc;
+      --color-mint: #86efac;
+      --color-yellow: #fde047;
+      --color-orange: #fdba74;
+      --font-main: 'Nunito', sans-serif;
+      --clay-shadow:
+        8px 8px 16px rgba(166, 141, 204, 0.4),
+        -4px -4px 12px rgba(255, 255, 255, 0.9),
+        inset 2px 2px 4px rgba(255, 255, 255, 0.6),
+        inset -1px -1px 3px rgba(166, 141, 204, 0.2);
+      --clay-shadow-hover:
+        12px 12px 24px rgba(166, 141, 204, 0.5),
+        -6px -6px 16px rgba(255, 255, 255, 1),
+        inset 2px 2px 4px rgba(255, 255, 255, 0.7),
+        inset -1px -1px 3px rgba(166, 141, 204, 0.3);
+      --clay-shadow-pressed:
+        4px 4px 8px rgba(166, 141, 204, 0.3),
+        -2px -2px 6px rgba(255, 255, 255, 0.8),
+        inset 4px 4px 8px rgba(166, 141, 204, 0.3),
+        inset -2px -2px 4px rgba(255, 255, 255, 0.5);
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
+      color: var(--color-text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Clay Card Utility */
+    .clay {
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(245, 240, 255, 0.9));
+      border-radius: 30px;
+      box-shadow: var(--clay-shadow);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .clay:hover {
+      box-shadow: var(--clay-shadow-hover);
+      transform: translateY(-4px);
+    }
+
+    .clay-colored {
+      border-radius: 24px;
+      box-shadow: var(--clay-shadow);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    /* Navigation */
+    nav {
+      padding: 1.5rem 0;
+    }
+
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.75rem;
+      font-weight: 900;
+      text-decoration: none;
+      color: var(--color-text);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--color-pink), var(--color-purple));
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: var(--clay-shadow);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0.5rem;
+      list-style: none;
+      padding: 0.5rem;
+    }
+
+    .nav-links a {
+      display: block;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--color-text-muted);
+      border-radius: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--color-text);
+      background: rgba(255, 255, 255, 0.7);
+      box-shadow: var(--clay-shadow);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 80px 0;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-content h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-content h1 span {
+      color: var(--color-pink);
+    }
+
+    .hero-description {
+      font-size: 1.125rem;
+      color: var(--color-text-muted);
+      margin-bottom: 2rem;
+      line-height: 1.8;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1.125rem 2rem;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 800;
+      text-decoration: none;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .btn-primary {
+      color: white;
+      background: linear-gradient(135deg, var(--color-pink), var(--color-purple));
+      box-shadow: var(--clay-shadow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: var(--clay-shadow-hover);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0) scale(0.98);
+      box-shadow: var(--clay-shadow-pressed);
+    }
+
+    .btn-secondary {
+      color: var(--color-text);
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: var(--clay-shadow);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-4px);
+    }
+
+    /* Hero Cards */
+    .hero-visual {
+      position: relative;
+    }
+
+    .hero-card-main {
+      padding: 2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-card-float {
+      position: absolute;
+      padding: 1.25rem;
+      z-index: 3;
+    }
+
+    .hero-card-float.top-right {
+      top: -20px;
+      right: -20px;
+      background: linear-gradient(135deg, var(--color-mint), #4ade80);
+    }
+
+    .hero-card-float.bottom-left {
+      bottom: 20px;
+      left: -30px;
+      background: linear-gradient(135deg, var(--color-yellow), var(--color-orange));
+    }
+
+    .float-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .float-text {
+      font-weight: 800;
+      font-size: 0.875rem;
+    }
+
+    .hero-image {
+      width: 100%;
+      border-radius: 24px;
+      overflow: hidden;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Features Section */
+    .features {
+      padding: 80px 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-tag {
+      display: inline-block;
+      padding: 0.5rem 1.25rem;
+      font-size: 0.875rem;
+      font-weight: 800;
+      color: white;
+      background: linear-gradient(135deg, var(--color-purple), var(--color-blue));
+      border-radius: 100px;
+      margin-bottom: 1rem;
+      box-shadow: var(--clay-shadow);
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .feature-card {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .feature-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      border-radius: 24px;
+      box-shadow: var(--clay-shadow);
+    }
+
+    .feature-icon.pink { background: linear-gradient(135deg, var(--color-pink), #ff85b1); }
+    .feature-icon.blue { background: linear-gradient(135deg, var(--color-blue), #38bdf8); }
+    .feature-icon.mint { background: linear-gradient(135deg, var(--color-mint), #4ade80); }
+    .feature-icon.yellow { background: linear-gradient(135deg, var(--color-yellow), var(--color-orange)); }
+    .feature-icon.purple { background: linear-gradient(135deg, var(--color-purple), #a78bfa); }
+    .feature-icon.multi { background: linear-gradient(135deg, var(--color-pink), var(--color-purple), var(--color-blue)); }
+
+    .feature-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+    }
+
+    .feature-description {
+      font-size: 0.9375rem;
+      color: var(--color-text-muted);
+      line-height: 1.7;
+    }
+
+    /* Pricing Section */
+    .pricing {
+      padding: 80px 0;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      align-items: stretch;
+    }
+
+    .price-card {
+      padding: 2.5rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .price-card.featured {
+      transform: scale(1.05);
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(255, 232, 245, 0.9));
+    }
+
+    .price-card.featured::before {
+      content: '✨ Best Value';
+      position: absolute;
+      top: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0.5rem 1.5rem;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: white;
+      background: linear-gradient(135deg, var(--color-pink), var(--color-purple));
+      border-radius: 100px;
+      box-shadow: var(--clay-shadow);
+    }
+
+    .price-icon {
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      border-radius: 20px;
+      box-shadow: var(--clay-shadow);
+    }
+
+    .price-name {
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    .price-value {
+      font-size: 3rem;
+      font-weight: 900;
+      margin-bottom: 1.5rem;
+    }
+
+    .price-value span {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+    }
+
+    .price-features {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 2rem;
+    }
+
+    .price-features li {
+      padding: 0.75rem 0;
+      font-size: 0.9375rem;
+      color: var(--color-text-muted);
+      border-bottom: 2px dashed rgba(45, 27, 78, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .price-features li::before {
+      content: '✓';
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: white;
+      background: linear-gradient(135deg, var(--color-mint), #4ade80);
+      border-radius: 8px;
+    }
+
+    .price-btn {
+      width: 100%;
+      padding: 1rem;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 800;
+      border: none;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .price-btn-primary {
+      color: white;
+      background: linear-gradient(135deg, var(--color-pink), var(--color-purple));
+      box-shadow: var(--clay-shadow);
+    }
+
+    .price-btn-secondary {
+      color: var(--color-text);
+      background: rgba(255, 255, 255, 0.7);
+      box-shadow: var(--clay-shadow);
+    }
+
+    .price-btn:hover {
+      transform: translateY(-4px);
+    }
+
+    .price-btn:active {
+      transform: translateY(0);
+      box-shadow: var(--clay-shadow-pressed);
+    }
+
+    /* Footer */
+    footer {
+      padding: 60px 0 40px;
+    }
+
+    .footer-card {
+      padding: 3rem;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--color-text);
+      margin-bottom: 1rem;
+    }
+
+    footer p {
+      font-size: 0.9375rem;
+      color: var(--color-text-muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero-grid { grid-template-columns: 1fr; text-align: center; }
+      .hero-buttons { justify-content: center; }
+      .hero-visual { margin-top: 3rem; }
+      .hero-card-float.bottom-left { left: 20px; bottom: -20px; }
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+      .price-card.featured { transform: scale(1); }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .features-grid { grid-template-columns: 1fr; }
+      .hero-card-float { display: none; }
+    }
+
+    /* Focus States */
+    a:focus-visible, button:focus-visible {
+      outline: 4px solid var(--color-pink);
+      outline-offset: 4px;
+    }
+
+    /* Micro Animations */
+    @keyframes bounceIn {
+      0% { opacity: 0; transform: scale(0.3); }
+      50% { transform: scale(1.05); }
+      70% { transform: scale(0.9); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes floatUp {
+      from { opacity: 0; transform: translateY(60px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(-3deg); }
+      50% { transform: rotate(3deg); }
+    }
+
+    @keyframes squish {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(0.95, 1.05); }
+    }
+
+    .hero-content { animation: floatUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both; }
+    .hero-card-main { animation: bounceIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s both; }
+
+    .hero-card-float.top-right { animation: bounceIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.7s both; }
+    .hero-card-float.bottom-left { animation: bounceIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.9s both; }
+
+    .hero-card-float:hover {
+      animation: wiggle 0.3s ease-in-out;
+    }
+
+    .feature-card { animation: floatUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+    .feature-card:nth-child(1) { animation-delay: 0.1s; }
+    .feature-card:nth-child(2) { animation-delay: 0.15s; }
+    .feature-card:nth-child(3) { animation-delay: 0.2s; }
+    .feature-card:nth-child(4) { animation-delay: 0.25s; }
+    .feature-card:nth-child(5) { animation-delay: 0.3s; }
+    .feature-card:nth-child(6) { animation-delay: 0.35s; }
+
+    .feature-icon {
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .feature-card:hover .feature-icon {
+      transform: scale(1.2) rotate(10deg);
+    }
+
+    .price-card { animation: bounceIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+    .price-card:nth-child(1) { animation-delay: 0.2s; }
+    .price-card:nth-child(2) { animation-delay: 0.3s; }
+    .price-card:nth-child(3) { animation-delay: 0.4s; }
+
+    .price-icon {
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .price-card:hover .price-icon {
+      animation: squish 0.4s ease-in-out;
+    }
+
+    .price-value {
+      display: inline-block;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .price-card:hover .price-value {
+      transform: scale(1.1);
+    }
+
+    .btn {
+      position: relative;
+    }
+    .btn:active {
+      animation: squish 0.2s ease-in-out;
+    }
+
+    .logo-icon {
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .logo:hover .logo-icon {
+      transform: rotate(15deg) scale(1.1);
+    }
+
+    .nav-links a {
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .nav-links a:hover {
+      transform: translateY(-3px);
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, .hero-content, .hero-card-main, .hero-card-float, .feature-card, .price-card {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        animation-delay: 0ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container">
+      <a href="#" class="logo">
+        <span class="logo-icon">🎨</span>
+        Clayful
+      </a>
+      <ul class="nav-links clay">
+        <li><a href="#" class="active">Home</a></li>
+        <li><a href="#">Features</a></li>
+        <li><a href="#">Pricing</a></li>
+        <li><a href="#">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-content">
+            <h1>Design that feels <span>squishy</span> & fun</h1>
+            <p class="hero-description">Experience the joy of clay-like interfaces with chunky 3D elements, playful pastels, and delightfully tactile interactions.</p>
+            <div class="hero-buttons">
+              <button class="btn btn-primary">Get Started 🚀</button>
+              <button class="btn btn-secondary">Learn More</button>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div class="hero-card-main clay">
+              <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&q=80" alt="Colorful abstract 3D shapes">
+              </div>
+            </div>
+            <div class="hero-card-float clay-colored top-right">
+              <div class="float-icon">✨</div>
+              <div class="float-text">Premium</div>
+            </div>
+            <div class="hero-card-float clay-colored bottom-left">
+              <div class="float-icon">🎯</div>
+              <div class="float-text">On Target</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Features</span>
+          <h2 class="section-title">Why you'll love it</h2>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card clay">
+            <div class="feature-icon pink">🎨</div>
+            <h3 class="feature-title">Pastel Paradise</h3>
+            <p class="feature-description">Soft, candy-colored palettes that bring warmth and friendliness to your designs.</p>
+          </div>
+          <div class="feature-card clay">
+            <div class="feature-icon blue">📦</div>
+            <h3 class="feature-title">Chunky 3D</h3>
+            <p class="feature-description">Oversized, rounded elements that feel like you could reach out and squeeze them.</p>
+          </div>
+          <div class="feature-card clay">
+            <div class="feature-icon mint">✨</div>
+            <h3 class="feature-title">Double Shadows</h3>
+            <p class="feature-description">Inner and outer shadows create that signature clay-like depth and dimension.</p>
+          </div>
+          <div class="feature-card clay">
+            <div class="feature-icon yellow">👆</div>
+            <h3 class="feature-title">Squishy Press</h3>
+            <p class="feature-description">Delightful press effects that make interactions feel satisfyingly tactile.</p>
+          </div>
+          <div class="feature-card clay">
+            <div class="feature-icon purple">🎭</div>
+            <h3 class="feature-title">Playful Vibes</h3>
+            <p class="feature-description">A friendly, approachable aesthetic perfect for creative brands and apps.</p>
+          </div>
+          <div class="feature-card clay">
+            <div class="feature-icon multi">🌈</div>
+            <h3 class="feature-title">Gradients Galore</h3>
+            <p class="feature-description">Smooth color transitions that add richness and visual interest to every element.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pricing">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Pricing</span>
+          <h2 class="section-title">Pick your plan</h2>
+        </div>
+        <div class="pricing-grid">
+          <div class="price-card clay">
+            <div class="price-icon" style="background: linear-gradient(135deg, var(--color-blue), #38bdf8);">🌱</div>
+            <h3 class="price-name">Starter</h3>
+            <div class="price-value">$9<span>/mo</span></div>
+            <ul class="price-features">
+              <li>5 clay components</li>
+              <li>Basic color palettes</li>
+              <li>Email support</li>
+            </ul>
+            <button class="price-btn price-btn-secondary">Choose Plan</button>
+          </div>
+          <div class="price-card clay featured">
+            <div class="price-icon" style="background: linear-gradient(135deg, var(--color-pink), var(--color-purple));">🚀</div>
+            <h3 class="price-name">Pro</h3>
+            <div class="price-value">$29<span>/mo</span></div>
+            <ul class="price-features">
+              <li>Unlimited components</li>
+              <li>Custom palettes</li>
+              <li>Priority support</li>
+              <li>Animation library</li>
+            </ul>
+            <button class="price-btn price-btn-primary">Choose Plan</button>
+          </div>
+          <div class="price-card clay">
+            <div class="price-icon" style="background: linear-gradient(135deg, var(--color-mint), #4ade80);">🏢</div>
+            <h3 class="price-name">Team</h3>
+            <div class="price-value">$79<span>/mo</span></div>
+            <ul class="price-features">
+              <li>Everything in Pro</li>
+              <li>Team collaboration</li>
+              <li>Custom branding</li>
+            </ul>
+            <button class="price-btn price-btn-secondary">Choose Plan</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-card clay">
+        <div class="footer-logo">🎨 Clayful</div>
+        <p>&copy; 2024 Clayful. Made with squishy love.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

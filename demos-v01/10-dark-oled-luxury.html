@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dark OLED Luxury | Aesthetic Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #000000;
+      --color-text: #ffffff;
+      --color-text-muted: rgba(255, 255, 255, 0.5);
+      --color-text-subtle: rgba(255, 255, 255, 0.3);
+      --color-emerald: #10b981;
+      --color-amber: #f59e0b;
+      --color-electric: #3b82f6;
+      --color-border: rgba(255, 255, 255, 0.08);
+      --font-display: 'Cormorant Garamond', serif;
+      --font-body: 'Outfit', sans-serif;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--color-bg);
+      color: var(--color-text);
+      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.5rem 0;
+      background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+    }
+
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 3rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--color-text-muted);
+      font-size: 0.8125rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: color 0.4s ease;
+    }
+
+    nav a:hover {
+      color: var(--color-text);
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 0;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      position: relative;
+    }
+
+    .hero-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--color-emerald);
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 10vw, 8rem);
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--color-emerald);
+    }
+
+    .hero p {
+      font-size: 1.125rem;
+      color: var(--color-text-muted);
+      max-width: 500px;
+      margin: 0 auto 3rem;
+      line-height: 1.8;
+    }
+
+    .btn-luxury {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 2.5rem;
+      background: transparent;
+      border: 1px solid var(--color-text);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-luxury::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--color-text);
+      transform: translateY(100%);
+      transition: transform 0.4s ease;
+    }
+
+    .btn-luxury span {
+      position: relative;
+      z-index: 1;
+      transition: color 0.4s ease;
+    }
+
+    .btn-luxury:hover::before {
+      transform: translateY(0);
+    }
+
+    .btn-luxury:hover span {
+      color: var(--color-bg);
+    }
+
+    /* Showcase */
+    .showcase {
+      padding: 8rem 0;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--color-border);
+    }
+
+    .showcase-item {
+      background: var(--color-bg);
+      padding: 4rem;
+      position: relative;
+      transition: all 0.4s ease;
+    }
+
+    .showcase-item::before {
+      content: '';
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      transition: all 0.4s ease;
+    }
+
+    .showcase-item:nth-child(1)::before { background: var(--color-emerald); }
+    .showcase-item:nth-child(2)::before { background: var(--color-amber); }
+    .showcase-item:nth-child(3)::before { background: var(--color-electric); }
+    .showcase-item:nth-child(4)::before { background: var(--color-emerald); }
+
+    .showcase-item:hover::before {
+      box-shadow: 0 0 20px currentColor;
+    }
+
+    .showcase-number {
+      font-family: var(--font-display);
+      font-size: 4rem;
+      font-weight: 300;
+      color: var(--color-text-subtle);
+      margin-bottom: 2rem;
+    }
+
+    .showcase-item h3 {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+    }
+
+    .showcase-item p {
+      color: var(--color-text-muted);
+      font-size: 0.9375rem;
+      line-height: 1.8;
+    }
+
+    /* Features */
+    .features {
+      padding: 8rem 0;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 4rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .section-header h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 300;
+    }
+
+    .section-header p {
+      color: var(--color-text-muted);
+      font-size: 0.9375rem;
+      max-width: 300px;
+      text-align: right;
+    }
+
+    .features-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .feature-item {
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      gap: 3rem;
+      align-items: center;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--color-border);
+      transition: all 0.4s ease;
+      cursor: pointer;
+    }
+
+    .feature-item:hover {
+      padding-left: 2rem;
+    }
+
+    .feature-number {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      color: var(--color-text-subtle);
+    }
+
+    .feature-content h3 {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-content p {
+      color: var(--color-text-muted);
+      font-size: 0.9375rem;
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text-muted);
+      transition: all 0.4s ease;
+    }
+
+    .feature-item:hover .feature-icon {
+      border-color: var(--color-emerald);
+      color: var(--color-emerald);
+    }
+
+    /* Product */
+    .product {
+      padding: 8rem 0;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .product-image {
+      position: relative;
+      aspect-ratio: 4/5;
+      background: linear-gradient(135deg, #111 0%, #000 100%);
+      border: 1px solid var(--color-border);
+      overflow: hidden;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.8;
+      transition: all 0.6s ease;
+    }
+
+    .product-image:hover img {
+      transform: scale(1.05);
+      opacity: 1;
+    }
+
+    .product-glow {
+      position: absolute;
+      bottom: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 300px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .product-content h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+    }
+
+    .product-content p {
+      color: var(--color-text-muted);
+      font-size: 1.0625rem;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .product-price {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: var(--color-emerald);
+      margin-bottom: 2rem;
+    }
+
+    .product-price span {
+      font-size: 1rem;
+      color: var(--color-text-muted);
+    }
+
+    /* Footer */
+    footer {
+      padding: 6rem 0;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 4rem;
+    }
+
+    .footer-brand {
+      max-width: 300px;
+    }
+
+    .footer-brand .logo {
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-brand p {
+      color: var(--color-text-muted);
+      font-size: 0.9375rem;
+      line-height: 1.8;
+    }
+
+    .footer-col h4 {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-text-subtle);
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col li {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-col a {
+      color: var(--color-text-muted);
+      text-decoration: none;
+      font-size: 0.9375rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-col a:hover {
+      color: var(--color-text);
+    }
+
+    .footer-bottom {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--color-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-bottom p {
+      color: var(--color-text-subtle);
+      font-size: 0.8125rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .showcase-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        display: none;
+      }
+
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      .section-header p {
+        text-align: left;
+      }
+
+      .feature-item {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .feature-number {
+        display: none;
+      }
+
+      .feature-icon {
+        display: none;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+
+    /* Focus Styles */
+    :focus-visible {
+      outline: 1px solid var(--color-emerald);
+      outline-offset: 4px;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container">
+      <div class="logo">Noir</div>
+      <ul>
+        <li><a href="#">Collection</a></li>
+        <li><a href="#">Story</a></li>
+        <li><a href="#">Atelier</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-label">Introducing</div>
+        <h1>The Art of<br><em>Darkness</em></h1>
+        <p>Pure black. Subtle glow. Premium interfaces designed for OLED displays and refined taste.</p>
+        <a href="#collection" class="btn-luxury">
+          <span>Explore Collection</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="showcase" id="collection">
+    <div class="container">
+      <div class="showcase-grid">
+        <div class="showcase-item">
+          <div class="showcase-number">01</div>
+          <h3>True Black</h3>
+          <p>Pure #000000 backgrounds designed specifically for OLED displays, where black pixels are truly off.</p>
+        </div>
+        <div class="showcase-item">
+          <div class="showcase-number">02</div>
+          <h3>Subtle Glow</h3>
+          <p>Minimal accent lighting that draws attention without overwhelming the senses.</p>
+        </div>
+        <div class="showcase-item">
+          <div class="showcase-number">03</div>
+          <h3>Typography First</h3>
+          <p>Elegant serif headlines paired with clean sans-serif body text for timeless sophistication.</p>
+        </div>
+        <div class="showcase-item">
+          <div class="showcase-number">04</div>
+          <h3>Cinematic Motion</h3>
+          <p>Smooth, deliberate animations that enhance rather than distract from content.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="container">
+      <div class="section-header">
+        <h2>Design Principles</h2>
+        <p>Every detail considered, every pixel intentional.</p>
+      </div>
+      <div class="features-list">
+        <div class="feature-item">
+          <div class="feature-number">01</div>
+          <div class="feature-content">
+            <h3>Battery Efficiency</h3>
+            <p>True black saves power on OLED displays</p>
+          </div>
+          <div class="feature-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M5 12H19M19 12L12 5M19 12L12 19"/>
+            </svg>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-number">02</div>
+          <div class="feature-content">
+            <h3>Reduced Eye Strain</h3>
+            <p>Optimized contrast for comfortable viewing</p>
+          </div>
+          <div class="feature-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M5 12H19M19 12L12 5M19 12L12 19"/>
+            </svg>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-number">03</div>
+          <div class="feature-content">
+            <h3>Premium Perception</h3>
+            <p>Dark interfaces convey sophistication and exclusivity</p>
+          </div>
+          <div class="feature-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M5 12H19M19 12L12 5M19 12L12 19"/>
+            </svg>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-number">04</div>
+          <div class="feature-content">
+            <h3>Content Focus</h3>
+            <p>Dark backgrounds make content stand out</p>
+          </div>
+          <div class="feature-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M5 12H19M19 12L12 5M19 12L12 19"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="product">
+    <div class="container">
+      <div class="product-grid">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80" alt="Premium dark product on black background">
+          <div class="product-glow"></div>
+        </div>
+        <div class="product-content">
+          <h2>Timeless Collection</h2>
+          <p>Experience design that transcends trends. Our dark luxury aesthetic combines pure blacks with subtle emerald accents, creating interfaces that feel both modern and eternal.</p>
+          <div class="product-price">$299 <span>/ lifetime</span></div>
+          <a href="#" class="btn-luxury">
+            <span>View Details</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">Noir</div>
+          <p>Crafting premium dark interfaces for discerning clients who appreciate the art of restraint.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="#">Collection</a></li>
+            <li><a href="#">Story</a></li>
+            <li><a href="#">Atelier</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Dribbble</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="#">hello@noir.design</a></li>
+            <li><a href="#">Press Kit</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 Noir — Designed in darkness.</p>
+        <p>Privacy · Terms</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
